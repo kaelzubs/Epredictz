@@ -1,0 +1,48 @@
+{% load static %}
+
+<header class="header">
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark primary-color fixed-top" id="navbdr">
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="{% url 'list_home' %}">
+            <div class="container">
+                <img id="iconh" src="{% static 'img/Epredictz.png' %}"/>
+            </div>
+        </a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+            <!-- Links -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'list_home' %}">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'list_about' %}">About</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'list_faqs' %}">Faq's</a>
+                </li>
+
+                <li class="nav-link">
+                    <form class="form-inline my-2 my-lg-0" method="get" action=".">
+                        <input class="form-control mr-sm-2" type="text" value="{{ request.GET.q }}" name="q" accept-charset="utf-8" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+        <!-- Collapsible content -->
+    </nav>
+    <!--/.Navbar-->
+</header>
+<br>

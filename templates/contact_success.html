@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container text-center" id="csuc">
+    <div class="row">
+        <div class="col">
+            <p id="cts">Your message was submitted successfully. Thank you.</p>
+            <a href="{% url 'list_home' %}">
+                <h3 class="success">Return To Home</h3>
+            </a>
+        </div>
+    </div>
+</div>
+<br>
+{% endblock content %}

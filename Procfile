@@ -1,0 +1,1 @@
+web: gunicorn epredictz.wsgi --log-file -

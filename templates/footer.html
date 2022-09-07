@@ -1,0 +1,58 @@
+{% load static %}
+
+<footer class="container-fluid text-center">
+    <div class="row">
+	    <div class="col-sm-4">
+            <p class="footer-links">
+                <a href="{% url 'list_about' %}" class="footnote">ABOUT US</a>  |
+                <a href="{% url 'list_contact' %}" class="footnote">CONTACT US</a>  |
+                <a href="{% url 'list_disclaim' %}" class="footnote">T &amp; Cs</a>
+            </p>
+            <img id='icon' src="{% static 'img/goatman.png' %}">
+            <h1 style="font-size: 18px; margin: 5px; font-weight: bold;">Excellent Prediction Zone</h1>
+        </div>
+
+
+        <div class="col-sm-4">
+            <h3>Connect & Share</h3>
+            <!-- Go to www.addthis.com/dashboard to customize your tools -->
+            <div class="addthis_inline_share_toolbox"></div>
+            <p><i>Copyright&copy; 2019 epredictz.com. All rights reserved.</i></p>
+            <br>
+        </div>
+
+
+        <div id="bs-newsletter-mailchimp-2" class="col-sm-4 h-ni w-t footer-widget footer-column-2 widget widget_bs-newsletter-mailchimp">
+            <div class="section-heading sh-t6 sh-s6">
+                {% if user.is_authenticated %}
+                <div>
+                    <p class="footnote">Welcome <span class="crups">{{ user.username }}</span></p>
+                </div>
+                {% else %}
+                <div>
+                    <p class="footnote">Welcome <span class="crups">Guest</span></p>
+                </div>
+                {% endif %}
+                <span class="h-text footnote">Newsletter</span>
+            </div>
+            <div class="bs-shortcode bs-subscribe-newsletter bs-mailchimp-newsletter ">
+                <div class="subscribe-image">
+                    <img src="{% static 'img/email-illustration.png' %}" alt="Newsletter">
+                </div>
+                <div class="subscribe-message">
+
+
+                    <p class="crups footnote">Subscribe on our newsletter to stay updated.</p>
+                </div>
+
+                <form action="{% url 'email_list' %}" method="post" class="validate form-inline my-2 ml-4">
+                    {% csrf_token %}
+                    {{ forms }}
+                    <button class="newsletter-subscribe btn btn-outline-warning my-2 ml-2 font-weight-bold" name="subscribe" type="submit">Subscribe</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</footer>
+

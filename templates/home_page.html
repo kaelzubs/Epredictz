@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block carousel %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="6"></li>
+                </ol>
+                <div class="carousel-inner rounded" id="tst">
+                    <div class="carousel-item active">
+                        <img src="{% static 'img/base1.jpg' %}" class="d-block w-100" alt="World cup">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'img/champ.jpg' %}" class="d-block w-100" alt="Champions League">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'img/aguero_.jpg' %}" class="d-block w-100" alt='aguero'>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'img/messi.jpg' %}" class="d-block w-100" alt='messi'>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'img/neymar_.jpg' %}" class="d-block w-100" alt='neymar'>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'img/Cr7c.jpg' %}" class="d-block w-100" alt='Cr7'>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'img/salah_.jpg' %}" class="d-block w-100" alt='salah'>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+</div>
+{% endblock carousel%}
+
+{% block content %}
+<div class="table-responsive text-center" id="tim">Excellent Prediction Zone</div>
+<div class="jumbotron">
+    <div class="row">
+        <div class="table-responsive col-md-10">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">Time</th>
+                        <th scope="col">Home &ndash; Away</th>
+                        <th scope="col">Tips</th>
+                        <th scope="col">Odds</th>
+                        <th scope="col">Results</th>
+                    </tr>
+                </thead>
+                {% for page in ppages %}
+                <tbody>
+                    <tr>
+                        <td class="chng">{{ page.country }} &raquo; {{ page.league }}</td>
+                        </tr>
+                            <tr>
+                                <td class="chngg">{{ page.match_dat }} &raquo; {{ page.match_time }}</td>
+                                <td class="chgg">{{ page.home_team }} <span class="vers">vs</span> {{ page.away_team }}</td>
+                                <td class="chg">{{ page.tip }}</td>
+                                <td class="chg">{{ page.tip_odd }}</td>
+                                <td><button class="btn btn-success">{{ page.result }}</button></td>
+                            </tr>
+                        </tr>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+            <br>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col text-center" id="pag">
+            <span class="step-links">
+                {% if ppages.has_previous %}
+                <a class="btn btn-success" href="?page={{ ppages.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+                    <button class="btn btn-success">prev</button>
+                </a>
+                {% endif %}
+                <span class="current">
+                    Page {{ ppages.number }} of {{ ppages.paginator.num_pages }}.
+                </span>
+
+                {% if ppages.has_next %}
+                <a class="btn btn-success" href="?page={{ ppages.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+                    <button class="btn btn-success">next</button>
+                </a>
+                {% endif %}
+            </span>
+            <br>
+            <br>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+
+{% block headline %}
+<hr>
+<div class="container text-center">
+    <h4>
+        <a href="#hidden" data-toggle="collapse" id="abt">Click here for an important tip</a>
+    </h4>
+    <div class="row">
+        <div id="hidden" class="collapse">
+            <div class="col text-center" id="imp">
+                <hr>
+                <p>
+                    Epredictz is the home for accurate and reliable soccer predictions forecasted by our team of brilliant analyst.
+                    You can choose from between 5 to 10 game from this page if you wanted to,
+                    this will increase your chances of winning a jackpot.
+                </p>
+                <p>
+                    Also note that we do not charge for any predicted game posted on Epredictz.
+                </p>
+                <p>Our registration is free.</p>
+                <p>You must be registered member to comment on our blog section and also to view our special membership odds(3 odd, 5 odd, 10 odd) section</p>
+                <p>
+                    The only sure thing about luck is that it will definately change.
+                </p>
+                <p>
+                    Beware!!!, We have only one epredictz.com, any other epredictz is a scam website.
+                </p>
+                <p>
+                    Note: Always bet with your spare money.
+                </p>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+{% endblock headline %}

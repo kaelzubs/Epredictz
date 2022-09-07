@@ -1,0 +1,31 @@
+<!doctype html>
+
+{% load cookielaw_tags %}
+
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+<html lang="en">
+
+    {% include 'head.html' %}
+
+    <body id="bck">
+
+        {% include 'header.html' %}
+
+        {% block carousel %}
+        {% endblock carousel %}
+
+        {% block content %}
+        {% endblock content %}
+
+        {% block headline %}
+        {% endblock headline %}
+
+        {% include 'footer.html' %}
+        {% include 'scripts.html' %}
+
+        
+    </body>
+</html>
