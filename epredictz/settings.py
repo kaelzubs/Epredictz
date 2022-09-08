@@ -16,6 +16,8 @@ import dj_database_url
 
 import django_heroku
 
+from django.test.runner import DiscoverRunner
+
 import cloudinary
 
 
@@ -47,15 +49,15 @@ IS_HEROKU = "DYNO" in os.environ
 if 'SECRET_KEY' in os.environ:
     SECRET_KEY = os.environ['SECRET_KEY']
 
-# SECURITY WARNING: don't run with debug turned on in production!
-
-DEBUG = False
-
-if DEBUG is False:
-   ALLOWED_HOSTS = ['*']
-
-if DEBUG is True:
+# Generally avoid wildcards(*). However since Heroku router provides hostname validation it is ok
+if IS_HEROKU:
+    ALLOWED_HOSTS = ["*"]
+else:
     ALLOWED_HOSTS = []
+
+# SECURITY WARNING: don't run with debug turned on in production!
+if not IS_HEROKU:
+    DEBUG = True
 
 
 # Application definition
@@ -226,6 +228,23 @@ cloudinary.config(
    api_key=os.environ['API_KEY_CLOUDINARY'],
    api_secret=os.environ['API_SECRET_CLOUDINARY']
 )
+
+
+
+# Test Runner Config
+class HerokuDiscoverRunner(DiscoverRunner):
+    """Test Runner for Heroku CI, which provides a database for you.
+    This requires you to set the TEST database (done for you by settings().)"""
+
+    def setup_databases(self, **kwargs):
+        self.keepdb = True
+        return super(HerokuDiscoverRunner, self).setup_databases(**kwargs)
+
+
+# Use HerokuDiscoverRunner on Heroku CI
+if "CI" in os.environ:
+    TEST_RUNNER = "gettingstarted.settings.HerokuDiscoverRunner"
+
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
