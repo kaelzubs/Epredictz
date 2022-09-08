@@ -223,11 +223,11 @@ DATABASES['default'].update(db_from_env)
 django_heroku.settings(locals())
 
 
-cloudinary.config(
-   cloud_name=os.environ['CLOUD_NAME_CLODINARY'],
-   api_key=os.environ['API_KEY_CLOUDINARY'],
-   api_secret=os.environ['API_SECRET_CLOUDINARY']
-)
+# cloudinary.config(
+#    cloud_name=os.environ['CLOUD_NAME_CLODINARY'],
+#    api_key=os.environ['API_KEY_CLOUDINARY'],
+#    api_secret=os.environ['API_SECRET_CLOUDINARY']
+# )
 
 
 
