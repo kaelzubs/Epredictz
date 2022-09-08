@@ -9,9 +9,6 @@ from django.shortcuts import render
 # Create your views here.
 from ratelimit import limits
 import requests
-from pathlib import Path
-import os
-import dotenv # <- New
 import environ
 
 
@@ -19,17 +16,6 @@ import environ
 # Initialise environment variables
 env = environ.Env()
 environ.Env.read_env()
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-# Add .env variables anywhere before SECRET_KEY
-dotenv_file = os.path.join(BASE_DIR, ".env")
-if os.path.isfile(dotenv_file):
-    dotenv.load_dotenv(dotenv_file)
-
-from dotenv import load_dotenv, find_dotenv
-load_dotenv(find_dotenv())
 
 
 @limits(calls=10, period=1)
@@ -42,8 +28,8 @@ def rate_limiter():
     headers = {
         "Content-Type": "application/json",
         "Connection": "keep-alive",
-        "X-RapidAPI-Key": os.environ['DAILY_RAPIDAPI_KEY'],
-        "X-RapidAPI-Host": os.environ['DAILY_RAPIDAPI_HOST']
+        "X-RapidAPI-Key": env('DAILY_RAPIDAPI_KEY'),
+        "X-RapidAPI-Host": env('DAILY_RAPIDAPI_HOST')
     }
 
     response = requests.request("GET", url, headers=headers, params=querystring)
