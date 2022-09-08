@@ -4,7 +4,8 @@
     <div class="container">
         <h6>{% trans "COOKIE_INFO_HEADER" %}</h6>
         <p>
-            <a class="btn btn-primary pull-right" href="javascript:Cookielaw.accept();">{% trans "COOKIE_INFO_OK" %}</a>
+            <a class="btn btn-success pull-right m-2" href="{% url 'cookie-list' %}">How to configure</a>
+            <a class="btn btn-primary pull-right m-2" href="javascript:Cookielaw.accept();">{% trans "COOKIE_INFO_OK" %}</a>
             {% trans "COOKIE_INFO_PARA" %}
         </p>
     </div>

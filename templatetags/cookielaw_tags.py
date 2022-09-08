@@ -5,6 +5,7 @@ from classytags.helpers import InclusionTag
 from django import template
 from django.template.loader import render_to_string
 
+
 register = template.Library()
 
 
@@ -36,5 +37,6 @@ class CookielawBanner(InclusionTag):
             return render_to_string(
                 template_filename, data, getattr(context, "request", None)
             )
+
 
 register.tag(CookielawBanner)

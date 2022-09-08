@@ -1,10 +1,18 @@
 #CookielawBanner {
-    background: #fff;
-    padding: 15px 0;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 45px 0;
+    color: white;
+    position: absolute;
+    z-index: 1;
+    border-radius: 3px;
+    position: fixed;
+    top: 50%;
 }
+
 
 #CookielawBanner .container {
     position: relative;
+
 }
 
 #CookielawBanner #CookielawCross {

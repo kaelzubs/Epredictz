@@ -25,47 +25,47 @@ from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
 
-@limits(calls=10, period=1)
-def rate_limiter():
+# @limits(calls=10, period=1)
+# def rate_limiter():
 
-    url = os.environ['URL']
+#     url = os.environ['URL']
 
-    querystring = {"sort":"-id"}
+#     querystring = {"sort":"-id"}
 
-    headers = {
-        "Content-Type": "application/json",
-        "Connection": "keep-alive",
-        "X-RapidAPI-Key": os.environ['DAILY_RAPIDAPI_KEY'],
-        "X-RapidAPI-Host": os.environ['DAILY_RAPIDAPI_HOST']
-    }
+#     headers = {
+#         "Content-Type": "application/json",
+#         "Connection": "keep-alive",
+#         "X-RapidAPI-Key": os.environ['DAILY_RAPIDAPI_KEY'],
+#         "X-RapidAPI-Host": os.environ['DAILY_RAPIDAPI_HOST']
+#     }
 
-    response = requests.request("GET", url, headers=headers, params=querystring)
-    data = response.json()
-    arrdata = data['data']
-    for dt in arrdata:
-        for res in dt['coupons_list_data']:
-            if not Home_Page.objects.filter(
-                match_dat = res['match_date'],
-                match_time = res['match_time'],
-                league = res['league_name'],
-                home_team = res['home_team'],
-                away_team = res['away_team'],
-                tip = res['game_prediction'],
-                tip_odd = res['odd_value'],
-                result = res['match_status']
-                ).exists():
-                Home_Page.objects.create(
-                    match_dat = res['match_date'],
-                    match_time = res['match_time'],
-                    league = res['league_name'],
-                    home_team = res['home_team'],
-                    away_team = res['away_team'],
-                    tip = res['game_prediction'],
-                    tip_odd = res['odd_value'],
-                    result = res['match_status']
-                )
+#     response = requests.request("GET", url, headers=headers, params=querystring)
+#     data = response.json()
+#     arrdata = data['data']
+#     for dt in arrdata:
+#         for res in dt['coupons_list_data']:
+#             if not Home_Page.objects.filter(
+#                 match_dat = res['match_date'],
+#                 match_time = res['match_time'],
+#                 league = res['league_name'],
+#                 home_team = res['home_team'],
+#                 away_team = res['away_team'],
+#                 tip = res['game_prediction'],
+#                 tip_odd = res['odd_value'],
+#                 result = res['match_status']
+#                 ).exists():
+#                 Home_Page.objects.create(
+#                     match_dat = res['match_date'],
+#                     match_time = res['match_time'],
+#                     league = res['league_name'],
+#                     home_team = res['home_team'],
+#                     away_team = res['away_team'],
+#                     tip = res['game_prediction'],
+#                     tip_odd = res['odd_value'],
+#                     result = res['match_status']
+#                 )
     
-rate_limiter()
+# rate_limiter()
 
 def list_home(request):
     pages = Home_Page.objects.all().order_by('-match_dat')

@@ -4,11 +4,12 @@
     color: white;
     position: absolute;
     z-index: 1;
-    border-radius: 3px;
+    border-radius: 2px;
     position: fixed;
     top: 50%;
+    left: 50%;
+    width: 100%;
 }
-
 
 #CookielawBanner .container {
     position: relative;
@@ -16,7 +17,7 @@
 }
 
 #CookielawBanner #CookielawCross {
-    background: url('../../img/close.png') no-repeat 0 0;
+    background: url("../../img/close.430c9a621518.png") no-repeat 0 0;
     cursor: pointer;
     display: block;
     position: absolute;

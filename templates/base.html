@@ -7,11 +7,9 @@
 {% load static %}
 
 <html lang="en">
-
     {% include 'head.html' %}
-
     <body id="bck">
-
+        {% CookielawBanner %}
 
         {% include 'header.html' %}
 
@@ -20,13 +18,11 @@
 
         {% block content %}
         {% endblock content %}
-
+        
         {% block headline %}
         {% endblock headline %}
 
         {% include 'footer.html' %}
         {% include 'scripts.html' %}
-
-        
     </body>
 </html>
