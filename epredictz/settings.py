@@ -50,7 +50,7 @@ DEBUG = False
 
 if DEBUG is False:
    ALLOWED_HOSTS = [
-       'https://epredictz.com'
+       'http://epredictz.com'
    ]
 
 if DEBUG is True:
