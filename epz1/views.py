@@ -28,7 +28,7 @@ load_dotenv(find_dotenv())
 @limits(calls=10, period=1)
 def rate_limiter():
 
-    url = os.environ['URL']
+    url = "https://daily-betting-tips.p.rapidapi.com/daily-betting-tip-api/items/daily_betting_coupons"
 
     querystring = {"sort":"-id"}
 
