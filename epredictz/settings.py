@@ -18,23 +18,20 @@ import django_heroku
 
 from django.test.runner import DiscoverRunner
 
+import environ
+
 import cloudinary
 
 
 from pathlib import Path
 
+
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-import os
-import dotenv # <- New
-
-# Add .env variables anywhere before SECRET_KEY
-dotenv_file = os.path.join(BASE_DIR, ".env")
-if os.path.isfile(dotenv_file):
-    dotenv.load_dotenv(dotenv_file)
-
-from dotenv import load_dotenv, find_dotenv
-load_dotenv(find_dotenv())
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -46,8 +43,15 @@ IS_HEROKU = "DYNO" in os.environ
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-if 'SECRET_KEY' in os.environ:
-    SECRET_KEY = os.environ['SECRET_KEY']
+DEBUG = False
+
+if DEBUG is False:
+   ALLOWED_HOSTS = [
+       '*',
+   ]
+
+if DEBUG is True:
+    ALLOWED_HOSTS = []
 
 # Generally avoid wildcards(*). However since Heroku router provides hostname validation it is ok
 if IS_HEROKU:
@@ -210,9 +214,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 SITE_ID = 1
 
-# MAILCHIMP_API_KEY = os.environ['MAILCHIMP_API_KEY']
-# MAILCHIMP_DATA_CENTER = os.environ['MAILCHIMP_DATA_CENTER']
-# MAILCHIMP_EMAIL_LIST_ID = os.environ['MAILCHIMP_EMAIL_LIST_ID']
+MAILCHIMP_API_KEY = env('MAILCHIMP_API_KEY')
+MAILCHIMP_DATA_CENTER = env('MAILCHIMP_DATA_CENTER')
+MAILCHIMP_EMAIL_LIST_ID = env('MAILCHIMP_EMAIL_LIST_ID')
 
 
 ######################################################
@@ -223,11 +227,11 @@ DATABASES['default'].update(db_from_env)
 django_heroku.settings(locals())
 
 
-# cloudinary.config(
-#    cloud_name=os.environ['CLOUD_NAME_CLODINARY'],
-#    api_key=os.environ['API_KEY_CLOUDINARY'],
-#    api_secret=os.environ['API_SECRET_CLOUDINARY']
-# )
+cloudinary.config(
+   cloud_name=env('CLOUD_NAME_CLODINARY'),
+   api_key=env('API_KEY_CLOUDINARY'),
+   api_secret=env('API_SECRET_CLOUDINARY')
+)
 
 
 

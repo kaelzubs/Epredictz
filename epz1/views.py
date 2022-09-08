@@ -12,6 +12,13 @@ import requests
 from pathlib import Path
 import os
 import dotenv # <- New
+import environ
+
+
+
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +35,7 @@ load_dotenv(find_dotenv())
 @limits(calls=10, period=1)
 def rate_limiter():
 
-    url = "https://daily-betting-tips.p.rapidapi.com/daily-betting-tip-api/items/daily_betting_coupons"
+    url = env('URL')
 
     querystring = {"sort":"-id"}
 
