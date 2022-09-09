@@ -171,8 +171,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 VENV_PATH = os.path.dirname(os.path.join(BASE_DIR))
 
-STATIC_ROOT = os.path.join(VENV_PATH, 'epredictz/staticfiles')
-MEDIA_ROOT = os.path.join(VENV_PATH,  'epredictz/mediafiles')
+STATIC_ROOT = os.path.join(VENV_PATH, 'staticfiles')
+MEDIA_ROOT = os.path.join(VENV_PATH,  'media')
 
 #  Add configuration for static files storage using whitenoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
