@@ -16,33 +16,22 @@ import dj_database_url
 
 import django_heroku
 
-from django.test.runner import DiscoverRunner
-
-import environ
-
 import cloudinary
 
-
-from pathlib import Path
-
-
 # Initialise environment variables
-env = environ.Env()
-environ.Env.read_env()
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
-IS_HEROKU = "DYNO" in os.environ
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.getenv('SECRET_KEY')
+
+# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 if DEBUG is False:
@@ -52,17 +41,6 @@ if DEBUG is False:
 
 if DEBUG is True:
     ALLOWED_HOSTS = []
-
-# Generally avoid wildcards(*). However since Heroku router provides hostname validation it is ok
-if IS_HEROKU:
-    ALLOWED_HOSTS = ["*"]
-else:
-    ALLOWED_HOSTS = []
-
-# SECURITY WARNING: don't run with debug turned on in production!
-if not IS_HEROKU:
-    DEBUG = True
-
 
 # Application definition
 INSTALLED_APPS = [
@@ -146,14 +124,10 @@ DATABASES = {
     }
 }
 
-if "DATABASE_URL" in os.environ:
-    # Configure Django for DATABASE_URL environment variable.
-    DATABASES["default"] = dj_database_url.config(
-        conn_max_age=MAX_CONN_AGE, ssl_require=True)
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
-    # Enable test database if found in CI environment.
-    if "CI" in os.environ:
-        DATABASES["default"]["TEST"] = DATABASES["default"]
+django_heroku.settings(locals())
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -187,8 +161,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
@@ -199,8 +171,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 VENV_PATH = os.path.dirname(os.path.join(BASE_DIR))
 
-STATIC_ROOT = os.path.join(VENV_PATH, 'staticfiles')
-MEDIA_ROOT = os.path.join(VENV_PATH,  'media')
+STATIC_ROOT = os.path.join(VENV_PATH, 'epredictz/staticfiles')
+MEDIA_ROOT = os.path.join(VENV_PATH,  'epredictz/mediafiles')
 
 #  Add configuration for static files storage using whitenoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -214,41 +186,26 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 SITE_ID = 1
 
-# MAILCHIMP_API_KEY = env('MAILCHIMP_API_KEY')
-# MAILCHIMP_DATA_CENTER = env('MAILCHIMP_DATA_CENTER')
-# MAILCHIMP_EMAIL_LIST_ID = env('MAILCHIMP_EMAIL_LIST_ID')
-
-
 ######################################################
+MAILCHIMP_API_KEY = os.getenv('MAILCHIMP_API_KEY')
+MAILCHIMP_DATA_CENTER = os.getenv('MAILCHIMP_DATA_CENTER')
+MAILCHIMP_EMAIL_LIST_ID = os.getenv('MAILCHIMP_EMAIL_LIST_ID')
 
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+cloudinary.config(
+   cloud_name=os.getenv('CLOUD_NAME_CLODINARY'),
+   api_key=os.getenv('API_KEY_CLOUDINARY'),
+   api_secret=os.getenv('API_SECRET_CLOUDINARY')
+)
 
-django_heroku.settings(locals())
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Email recieved from epredictz.com'
+DEFAULT_FROM_EMAIL = 'donmart4u@gmail.com'
 
-
-# cloudinary.config(
-#    cloud_name=env('CLOUD_NAME_CLODINARY'),
-#    api_key=env('API_KEY_CLOUDINARY'),
-#    api_secret=env('API_SECRET_CLOUDINARY')
-# )
-
-
-
-# Test Runner Config
-class HerokuDiscoverRunner(DiscoverRunner):
-    """Test Runner for Heroku CI, which provides a database for you.
-    This requires you to set the TEST database (done for you by settings().)"""
-
-    def setup_databases(self, **kwargs):
-        self.keepdb = True
-        return super(HerokuDiscoverRunner, self).setup_databases(**kwargs)
-
-
-# Use HerokuDiscoverRunner on Heroku CI
-if "CI" in os.environ:
-    TEST_RUNNER = "gettingstarted.settings.HerokuDiscoverRunner"
-
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 

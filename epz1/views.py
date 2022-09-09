@@ -6,30 +6,29 @@ from django.urls import reverse
 from django.db.models import Q
 from epz7.forms import EmailSignupForm
 from django.shortcuts import render
+import os
+
 # Create your views here.
 from ratelimit import limits
 import requests
-import environ
-
-
 
 # Initialise environment variables
-env = environ.Env()
-environ.Env.read_env()
+from dotenv import load_dotenv
+load_dotenv()
 
 
 @limits(calls=10, period=1)
 def rate_limiter():
 
-    url = env('URL')
+    url = os.getenv('URL')
 
     querystring = {"sort":"-id"}
 
     headers = {
         "Content-Type": "application/json",
         "Connection": "keep-alive",
-        "X-RapidAPI-Key": env('DAILY_RAPIDAPI_KEY'),
-        "X-RapidAPI-Host": env('DAILY_RAPIDAPI_HOST')
+        "X-RapidAPI-Key": os.getenv('DAILY_RAPIDAPI_KEY'),
+        "X-RapidAPI-Host": os.getenv('DAILY_RAPIDAPI_HOST')
     }
 
     response = requests.request("GET", url, headers=headers, params=querystring)
