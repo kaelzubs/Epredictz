@@ -195,6 +195,8 @@ cloudinary.config(
    api_secret=os.getenv('API_SECRET_CLOUDINARY')
 )
 
+CLOUDINARY_URL='cloudinary://351119632336342:kS3ozpYAYay8cRrhefG2PgQLxWs@hslbmrt3n'
+
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
