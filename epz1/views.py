@@ -102,8 +102,6 @@ class StaticViewSitemap(sitemaps.Sitemap):
         return reverse(item)
 
 
-
-
 def handler404(request, exception, template_name="error_404.html"):
     pages = Home_Page.objects.all()
     if request.user.is_staff or request.user.is_superuser:
