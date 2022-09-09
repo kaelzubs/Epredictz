@@ -12,7 +12,7 @@ import requests
 
 @limits(calls=10, period=1)
 def rate_limiter():
-    url = os.getenv('URL')
+    url = os.getenv('URL', 'url')
     querystring = {"sort":"-id"}
     headers = {
         "Content-Type": "application/json",
