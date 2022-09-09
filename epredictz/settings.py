@@ -35,9 +35,9 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'secret')
 DEBUG = True
 
 if DEBUG is False:
-   ALLOWED_HOSTS = [
-       '*'
-   ]
+    ALLOWED_HOSTS = [
+        '*'
+    ]
 
 if DEBUG is True:
     ALLOWED_HOSTS = []
