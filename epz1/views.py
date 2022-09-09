@@ -6,14 +6,9 @@ from django.urls import reverse
 from django.db.models import Q
 from epz7.forms import EmailSignupForm
 import os
-
-# Create your views here.
 from ratelimit import limits
 import requests
 
-# Initialise environment variables
-from dotenv import load_dotenv
-load_dotenv()
 
 @limits(calls=10, period=1)
 def rate_limiter():
