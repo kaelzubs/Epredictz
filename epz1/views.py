@@ -8,11 +8,13 @@ from epz7.forms import EmailSignupForm
 import os
 from ratelimit import limits
 import requests
+from dotenv import load_dotenv
+load_dotenv()
 
 
 @limits(calls=10, period=1)
 def rate_limiter():
-    url = os.getenv('URL', 'url')
+    url = os.getenv('URL')
     querystring = {"sort":"-id"}
     headers = {
         "Content-Type": "application/json",
