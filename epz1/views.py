@@ -22,7 +22,6 @@ def rate_limiter():
     querystring = {"sort":"-id"}
     headers = {
         "Content-Type": "application/json",
-        "Connection": "keep-alive",
         "X-RapidAPI-Key": os.getenv('DAILY_RAPIDAPI_KEY'),
         "X-RapidAPI-Host": os.getenv('DAILY_RAPIDAPI_HOST')
     }
