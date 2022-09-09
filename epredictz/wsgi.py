@@ -15,8 +15,7 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'epredictz.settings'
 
 application = get_wsgi_application()
 
-application = WhiteNoise(application, root='/epredictz/static')
-application.add_files('/epredictz/static/img/', prefix='statiic_img')
+WhiteNoise(application)
 
 # application = WhiteNoise(application, root='C:/Users/robot/Desktop/epredictz/epredictz/static')
 # application.add_files('C:/Users/robot/Desktop/epredictz/epredictz/static/img', prefix='static_img')
