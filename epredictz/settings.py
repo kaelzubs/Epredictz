@@ -115,8 +115,6 @@ WSGI_APPLICATION = 'epredictz.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-MAX_CONN_AGE = 600
-
 DATABASES = {
     'default': {
          'ENGINE': 'django.db.backends.sqlite3',
@@ -195,7 +193,7 @@ cloudinary.config(
    api_secret=os.getenv('API_SECRET_CLOUDINARY')
 )
 
-CLOUDINARY_URL='cloudinary://351119632336342:kS3ozpYAYay8cRrhefG2PgQLxWs@hslbmrt3n'
+CLOUDINARY_URL=os.getenv('CLOUDINARY_URL')
 
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
@@ -211,4 +209,14 @@ DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
 ROBOTS_CACHE_TIMEOUT = 60*60*24
 
-APPEND_SLASH = False
+ROBOTS_USE_SITEMAP = False
+
+ROBOTS_SITEMAP_URLS = [
+    'http://www.epredictz.com/sitemap.xml',
+]
+
+ROBOTS_SITEMAP_VIEW_NAME = 'cached-sitemap'
+
+ROBOTS_USE_HOST = False
+
+ROBOTS_USE_SCHEME_IN_HOST = True

@@ -86,7 +86,8 @@ footer {
 
 @media (max-width: 600px) {
     #iconh {
-        margin-left: -15px;
+        position: relative;
+        left: 0;
     }
     #bltst {
         height: 350px;

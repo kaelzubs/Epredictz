@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
 {% block carousel %}
-<div class="container-fluid">
+<div class="container-fluid" id="cousel">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -81,6 +80,8 @@
                 <td><button class="btn btn-danger">{{ page.result }}</button></td>
                 {% elif page.result == 'pending' %}
                 <td><button class="btn btn-warning text-white">{{ page.result }}...</button></td>
+                {% else %}
+                <td><button class="btn btn-primary">waiting...</button></td>
                 {% endif %}
             </tr>
         </tbody>
@@ -129,6 +130,9 @@
                     Epredictz is the home for accurate and reliable soccer predictions forecasted by our team of brilliant analyst.
                     You can choose from between 5 to 10 game from this page if you wanted to,
                     this will increase your chances of winning a jackpot.
+                </p>
+                <p>
+                    Please check the date for the games you are booking as some of the games are future predictions, eg: (Tomorrow Games).
                 </p>
                 <p>
                     Also note that we do not charge for any predicted game posted on Epredictz.

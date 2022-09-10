@@ -84,33 +84,22 @@ footer {
     max-height: 800px;
 }
 
-@media (max-width: 600px) {
-    #iconh {
-        margin-left: -15px;
-    }
+
+@media only screen and (max-width: 600px) {
     #bltst {
         height: 350px;
     }
+}
+
+@media only screen and (max-width: 600px) {
     #tsts {
         height: 250px;
     }
+}
+
+@media only screen and (max-width: 600px) {
     #tstss {
         height: 250px;
-    }
-    a.footnote {
-        font-size: 12px !important;
-    }
-    a#abt {
-        font-size: 18px !important;
-    }
-    table, table tr, table th, table td {
-        width: 100% !important;
-    }
-    h1, h2, h3, h4, h5, h6, p, a {
-        font-size: 14px !important;
-    }
-    table td {
-        font-size: 14px !important;
     }
 }
 
@@ -190,6 +179,18 @@ footer {
     padding: 5px;
 }
 
+
+@media (max-width: 600px) {
+    a.footnote {
+        font-size: 12px !important;
+    }
+}
+
+@media (max-width: 600px) {
+    a#abt {
+        font-size: 18px !important;
+    }
+}
 
 span.crups {
     color: green;
@@ -355,7 +356,19 @@ table th, table td {
 }
 
 #cousel {
-    margin-top: -13px;
+    margin-top: -10px;
+}
+
+@media (max-width: 600px) {
+    table, table tr, table th, table td {
+        width: 100% !important;
+    }
+    h1, h2, h3, h4, h5, h6, p, a {
+        font-size: 14px !important;
+    }
+    table td {
+        font-size: 14px !important;
+    }
 }
 
 a.ttr {

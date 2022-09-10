@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import requests
 import json
 from django.conf import settings
@@ -37,4 +37,10 @@ def email_list_signup(request):
             else:
                 subscribe(form.instance.email)
                 form.save()
+                
+            redirect('sub_success')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def sub_success(request):
+    forms = EmailSignupForm()
+    return render(request, 'sub_success.html', {'forms': forms})
