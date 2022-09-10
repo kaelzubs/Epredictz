@@ -15,10 +15,6 @@ body {
   background-color: #fdfdfd;
 }
 
-#tim {
-    margin-bottom: 10px;
-}
-
 .card-title a {
    color: darkgoldenrod;
    font-weight: bold;
@@ -88,6 +84,18 @@ footer {
 @media only screen and (max-width: 600px) {
     #bltst {
         height: 350px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #tst {
+        position: relative;
+        height: 300px;
+        top: 0px;
+        bottom: 0px;
+    }
+    #tim {
+        margin-top: -35px;
     }
 }
 
