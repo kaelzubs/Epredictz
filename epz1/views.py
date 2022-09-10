@@ -8,8 +8,6 @@ from epz7.forms import EmailSignupForm
 import os
 from ratelimit import limits
 import requests
-from dotenv import load_dotenv
-load_dotenv()
 
 
 @limits(calls=10, period=1)

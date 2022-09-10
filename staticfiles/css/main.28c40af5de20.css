@@ -91,9 +91,6 @@ footer {
     #tst {
         height: 300px;
     }
-    #tim {
-        margin-top: -35px;
-    }
 }
 
 @media only screen and (max-width: 600px) {
@@ -214,6 +211,11 @@ h3.text-center {
 
 #cts {
     padding: 15px;
+}
+
+#ads {
+    background-color: #064300; /*#659EC7;*/
+    color: snow;
 }
 
 #nws {

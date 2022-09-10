@@ -91,9 +91,6 @@ footer {
     #tst {
         height: 300px;
     }
-    #tim {
-        margin-top: -35px;
-    }
 }
 
 @media only screen and (max-width: 600px) {
@@ -180,7 +177,6 @@ footer {
     color: snow;
     text-align: center;
     border: 1px solid rgb(222, 226, 230);
-    margin-bottom: -1px;
     padding: 5px;
 }
 

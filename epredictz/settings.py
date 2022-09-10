@@ -210,3 +210,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
 ROBOTS_CACHE_TIMEOUT = 60*60*24
+
+APPEND_SLASH = False

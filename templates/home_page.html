@@ -19,33 +19,29 @@
                 </ol>
                 <div class="carousel-inner rounded" id="tst">
                     <div class="carousel-item active">
-                        <img src="{% static 'img/base1.jpg' %}" class="d-block mw-100 w-100" alt="World cup">
+                        <img src="{% static 'img/base1.jpg' %}" class="d-block w-100" alt="World cup">
                     </div>
                     <div class="carousel-item">
-                        <img src="{% static 'img/champ.jpg' %}" class="d-block mw-100 w-100" alt="Champions League">
-                    </div>
-
-                    <div class="carousel-item">
-                        <img src="{% static 'img/neymar_.jpg' %}" class="d-block mw-100 w-100" alt="World cup">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{% static 'img/mmessi.png' %}" class="d-block mw-100 w-100" alt="World cup">
+                        <img src="{% static 'img/champ.jpg' %}" class="d-block w-100" alt="Champions League">
                     </div>
 
                     <div class="carousel-item">
-                        <img src="{% static 'img/aguero_.jpg' %}" class="d-block mw-100 w-100" alt='aguero'>
+                        <img src="{% static 'img/neymar_.jpg' %}" class="d-block w-100" alt="World cup">
                     </div>
                     <div class="carousel-item">
-                        <img src="{% static 'img/messi.jpg' %}" class="d-block mw-100 w-100" alt='messi'>
+                        <img src="{% static 'img/aguero_.jpg' %}" class="d-block w-100" alt='aguero'>
                     </div>
                     <div class="carousel-item">
-                        <img src="{% static 'img/neymar_.jpg' %}" class="d-block mw-100 w-100" alt='neymar'>
+                        <img src="{% static 'img/messi.jpg' %}" class="d-block w-100" alt='messi'>
                     </div>
                     <div class="carousel-item">
-                        <img src="{% static 'img/Cr7c.jpg' %}" class="d-block mw-100 w-100" alt='Cr7'>
+                        <img src="{% static 'img/neymar_.jpg' %}" class="d-block w-100" alt='neymar'>
                     </div>
                     <div class="carousel-item">
-                        <img src="{% static 'img/salah_.jpg' %}" class="d-block mw-100 w-100" alt='salah'>
+                        <img src="{% static 'img/Cr7c.jpg' %}" class="d-block w-100" alt='Cr7'>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'img/salah_.jpg' %}" class="d-block w-100" alt='salah'>
                     </div>
                 </div>
             </div>
@@ -56,46 +52,42 @@
 {% endblock carousel%}
 
 {% block content %}
-<div class="table-responsive text-center" id="tim">Excellent Prediction Zone</div>
-<div class="jumbotron">
-    <div class="row">
-        <div class="table-responsive col-md-10">
-            <table>
-                <thead>
-                    <tr>
-                        <th scope="col">Time</th>
-                        <th scope="col">Home &ndash; Away</th>
-                        <th scope="col">Tips</th>
-                        <th scope="col">Odds</th>
-                        <th scope="col">Results</th>
-                    </tr>
-                </thead>
-                {% for page in ppages %}
-                <tbody>
-                    <tr>
-                        <td class="chng">{{ page.country }} &raquo; {{ page.league }}</td>
-                        </tr>
-                            <tr>
-                                <td class="chngg">{{ page.match_dat }} &raquo; {{ page.match_time }}</td>
-                                <td class="chgg">{{ page.home_team }} <span class="vers">vs</span> {{ page.away_team }}</td>
-                                <td class="chg">{{ page.tip }}</td>
-                                <td class="chg">{{ page.tip_odd }}</td>
-                                {% if page.result == 'won' %}
-                                <td><button class="btn btn-success">{{ page.result }}</button></td>
-                                {% elif page.result == 'lost' %}
-                                <td><button class="btn btn-danger">{{ page.result }}</button></td>
-                                {% elif page.result == 'pending' %}
-                                <td><button class="btn btn-warning text-white">{{ page.result }}...</button></td>
-                                {% endif %}
-                            </tr>
-                        </tr>
-                    </tr>
-                </tbody>
-                {% endfor %}
-            </table>
-            <br>
-        </div>
-    </div>
+<div class="container">
+    <h2 id="tim">Excellent Prediction Zone</h2>
+    <table class="table table-bordered table-striped table-responsive-stack table-dark" id="tableOne">
+        <thead class="thead-dark">
+            <tr>
+                <th>Country/League</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Home</th>
+                <th>Away</th>
+                <th>Tips</th>
+                <th>Odds</th>
+                <th>Result</th>
+            </tr>
+        </thead>
+        {% for page in ppages %}
+        <tbody>
+            <tr>
+                <td>{{ page.league }}</td>
+                <td>{{ page.match_dat }}</td>
+                <td>{{ page.match_time }}</td>
+                <td>{{ page.home_team }}</td>
+                <td>{{ page.away_team }}</td>
+                <td>{{ page.tip }}</td>
+                <td>{{ page.tip_odd }}</td>
+                {% if page.result == 'won' %}
+                <td><button class="btn btn-success">{{ page.result }}</button></td>
+                {% elif page.result == 'lost' %}
+                <td><button class="btn btn-danger">{{ page.result }}</button></td>
+                {% elif page.result == 'pending' %}
+                <td><button class="btn btn-warning text-white">{{ page.result }}...</button></td>
+                {% endif %}
+            </tr>
+        </tbody>
+       {% endfor %}
+    </table> 
 </div>
 
 <div class="container">
