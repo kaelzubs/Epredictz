@@ -22,7 +22,6 @@ from django.conf.urls import handler404, handler500
 from django.views.static import serve
 from django.contrib.sitemaps.views import sitemap
 from .views import StaticViewSitemap
-from django.views.generic.base import TemplateView
 
 
 
@@ -40,9 +39,8 @@ urlpatterns = [
     path('faqs/', include('epz5.urls')),
     path('cookie-', include('epz6.urls')),
     path('subscription-', include('epz7.urls')),
-    path('robots.txt/', include('robots.urls')),
-    path('sitemap.xml/', sitemap, {'sitemaps': sitemaps}, name='cached-sitemap'),
-    path("robots.txt", TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
+    path('robots.txt', include('robots.urls')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='cached-sitemap'),
     path('admin-MrRobot/', admin.site.urls),
 
 ]
