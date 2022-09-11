@@ -212,7 +212,7 @@ ROBOTS_CACHE_TIMEOUT = 60*60*24
 ROBOTS_USE_SITEMAP = False
 
 ROBOTS_SITEMAP_URLS = [
-    'http://epredictz.com/sitemap.xml',
+    'http://www.epredictz.com/sitemap.xml',
 ]
 
 ROBOTS_SITEMAP_VIEW_NAME = 'cached-sitemap'
