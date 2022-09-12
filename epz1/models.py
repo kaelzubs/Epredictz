@@ -16,5 +16,5 @@ class Home_Page(models.Model):
         return self.match_dat
 
     def get_absolute_url(self):
-        return "/?page=%i/" % self.id
+        return "/?page=%i" % self.id
 
