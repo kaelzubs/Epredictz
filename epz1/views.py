@@ -3,6 +3,7 @@ from . models import Home_Page
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from epz7.forms import EmailSignupForm
+from django.contrib.sitemaps import Sitemap
 import os
 from ratelimit import limits
 import requests
