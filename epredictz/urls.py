@@ -14,16 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include, re_path
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from epz1 import views as epz_views
 from django.conf.urls import handler404, handler500
 from django.views.static import serve
 from django.contrib.sitemaps.views import sitemap
-from .views import StaticViewSitemap, robots_txt
-from django.views.generic.base import TemplateView
-
+from .views import StaticViewSitemap
 
 
 sitemaps = {
@@ -41,10 +39,8 @@ urlpatterns = [
     path('faqs/', include('epz5.urls')),
     path('cookie-', include('epz6.urls')),
     path('subscription-', include('epz7.urls')),
-    path('robot.txt', robots_txt),
-    re_path(r'^robots\.txt', include('robots.urls')),
-    path("robots.txt", TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
-    re_path(r'^sitemap.xml$', sitemap, {'sitemaps': sitemaps}, name='cached-sitemap'),
+    path('robots.txt/', include('robots.urls')),
+    path('sitemap.xml/', sitemap, {'sitemaps': sitemaps}, name='cached-sitemap'),
 ]
 
 if settings.DEBUG:
