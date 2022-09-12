@@ -17,6 +17,10 @@ body {
     width: 100%;
 }
 
+.ads_css {
+    max-width: 100%;
+}
+
 #tim {
     margin-bottom: 10px;
 }
