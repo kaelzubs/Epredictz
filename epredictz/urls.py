@@ -31,7 +31,6 @@ sitemaps = {
 
 
 urlpatterns = [
-    path('admin-MrRobot/', admin.site.urls),
     path('', include('epz1.urls')),
     path('about-', include('epz2.urls')),
     path('contact-', include('epz3.urls')),
@@ -41,6 +40,7 @@ urlpatterns = [
     path('subscription-', include('epz7.urls')),
     path('robots.txt/', include('robots.urls')),
     path('sitemap.xml/', sitemap, {'sitemaps': sitemaps}),
+    path('admin-MrRobot/', admin.site.urls),
 ]
 
 if settings.DEBUG:
