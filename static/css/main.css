@@ -16,12 +16,6 @@ body {
     background-color: #fdfdfd;
 }
 
-.ads_css {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 #tim {
     margin-bottom: 10px;
 }
