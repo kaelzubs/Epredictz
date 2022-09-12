@@ -59,7 +59,7 @@ INSTALLED_APPS = [
     'epz5',
     'epz6',
     'epz7',
-    'django.contrib.sites',
+    # 'django.contrib.sites',
     'robots',
     'django.contrib.sitemaps',
     'cloudinary',
