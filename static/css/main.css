@@ -8,11 +8,14 @@
     border: 0;
 }
 
+
 body {
   padding-top: 5.0rem;
   font-family: Trebuchet MS, sans-serif;
   font-size: 18px;
   background-color: #fdfdfd;
+  justify-content: center;
+align-items: center;
 }
 
 #tim {
