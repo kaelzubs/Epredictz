@@ -15,3 +15,6 @@ class Home_Page(models.Model):
     def __str__(self):
         return self.match_dat
 
+    def get_absolute_url(self):
+        return "/?page=%i" % self.id
+

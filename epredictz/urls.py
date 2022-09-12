@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from epz1 import views as epz_views
@@ -40,7 +40,7 @@ urlpatterns = [
     path('cookie-', include('epz6.urls')),
     path('subscription-', include('epz7.urls')),
     path('robots.txt/', include('robots.urls')),
-    path('sitemap.xml/', sitemap, {'sitemaps': sitemaps}, name='cached-sitemap'),
+    path('sitemap.xml/', sitemap, {'sitemaps': sitemaps}),
 ]
 
 if settings.DEBUG:

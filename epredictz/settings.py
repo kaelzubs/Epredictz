@@ -32,7 +32,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 if DEBUG is False:
     ALLOWED_HOSTS = [
@@ -208,15 +208,3 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
 ROBOTS_CACHE_TIMEOUT = 60*60*24
-
-ROBOTS_USE_SITEMAP = False
-
-ROBOTS_SITEMAP_URLS = [
-    'http://www.epredictz.com/sitemap.xml',
-]
-
-ROBOTS_SITEMAP_VIEW_NAME = 'cached-sitemap'
-
-ROBOTS_USE_HOST = False
-
-ROBOTS_USE_SCHEME_IN_HOST = True

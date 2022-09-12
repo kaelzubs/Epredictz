@@ -8,6 +8,7 @@ from ratelimit import limits
 import requests
 
 
+
 # @limits(calls=10, period=1)
 # def rate_limiter():
 #     url = os.getenv('DAILY_URL')
@@ -137,3 +138,4 @@ def handler500(request, template_name="error_500.html"):
     })
     response.status_code = 500
     return response
+
