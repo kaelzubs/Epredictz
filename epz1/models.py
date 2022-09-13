@@ -18,6 +18,6 @@ class Home_Page(models.Model):
     def get_absolute_url(self):
         return "/?page=%i" % self.id
 
-    # class Meta:
-    #     ordering = ['-id']
+    class Meta:
+        ordering = ['-id']
 
