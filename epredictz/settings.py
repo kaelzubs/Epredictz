@@ -36,11 +36,13 @@ DEBUG = False
 
 if DEBUG is False:
     ALLOWED_HOSTS = [
-        '*'
+        "epredictz.com",
+        "www.epredictz.com",
     ]
 
 if DEBUG is True:
     ALLOWED_HOSTS = []
+
 
 # Application definition
 INSTALLED_APPS = [
@@ -69,6 +71,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    "middleware.WwwRedirectMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
