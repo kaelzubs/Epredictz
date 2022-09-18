@@ -18,6 +18,10 @@ import django_heroku
 
 import cloudinary
 
+import epredictz
+
+
+
 # Initialise environment variables
 from dotenv import load_dotenv
 load_dotenv()
@@ -71,7 +75,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    "django.middleware.WwwRedirectMiddleware",
+    "epz1.middleware.WwwRedirectMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -81,7 +85,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'epredictz.urls'
-
 
 
 TEMPLATES = [
