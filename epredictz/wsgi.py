@@ -8,6 +8,8 @@ path = '/epredictz/'
 
 if path not in sys.path:
     sys.path.append(path)
+    
+os.environ['https'] = "on"
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'epredictz.settings'
 
