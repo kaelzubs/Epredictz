@@ -10,6 +10,6 @@ class WwwRedirectMiddleware:
     def __call__(self, request):
         host = request.get_host().partition(":")[0]
         if host == "www.epredictz.com":
-            return HttpResponsePermanentRedirect("http://epredictz.com" + request.path)
+            return HttpResponsePermanentRedirect("https://epredictz.com" + request.path)
         else:
             return self.get_response(request)
