@@ -23,6 +23,10 @@ body {
     margin-bottom: 10px;
 }
 
+.cookie_config {
+    vertical-align: inherit;
+}
+
 .card-title a {
    color: darkgoldenrod;
    font-weight: bold;
