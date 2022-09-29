@@ -18,4 +18,4 @@ class AdsView(View):
     line  =  "google.com, pub-6411693288489882, DIRECT, f08c47fec0942fa0"
 
     def get(self, request, *args, **kwargs):
-        return HttpResponse(self.line)
+        return HttpResponse(line)
