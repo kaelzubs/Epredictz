@@ -12,6 +12,6 @@ from django.conf import settings
 urlpatterns = [
 
     path('', list_home, name='list_home'),
-    path("ads.txt", RedirectView.as_view(urls=staticfiles_storage.url("ads.txt"))),
-    
+    path("ads.txt", RedirectView.as_view(url=staticfiles_storage.url("ads.txt"))),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
