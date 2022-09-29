@@ -45,9 +45,8 @@ urlpatterns = [
     path("ads.txt", RedirectView.as_view(url=staticfiles_storage.url("ads.txt"))),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, serve, document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, serve, document_root=settings.MEDIA_ROOT)
+urlpatterns + static(settings.STATIC_URL, serve, document_root=settings.STATIC_ROOT)
+urlpatterns + static(settings.MEDIA_URL, serve, document_root=settings.MEDIA_ROOT)
 
 
 handler404 = epz_views.handler404
