@@ -22,6 +22,7 @@ from django.conf.urls import handler404, handler500
 from django.views.static import serve
 from django.contrib.sitemaps.views import sitemap
 from .views import StaticViewSitemap
+from .views import AdsView
 
 
 sitemaps = {
@@ -41,6 +42,7 @@ urlpatterns = [
     path('subscription-', include('epz7.urls')),
     path('robots.txt/', include('robots.urls')),
     path('sitemap.xml/', sitemap, {'sitemaps': sitemaps}),
+    path('ads.txt', AdsView.as_view()),
 ]
 
 if settings.DEBUG:
