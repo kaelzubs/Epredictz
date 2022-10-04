@@ -18,8 +18,6 @@ import django_heroku
 
 import cloudinary
 
-import epredictz
-
 
 
 # Initialise environment variables
@@ -36,7 +34,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 if DEBUG is False:
     ALLOWED_HOSTS = [
@@ -215,6 +213,6 @@ DEFAULT_FROM_EMAIL = 'donmart4u@gmail.com'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-DEFAULT_AUTO_FIELD='django.db.models.AutoField'
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 ROBOTS_CACHE_TIMEOUT = 60*60*24

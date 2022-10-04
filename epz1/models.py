@@ -17,13 +17,16 @@ class Home_Page(models.Model):
 
     def __str__(self):
         return self.match_dat
+
+    # def get_absolute_url(self):
+    #     return "/?page=%i" % self.id
     
     def get_absolute_url(self):
         kwargs = {
         'pk': self.id,
             'slug': self.slug
         }
-        return reverse('list_home', kwargs=kwargs)
+        return reverse('detail_home', kwargs=kwargs)
 
     def save(self, *args, **kwargs):
         value = self.league
