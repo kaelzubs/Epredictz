@@ -94,7 +94,7 @@
         <div class="col text-center" id="pag">
             <span class="step-links">
                 {% if ppages.has_previous %}
-                <a class="btn btn-success" href="?page={{ ppages.previous_page_number }}">
+                <a class="btn btn-success" href="{% url 'epz_detail' epz_detail.slug ppages.previous_page_number %}">
                     <button class="btn btn-success">prev</button>
                 </a>
                 {% endif %}
@@ -103,7 +103,7 @@
                 </span>
 
                 {% if ppages.has_next %}
-                <a class="btn btn-success" href="?page={{ ppages.next_page_number }}">
+                <a class="btn btn-success" href="{% url 'epz_detail' epz_detail.slug ppages.next_page_number %}">
                     <button class="btn btn-success">next</button>
                 </a>
                 {% endif %}
