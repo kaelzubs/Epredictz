@@ -46,7 +46,7 @@ def rate_limiter():
     
 rate_limiter()
 
-def detail_home(request):
+def detail_home(request, slug, pk):
     pages = Home_Page.objects.all().order_by('-match_dat')
     if request.user.is_staff or request.user.is_superuser:
         pages = Home_Page.objects.all().order_by('-match_dat')
