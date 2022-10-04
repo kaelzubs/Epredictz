@@ -55,7 +55,7 @@ def list_home(request):
     if query:
         pages = Home_Page.objects.filter(
             Q(match_dat__icontains=query) |
-            Q(country__icontains=query) |
+            Q(match_time__icontains=query) |
             Q(league__icontains=query) |
             Q(home_team__icontains=query) |
             Q(away_team__icontains=query) |
@@ -92,7 +92,7 @@ def handler404(request, exception, template_name="error_404.html"):
     if query:
         pages = Home_Page.objects.filter(
             Q(match_dat__icontains=query) |
-            Q(country__icontains=query) |
+            Q(match_time__icontains=query) |
             Q(league__icontains=query) |
             Q(home_team__icontains=query) |
             Q(away_team__icontains=query) |
@@ -120,7 +120,7 @@ def handler500(request, template_name="error_500.html"):
     if query:
         pages = Home_Page.objects.filter(
             Q(match_dat__icontains=query) |
-            Q(country__icontains=query) |
+            Q(match_time__icontains=query) |
             Q(league__icontains=query) |
             Q(home_team__icontains=query) |
             Q(away_team__icontains=query) |
