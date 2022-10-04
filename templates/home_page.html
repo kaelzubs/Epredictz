@@ -85,33 +85,32 @@
                 {% endif %}
             </tr>
         </tbody>
+        <div class="container">
+            <div class="row">
+                <div class="col text-center" id="pag">
+                    <span class="step-links">
+                        {% if ppages.has_previous %}
+                        <a class="btn btn-success" href="{% url 'epz_detail' page.slug ppages.previous_page_number %}">
+                            <button class="btn btn-success">prev</button>
+                        </a>
+                        {% endif %}
+                        <span class="current">
+                            Page {{ ppages.number }} of {{ ppages.paginator.num_pages }}.
+                        </span>
+        
+                        {% if ppages.has_next %}
+                        <a class="btn btn-success" href="{% url 'epz_detail' page.slug ppages.next_page_number %}">
+                            <button class="btn btn-success">next</button>
+                        </a>
+                        {% endif %}
+                    </span>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
        {% endfor %}
     </table> 
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="col text-center" id="pag">
-            <span class="step-links">
-                {% if ppages.has_previous %}
-                <a class="btn btn-success" href="{% url 'epz_detail' ppage.slug ppages.previous_page_number %}">
-                    <button class="btn btn-success">prev</button>
-                </a>
-                {% endif %}
-                <span class="current">
-                    Page {{ ppages.number }} of {{ ppages.paginator.num_pages }}.
-                </span>
-
-                {% if ppages.has_next %}
-                <a class="btn btn-success" href="{% url 'epz_detail' ppage.slug ppages.next_page_number %}">
-                    <button class="btn btn-success">next</button>
-                </a>
-                {% endif %}
-            </span>
-            <br>
-            <br>
-        </div>
-    </div>
 </div>
 {% endblock content %}
 
