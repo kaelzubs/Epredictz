@@ -85,10 +85,30 @@
                 {% endif %}
             </tr>
         </tbody>
+        <div class="col text-center" id="pag">
+            <span class="step-links">
+                {% if pages.has_previous %}
+                <a class="btn btn-success" href="{% url 'detail_home' page.slug pages.previous_page_number %}">
+                    <button class="btn btn-success">prev</button>
+                </a>
+                {% endif %}
+                <span class="current">
+                    Page {{ pages.number }} of {{ pages.paginator.num_pages }}.
+                </span>
+
+                {% if pages.has_next %}
+                <a class="btn btn-success" href="{% url 'detail_home' page.slug pages.next_page_number %}">
+                    <button class="btn btn-success">next</button>
+                </a>
+                {% endif %}
+            </span>
+            <br>
+            <br>
+        </div>
        {% endfor %}
     </table> 
 </div>
-<div class="container">
+<!-- <div class="container">
     <div class="row">
         <div class="col text-center" id="pag">
             <span class="step-links">
@@ -111,7 +131,7 @@
             <br>
         </div>
     </div>
-</div>
+</div> -->
 {% endblock content %}
 
 
