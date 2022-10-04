@@ -11,7 +11,6 @@ import requests
 @limits(calls=10, period=1)
 def rate_limiter():
     url = os.getenv('DAILY_URL')
-    # querystring = {"sort":"-id"}
     headers = {
         "Content-Type": "application/json",
         "Connection": "keep-alive",
