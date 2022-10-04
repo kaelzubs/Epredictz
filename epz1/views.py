@@ -11,14 +11,14 @@ import requests
 @limits(calls=10, period=1)
 def rate_limiter():
     url = os.getenv('DAILY_URL')
-    querystring = {"sort":"-id"}
+    # querystring = {"sort":"-id"}
     headers = {
         "Content-Type": "application/json",
         "Connection": "keep-alive",
         "X-RapidAPI-Key": os.getenv('DAILY_RAPIDAPI_KEY'),
         "X-RapidAPI-Host": os.getenv('DAILY_RAPIDAPI_HOST')
     }
-    response = requests.request("GET", url, headers=headers, params=querystring)
+    response = requests.request("GET", url, headers=headers)
     
     data = response.json()
     arrdata = data['data']
@@ -48,7 +48,7 @@ def rate_limiter():
 rate_limiter()
 
 def list_home(request):
-    pages = Home_Page.objects.all()
+    pages = Home_Page.objects.all().order_by('-match_dat')
     if request.user.is_staff or request.user.is_superuser:
         pages = Home_Page.objects.all().order_by('-match_dat')
 

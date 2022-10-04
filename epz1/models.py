@@ -19,5 +19,5 @@ class Home_Page(models.Model):
         return "/?page=%i" % self.id
 
     class Meta:
-        ordering = ['-match_dat']
+        ordering = ['-id']
 
