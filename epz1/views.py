@@ -11,14 +11,14 @@ import requests
 @limits(calls=10, period=1)
 def rate_limiter():
     url = os.getenv('DAILY_URL')
+    querystring = {"sort":"-id"}
     headers = {
         "Content-Type": "application/json",
         "Connection": "keep-alive",
         "X-RapidAPI-Key": os.getenv('DAILY_RAPIDAPI_KEY'),
         "X-RapidAPI-Host": os.getenv('DAILY_RAPIDAPI_HOST')
     }
-    response = requests.request("GET", url, headers=headers)
-    
+    response = requests.request("GET", url, headers=headers, params=querystring)
     data = response.json()
     arrdata = data['data']
     for dt in arrdata:
