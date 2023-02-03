@@ -5,7 +5,6 @@ from django.utils.text import slugify
 
 
 class Home_Page(models.Model):
-    slug = AutoSlugField(populate_from='league')
     match_date_time = models.DateTimeField(auto_now_add=True, null=True)
     league = models.CharField(max_length=100)
     home_team = models.CharField(max_length=100)
@@ -13,6 +12,7 @@ class Home_Page(models.Model):
     tip = models.CharField(max_length=100)
     tip_odd = models.DecimalField(max_digits=20, decimal_places=10)
     result = models.CharField(max_length=100)
+    slug = models.SlugField(prepopulate_from=('league',))
 
     class Meta:
         ordering = ('league',)
