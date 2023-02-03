@@ -5,34 +5,17 @@ from django.utils.text import slugify
 
 
 class Home_Page(models.Model):
-    slug = models.SlugField(default='', editable=False, max_length=200, null = False)
-    match_dat = models.CharField(max_length=100)
-    match_time = models.CharField(max_length=100)
+    slug = models.SlugField()
+    match_date_time = models.DateTimeField(auto_now_add=True)
     league = models.CharField(max_length=100)
     home_team = models.CharField(max_length=100)
     away_team = models.CharField(max_length=100)
     tip = models.CharField(max_length=100)
-    tip_odd = models.CharField(max_length=100)
+    tip_odd = models.DecimalField()
     result = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.match_dat
+        return self.league
 
-    # def get_absolute_url(self):
-    #     return "/?page=%i" % self.id
-    
     def get_absolute_url(self):
-        kwargs = {
-            'pk': self.id,
-            'slug': self.slug
-        }
-        return reverse('detail_home', kwargs=kwargs)
-
-    def save(self, *args, **kwargs):
-        value = self.league
-        self.slug = slugify(value, allow_unicode=True)
-        super().save(*args, **kwargs)
-
-    class Meta:
-        ordering = ['-id']
-
+        return "/?%s" % self.slug
