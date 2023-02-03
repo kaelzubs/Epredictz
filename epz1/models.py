@@ -6,7 +6,7 @@ from django.utils.text import slugify
 
 class Home_Page(models.Model):
     slug = AutoSlugField(populate_from='league')
-    match_date_time = models.DateTimeField(auto_now_add=True)
+    match_date_time = models.DateTimeField(auto_now_add=True, null=True)
     league = models.CharField(max_length=100)
     home_team = models.CharField(max_length=100)
     away_team = models.CharField(max_length=100)
