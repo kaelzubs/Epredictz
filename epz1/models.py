@@ -14,8 +14,11 @@ class Home_Page(models.Model):
     tip_odd = models.DecimalField(max_digits=20, decimal_places=10)
     result = models.CharField(max_length=100)
 
+    class Meta:
+        ordering = ('league')
+
     def __str__(self):
         return self.league
 
     def get_absolute_url(self):
-        return "/?%s" % self.slug
+        return f"/{self.slug}/"
