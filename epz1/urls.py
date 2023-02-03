@@ -1,17 +1,10 @@
 from django.urls import path
-from .views import list_home, StaticViewSitemap
-from django.contrib.sitemaps.views import sitemap
-from django.contrib.syndication.views import Feed
-
-
-sitemaps = {
-
-    'static': StaticViewSitemap,
-}
+from .views import list_home, detail_home
 
 
 urlpatterns = [
 
     path('', list_home, name='list_home'),
-    path('sitemap.xml/', sitemap, {'sitemaps': sitemaps}),
+    path('<slug:slug>/', detail_home , name='detail_home')
+
 ]

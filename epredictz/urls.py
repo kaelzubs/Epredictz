@@ -20,10 +20,21 @@ from django.conf.urls.static import static
 from epz1 import views as epz_views
 from django.conf.urls import handler404, handler500
 from django.views.static import serve
+from django.contrib.sitemaps.views import sitemap
+from .views import StaticViewSitemap
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.views.generic.base import RedirectView
 
+
+
+sitemaps = {
+
+    'static': StaticViewSitemap,
+}
 
 
 urlpatterns = [
+    path('admin-MrRobot/', admin.site.urls),
     path('', include('epz1.urls')),
     path('about-', include('epz2.urls')),
     path('contact-', include('epz3.urls')),
@@ -32,8 +43,8 @@ urlpatterns = [
     path('cookie-', include('epz6.urls')),
     path('subscription-', include('epz7.urls')),
     path('robots.txt/', include('robots.urls')),
-    path('admin-MrRobot/', admin.site.urls),
-
+    path('sitemap.xml/', sitemap, {'sitemaps': sitemaps}),
+    path("ads.txt", RedirectView.as_view(url=staticfiles_storage.url("ads.txt"))),
 ]
 
 if settings.DEBUG:

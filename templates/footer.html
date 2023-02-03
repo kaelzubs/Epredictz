@@ -8,8 +8,8 @@
                 <a href="{% url 'list_contact' %}" class="footnote">CONTACT US</a>  |
                 <a href="{% url 'list_disclaim' %}" class="footnote">T &amp; Cs</a>
             </p>
-            <img id='icon' src="{% static 'img/goatman.png' %}">
-            <h1 style="font-size: 18px; margin: 5px; font-weight: bold;">Excellent Prediction Zone</h1>
+            <img id='icon' src="{% static 'img/goatman.png' %}" alt="Goat man" class="img-fluid">
+            <h2 class="footer_epz">EPREDICTZ</h2>
         </div>
 
 
@@ -23,25 +23,12 @@
 
 
         <div id="bs-newsletter-mailchimp-2" class="col-sm-4 h-ni w-t footer-widget footer-column-2 widget widget_bs-newsletter-mailchimp">
-            <div class="section-heading sh-t6 sh-s6">
-                {% if user.is_authenticated %}
-                <div>
-                    <p class="footnote">Welcome <span class="crups">{{ user.username }}</span></p>
-                </div>
-                {% else %}
-                <div>
-                    <p class="footnote">Welcome <span class="crups">Guest</span></p>
-                </div>
-                {% endif %}
-                <span class="h-text footnote">Newsletter</span>
-            </div>
+            <span class="h-text footnote">Newsletter</span>
             <div class="bs-shortcode bs-subscribe-newsletter bs-mailchimp-newsletter ">
                 <div class="subscribe-image">
-                    <img src="{% static 'img/email-illustration.png' %}" alt="Newsletter">
+                    <img class="img-fluid" src="{% static 'img/email-illustration.png' %}" alt="Newsletter">
                 </div>
                 <div class="subscribe-message">
-
-
                     <p class="crups footnote">Subscribe on our newsletter to stay updated.</p>
                 </div>
 

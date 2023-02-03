@@ -19,39 +19,28 @@ import django_heroku
 import cloudinary
 
 
-from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-import os
-import dotenv # <- New
-
-# Add .env variables anywhere before SECRET_KEY
-dotenv_file = os.path.join(BASE_DIR, ".env")
-if os.path.isfile(dotenv_file):
-    dotenv.load_dotenv(dotenv_file)
-
-from dotenv import load_dotenv, find_dotenv
-load_dotenv(find_dotenv())
+# Initialise environment variables
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-
 DEBUG = False
 
 if DEBUG is False:
-   ALLOWED_HOSTS = [
-       'https://epredictz.com'
-   ]
+    ALLOWED_HOSTS = [
+        "epredictz.com",
+        "www.epredictz.com",
+    ]
 
 if DEBUG is True:
     ALLOWED_HOSTS = []
@@ -82,18 +71,22 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    "epz1.middleware.WwwRedirectMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.gzip.GZipMiddleware',
 ]
 
-ROOT_URLCONF = 'epredictz.urls'
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
 
+ROOT_URLCONF = 'epredictz.urls'
 
 
 TEMPLATES = [
@@ -132,10 +125,24 @@ WSGI_APPLICATION = 'epredictz.wsgi.application'
 
 DATABASES = {
     'default': {
-         'ENGINE': 'django.db.backends.sqlite3',
-         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'Epredictz',
+        'USER': os.getenv('POST_NAME'),
+        'PASSWORD': os.getenv('POST_PASS'),
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
+
+# DATABASES = {}
+# db_from_env = dj_database_url.config(conn_max_age=600)
+# DATABASES['default'].update(db_from_env)
+# DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+
+django_heroku.settings(locals())
+
+# options = DATABASES['default'].get('OPTIONS', {})
+# options.pop('sslmode', None)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -169,8 +176,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
@@ -179,10 +184,8 @@ MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
-VENV_PATH = os.path.dirname(os.path.join(BASE_DIR))
-
-STATIC_ROOT = os.path.join(VENV_PATH, 'staticfiles')
-MEDIA_ROOT = os.path.join(VENV_PATH,  'media')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_ROOT = os.path.join(BASE_DIR,  'media')
 
 #  Add configuration for static files storage using whitenoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -196,25 +199,29 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 SITE_ID = 1
 
-MAILCHIMP_API_KEY = os.environ['MAILCHIMP_API_KEY']
-MAILCHIMP_DATA_CENTER = os.environ['MAILCHIMP_DATA_CENTER']
-MAILCHIMP_EMAIL_LIST_ID = os.environ['MAILCHIMP_EMAIL_LIST_ID']
-
-
 ######################################################
-
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
-
-django_heroku.settings(locals())
-
+MAILCHIMP_API_KEY = os.getenv('MAILCHIMP_API_KEY')
+MAILCHIMP_DATA_CENTER = os.getenv('MAILCHIMP_DATA_CENTER')
+MAILCHIMP_EMAIL_LIST_ID = os.getenv('MAILCHIMP_EMAIL_LIST_ID')
 
 cloudinary.config(
-   cloud_name=os.environ['CLOUD_NAME_CLODINARY'],
-   api_key=os.environ['API_KEY_CLOUDINARY'],
-   api_secret=os.environ['API_SECRET_CLOUDINARY']
+   cloud_name=os.getenv('CLOUD_NAME_CLODINARY'),
+   api_key=os.getenv('API_KEY_CLOUDINARY'),
+   api_secret=os.getenv('API_SECRET_CLOUDINARY')
 )
 
-DEFAULT_AUTO_FIELD='django.db.models.AutoField'
+CLOUDINARY_URL=os.getenv('CLOUDINARY_URL')
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Email recieved from epredictz.com'
+DEFAULT_FROM_EMAIL = 'donmart4u@gmail.com'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 ROBOTS_CACHE_TIMEOUT = 60*60*24
