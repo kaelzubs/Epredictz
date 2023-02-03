@@ -6,5 +6,5 @@ from . models import Home_Page
 class HomeAdmin(admin.ModelAdmin):
     list_display = ('match_date_time', 'league', 'home_team', 'away_team', 'tip', 'tip_odd', 'result')
     search_fields = ('match_date_time',)
-
+    prepopulated_fields = {'slug': ('league',), }
 admin.site.register(Home_Page, HomeAdmin)
