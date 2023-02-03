@@ -3,56 +3,13 @@ from . models import Home_Page
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from epz7.forms import EmailSignupForm
-import os
-from ratelimit import limits
-import requests
-
-
-#@limits(calls=10, period=1)
-#def rate_limiter():
-#    url = os.getenv('DAILY_URL')
-#    querystring = {"sort":"-id"}
-#    headers = {
-#        "Content-Type": "application/json",
-#        "Connection": "keep-alive",
-#        "X-RapidAPI-Key": os.getenv('DAILY_RAPIDAPI_KEY'),
-#        "X-RapidAPI-Host": os.getenv('DAILY_RAPIDAPI_HOST')
-#    }
-#    response = requests.request("GET", url, headers=headers, params=querystring)
-#    data = response.json()
-#    arrdata = data['data']
-#    for dt in arrdata:
-#        for res in dt['coupons_list_data']:
-#            if not Home_Page.objects.filter(
-#                match_dat = res['match_date'],
-#                match_time = res['match_time'],
-#                league = res['league_name'],
-#                home_team = res['home_team'],
-#                away_team = res['away_team'],
-#                tip = res['game_prediction'],
-#                tip_odd = res['odd_value'],
-#                result = res['match_status']
-#            ).exists():
-#                Home_Page.objects.create(
-#                    match_dat = res['match_date'],
-#                    match_time = res['match_time'],
-#                    league = res['league_name'],
-#                    home_team = res['home_team'],
-#                    away_team = res['away_team'],
-#                    tip = res['game_prediction'],
-#                    tip_odd = res['odd_value'],
-#                    result = res['match_status']
-#               )
-#
-#rate_limiter()
-
 
 def list_home(request):
-    pages = Home_Page.objects.all().order_by('-match_date_time')
+    pages = Home_Page.objects.all().order_by('-date_time')
     query = request.GET.get('q')
     if query:
         pages = Home_Page.objects.filter(
-            Q(match_date_time__icontains=query) |
+            Q(date_time__icontains=query) |
             Q(league__icontains=query) |
             Q(home_team__icontains=query) |
             Q(away_team__icontains=query) |
