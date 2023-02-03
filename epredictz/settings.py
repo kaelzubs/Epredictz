@@ -127,8 +127,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'Epredictz',
-        'USER': is.getenv('POST_NAME'),
-        'PASSWORD': is.getenv('POST_PASS'),
+        'USER': os.getenv('POST_NAME'),
+        'PASSWORD': os.getenv('POST_PASS'),
         'HOST': 'localhost',
         'PORT': '5432',
     }
