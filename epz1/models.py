@@ -5,7 +5,7 @@ from django.utils.text import slugify
 
 
 class Home_Page(models.Model):
-    slug = models.SlugField()
+    slug = AutoSlugField(populate_from='league')
     match_date_time = models.DateTimeField(auto_now_add=True)
     league = models.CharField(max_length=100)
     home_team = models.CharField(max_length=100)
@@ -22,8 +22,3 @@ class Home_Page(models.Model):
 
     def get_absolute_url(self):
         return f"/{self.slug}/"
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.league)
-        return super().save(*args, **kwargs)
