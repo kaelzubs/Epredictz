@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
-import dj_database_url
+# import dj_database_url
 
 import django_heroku
 
@@ -123,21 +123,22 @@ WSGI_APPLICATION = 'epredictz.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'Epredictz',
+        'NAME': 'epredictz',
         'USER': os.getenv('POST_NAME'),
         'PASSWORD': os.getenv('POST_PASS'),
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'HOST': os.getenv('HOST'),
+        'PORT': os.getenv('PORT'),
     }
 }
 
-# DATABASES = {}
-# db_from_env = dj_database_url.config(conn_max_age=600)
-# DATABASES['default'].update(db_from_env)
-# DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+#DATABASES = {}
+#db_from_env = dj_database_url.config(conn_max_age=600)
+#DATABASES['default'].update(db_from_env)
+#DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 django_heroku.settings(locals())
 

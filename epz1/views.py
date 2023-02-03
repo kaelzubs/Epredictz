@@ -32,7 +32,7 @@ import requests
 #                tip = res['game_prediction'],
 #                tip_odd = res['odd_value'],
 #                result = res['match_status']
-#                ).exists():
+#            ).exists():
 #                Home_Page.objects.create(
 #                    match_dat = res['match_date'],
 #                    match_time = res['match_time'],
@@ -42,57 +42,17 @@ import requests
 #                    tip = res['game_prediction'],
 #                    tip_odd = res['odd_value'],
 #                    result = res['match_status']
-#                )
-#    
+#               )
+#
 #rate_limiter()
-
-def detail_home(request):
-    pages = Home_Page.objects.all().order_by('-match_dat')
-    if request.user.is_staff or request.user.is_superuser:
-        pages = Home_Page.objects.all().order_by('-match_dat')
-
-    query = request.GET.get('q')
-    if query:
-        pages = Home_Page.objects.filter(
-            Q(match_dat__icontains=query) |
-            Q(match_time__icontains=query) |
-            Q(league__icontains=query) |
-            Q(home_team__icontains=query) |
-            Q(away_team__icontains=query) |
-            Q(tip__icontains=query) |
-            Q(tip_odd__icontains=query) |
-            Q(result__icontains=query)
-
-        ).distinct()
-
-    paginator = Paginator(pages, 10)
-    page = request.GET.get('page')
-    try:
-        ppages = paginator.page(page)
-    except PageNotAnInteger:
-       ppages = paginator.page(1)
-    except EmptyPage:
-        ppages = paginator.page(paginator.num_pages)
-
-    forms = EmailSignupForm()
-
-    return render(request, 'home_page.html', {
-        'pages': pages,
-        'ppages': ppages,
-        'forms': forms
-    })
 
 
 def list_home(request):
-    pages = Home_Page.objects.all().order_by('-match_dat')
-    if request.user.is_staff or request.user.is_superuser:
-        pages = Home_Page.objects.all().order_by('-match_dat')
-
+    pages = Home_Page.objects.all().order_by('-match_date_time')
     query = request.GET.get('q')
     if query:
         pages = Home_Page.objects.filter(
-            Q(match_dat__icontains=query) |
-            Q(match_time__icontains=query) |
+            Q(match_date_time__icontains=query) |
             Q(league__icontains=query) |
             Q(home_team__icontains=query) |
             Q(away_team__icontains=query) |
@@ -123,56 +83,14 @@ def list_home(request):
 
 def handler404(request, exception, template_name="error_404.html"):
     pages = Home_Page.objects.all()
-    if request.user.is_staff or request.user.is_superuser:
-        pages = Home_Page.objects.all()
-
-    query = request.GET.get('q')
-    if query:
-        pages = Home_Page.objects.filter(
-            Q(match_dat__icontains=query) |
-            Q(match_time__icontains=query) |
-            Q(league__icontains=query) |
-            Q(home_team__icontains=query) |
-            Q(away_team__icontains=query) |
-            Q(tip__icontains=query) |
-            Q(tip_odd__icontains=query) |
-            Q(result__icontains=query)
-        ).distinct()
-
-    forms = EmailSignupForm()
-
-    response = render(request, "error_404.html", {
-        'pages': pages,
-        'forms': forms
-    })
+    response = render(request, "error_404.html", {})
     response.status_code = 404
     return response
 
 
 def handler500(request, template_name="error_500.html"):
     pages = Home_Page.objects.all()
-    if request.user.is_staff or request.user.is_superuser:
-        pages = Home_Page.objects.all()
-
-    query = request.GET.get('q')
-    if query:
-        pages = Home_Page.objects.filter(
-            Q(match_dat__icontains=query) |
-            Q(match_time__icontains=query) |
-            Q(league__icontains=query) |
-            Q(home_team__icontains=query) |
-            Q(away_team__icontains=query) |
-            Q(tip__icontains=query) |
-            Q(tip_odd__icontains=query) |
-            Q(result__icontains=query)
-        ).distinct()
-
-    forms = EmailSignupForm()
-
-    response = render(request, "error_500.html", {
-        'pages': pages,
-        'forms': forms
-    })
+    response = render(request, "error_500.html", {})
     response.status_code = 500
     return response
 
