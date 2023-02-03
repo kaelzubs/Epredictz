@@ -12,7 +12,7 @@ class Home_Page(models.Model):
     tip = models.CharField(max_length=100)
     tip_odd = models.DecimalField(max_digits=20, decimal_places=10)
     result = models.CharField(max_length=100)
-    slug = models.SlugField(prepopulate_from=('league',))
+    slug = models.SlugField()
 
     class Meta:
         ordering = ('league',)
