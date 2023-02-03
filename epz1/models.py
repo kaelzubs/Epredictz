@@ -5,7 +5,7 @@ from django.utils.text import slugify
 
 
 class Home_Page(models.Model):
-    match_date_time = models.DateTimeField(auto_now_add=True, editable=True, blank=False)
+    match_date_time = models.DateTimeField()
     league = models.CharField(max_length=100)
     home_team = models.CharField(max_length=100)
     away_team = models.CharField(max_length=100)
