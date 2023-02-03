@@ -4,7 +4,7 @@ from django.db import models
 
 
 class Home_Page(models.Model):
-    match_date_time = models.DateTimeField()
+    date_time = models.DateTimeField()
     league = models.CharField(max_length=100)
     home_team = models.CharField(max_length=100)
     away_team = models.CharField(max_length=100)
