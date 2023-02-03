@@ -15,7 +15,7 @@ class Home_Page(models.Model):
     result = models.CharField(max_length=100)
 
     class Meta:
-        ordering = ('league')
+        ordering = ('league',)
 
     def __str__(self):
         return self.league
