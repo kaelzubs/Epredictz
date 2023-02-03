@@ -22,3 +22,8 @@ class Home_Page(models.Model):
 
     def get_absolute_url(self):
         return f"/{self.slug}/"
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.league)
+        return super().save(*args, **kwargs)
