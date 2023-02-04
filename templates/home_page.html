@@ -53,9 +53,9 @@
     <h1 id="tim">Excellent Prediction Zone: Home country to League tipsters</h1>
     <div class="btn-group btn-group-lg" role="group" aria-label="Epredictz">
         <div class="row">
-            <a class="col" href="{% url 'list_home_prev' %}"><button type="button" class="btn btn-secondary">Yesterday</button></a>
-            <a class="col" href="{% url 'list_home' %}"><button type="button" class="btn btn-secondary">Today</button></a>
-            <a class="col" href="{% url 'list_home_next' %}"><button type="button" class="btn btn-secondary">Tomorrow</button></a>
+            <a type="button" class="col btn btn-warning" href="{% url 'list_home_prev' %}">Yesterday</a>
+            <a type="button" class="col btn btn-success" href="{% url 'list_home' %}"><button type="button" class="btn btn-secondary">Today</button></a>
+            <a type="button" class="col btn btn-primary" href="{% url 'list_home_next' %}"><button type="button" class="btn btn-secondary">Tomorrow</button></a>
         </div>
     </div>
     <table class="table table-bordered table-striped table-responsive-stack table-dark" id="tableOne">
