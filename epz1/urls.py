@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import list_home, list_home_prev, list_home_next
+from .views import list_home, list_home_prev, list_home_next, list_home_today
 
 urlpatterns = [
     path('', list_home, name='list_home')
