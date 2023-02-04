@@ -71,7 +71,7 @@ def list_home(request):
     })
 
 def list_home_next(request):
-    pages = Home_Page.objects.earliest("date_time")
+    pages = Home_Page.objects.order_by("date_time")
     query = request.GET.get('q')
     if query:
         pages = Home_Page.objects.filter(
