@@ -3,9 +3,11 @@ from . models import Home_Page
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from epz7.forms import EmailSignupForm
+from datetime import datetime, timedelta
 
-def list_home(request):
-    pages = Home_Page.objects.all().order_by('-date_time')
+
+def list_home_prev(request):
+    pages = Home_Page.objects.all().order_by('date_time - timedelta(1)')
     query = request.GET.get('q')
     if query:
         pages = Home_Page.objects.filter(
@@ -36,6 +38,69 @@ def list_home(request):
         'forms': forms
     })
 
+def list_home(request):
+    pages = Home_Page.objects.all().order_by('date_time')
+    query = request.GET.get('q')
+    if query:
+        pages = Home_Page.objects.filter(
+            Q(date_time__icontains=query) |
+            Q(league__icontains=query) |
+            Q(home_team__icontains=query) |
+            Q(away_team__icontains=query) |
+            Q(tip__icontains=query) |
+            Q(tip_odd__icontains=query) |
+            Q(result__icontains=query)
+
+        ).distinct()
+
+    paginator = Paginator(pages, 10)
+    page = request.GET.get('page')
+    try:
+        ppages = paginator.page(page)
+    except PageNotAnInteger:
+       ppages = paginator.page(1)
+    except EmptyPage:
+        ppages = paginator.page(paginator.num_pages)
+
+    forms = EmailSignupForm()
+
+    return render(request, 'home_page.html', {
+        'pages': pages,
+        'ppages': ppages,
+        'forms': forms
+    })
+
+def list_home_next(request):
+    pages = Home_Page.objects.all().order_by('date_time + timedelta(1)')
+    query = request.GET.get('q')
+    if query:
+        pages = Home_Page.objects.filter(
+            Q(date_time__icontains=query) |
+            Q(league__icontains=query) |
+            Q(home_team__icontains=query) |
+            Q(away_team__icontains=query) |
+            Q(tip__icontains=query) |
+            Q(tip_odd__icontains=query) |
+            Q(result__icontains=query)
+
+        ).distinct()
+
+    paginator = Paginator(pages, 10)
+    page = request.GET.get('page')
+    try:
+        ppages = paginator.page(page)
+    except PageNotAnInteger:
+       ppages = paginator.page(1)
+    except EmptyPage:
+        ppages = paginator.page(paginator.num_pages)
+
+    forms = EmailSignupForm()
+
+    return render(request, 'home_page.html', {
+        'pages': pages,
+        'ppages': ppages,
+        'forms': forms
+    })
 
 
 def handler404(request, exception, template_name="error_404.html"):

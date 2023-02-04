@@ -10,7 +10,7 @@ class Home_Page(models.Model):
     home_team = models.CharField(max_length=100)
     away_team = models.CharField(max_length=100)
     tip = models.CharField(max_length=100)
-    tip_odd = models.DecimalField(max_digits=20, decimal_places=10)
+    tip_odd = models.FloatField(default=None)
     result = models.CharField(max_length=100)
     slug = models.SlugField()
 
