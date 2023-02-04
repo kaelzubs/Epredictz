@@ -40,8 +40,7 @@ def list_home_prev(request):
     })
 
 def list_home(request):
-    today = datetime.now()
-    pages = Home_Page.objects.all().order_by(today, 'date_time')
+    pages = Home_Page.objects.order_by('date_time')
     query = request.GET.get('q')
     if query:
         pages = Home_Page.objects.filter(
@@ -73,8 +72,7 @@ def list_home(request):
     })
 
 def list_home_next(request):
-    tomorrow = datetime.now() + timedelta(1)
-    pages = Home_Page.objects.order_by(tomorrow, "date_time")
+    pages = Home_Page.objects.earliest("date_time")
     query = request.GET.get('q')
     if query:
         pages = Home_Page.objects.filter(
