@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 
 def list_home_prev(request):
     yesterday = datetime.now() - timedelta(1)
-    pages = Home_Page.objects.all().order_by(yesterday, "date_time")
+    pages = Home_Page.objects.order_by(yesterday, "date_time")
     query = request.GET.get('q')
     if query:
         pages = Home_Page.objects.filter(
@@ -22,7 +22,7 @@ def list_home_prev(request):
 
         ).distinct()
 
-    paginator = Paginator(pages, 10)
+    paginator = Paginator(pages, 5)
     page = request.GET.get('page')
     try:
         ppages = paginator.page(page)
@@ -55,7 +55,7 @@ def list_home(request):
 
         ).distinct()
 
-    paginator = Paginator(pages, 10)
+    paginator = Paginator(pages, 5)
     page = request.GET.get('page')
     try:
         ppages = paginator.page(page)
@@ -74,7 +74,7 @@ def list_home(request):
 
 def list_home_next(request):
     tomorrow = datetime.now() + timedelta(1)
-    pages = Home_Page.objects.all().order_by(tomorrow, "date_time")
+    pages = Home_Page.objects.order_by(tomorrow, "date_time")
     query = request.GET.get('q')
     if query:
         pages = Home_Page.objects.filter(
@@ -88,7 +88,7 @@ def list_home_next(request):
 
         ).distinct()
 
-    paginator = Paginator(pages, 10)
+    paginator = Paginator(pages, 5)
     page = request.GET.get('page')
     try:
         ppages = paginator.page(page)
