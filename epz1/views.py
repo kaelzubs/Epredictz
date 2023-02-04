@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 
 
 def list_home_prev(request):
-    pages = Home_Page.objects.all().order_by('date_time') - timedelta(1)
+    pages = Home_Page.objects.all().order_by('date_time')
     query = request.GET.get('q')
     if query:
         pages = Home_Page.objects.filter(
@@ -71,7 +71,7 @@ def list_home(request):
     })
 
 def list_home_next(request):
-    pages = Home_Page.objects.all().order_by('date_time') + timedelta(1)
+    pages = Home_Page.objects.all().order_by('date_time')
     query = request.GET.get('q')
     if query:
         pages = Home_Page.objects.filter(
