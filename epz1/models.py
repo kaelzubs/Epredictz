@@ -1,11 +1,11 @@
 from django.db import models
-from django.utils.timezone import now
+from datetime import datetime
 
 # Create your models here.
 
 
 class Home_Page(models.Model):
-    date_time = models.DateTimeField(default=now)
+    date_time = models.DateTimeField(default=datetime.now)
     league = models.CharField(max_length=100)
     home_team = models.CharField(max_length=100)
     away_team = models.CharField(max_length=100)

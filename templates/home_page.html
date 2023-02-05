@@ -51,15 +51,11 @@
 {% block content %}
 <div class="container">
     <h1 id="tim">Excellent Prediction Zone: Home country to League tipsters</h1>
-    <div class="btn-group btn-group-lg" role="group" aria-label="Epredictz">
-        <div class="col">
-            <a href="{% url 'list_home_prev' %}"><button type="button" class="btn btn-secondary">Yesterday</button></a>
-        </div>
-        <div class="col">
-            <a href="{% url 'list_home' %}"><button type="button" class="btn btn-secondary">Today</button></a>
-        </div>
-        <div class="col">
-            <a href="{% url 'list_home_next' %}"><button type="button" class="btn btn-secondary">Tomorrow</button></a>
+    <div class="col-12">
+        <div class="row">
+            <a class="col btn btn-success" href="{% url 'list_home_prev' %}">Yesterday</a>
+            <a class="col btn btn-danger" href="{% url 'list_home_today' %}">Today</a>
+            <a class="col btn btn-primary" href="{% url 'list_home_next' %}">Tomorrow</a>
         </div>
     </div>
     <table class="table table-bordered table-striped table-responsive-stack table-dark" id="tableOne">
@@ -74,7 +70,7 @@
                 <th>Result</th>
             </tr>
         </thead>
-        {% for page in ppages %}
+        {% for date, page in ppages %}
         <tbody>
             <tr>
                 <td>{{ page.league }}</td>
