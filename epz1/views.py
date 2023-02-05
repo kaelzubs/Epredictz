@@ -7,8 +7,7 @@ from datetime import datetime, timedelta
 
 
 def list_home_prev(request):
-    yesterday = datetime.now() - timedelta(1)
-    pages = Home_Page.objects.order_by("date_time", yesterday)
+    pages = Home_Page.objects.order_by("date_time")
     query = request.GET.get('q')
     if query:
         pages = Home_Page.objects.filter(
