@@ -27,20 +27,20 @@ def list_home_prev(request):
 
         ).distinct()
 
-    paginator = Paginator(pages, 5)
-    page = request.GET.get('page')
-    try:
-        ppages = paginator.page(page)
-    except PageNotAnInteger:
-       ppages = paginator.page(1)
-    except EmptyPage:
-        ppages = paginator.page(paginator.num_pages)
+    #paginator = Paginator(pages, 5)
+    #page = request.GET.get('page')
+    #try:
+     #   ppages = paginator.page(page)
+    #except PageNotAnInteger:
+     #  ppages = paginator.page(1)
+    #except EmptyPage:
+     #   ppages = paginator.page(paginator.num_pages)
 
     forms = EmailSignupForm()
 
     return render(request, 'home_page.html', {
         'pages': pages,
-        'ppages': ppages,
+        #'ppages': ppages,
         'forms': forms
     })
 
