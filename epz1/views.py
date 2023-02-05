@@ -25,7 +25,7 @@ def list_home_prev(request):
     try:
         ppages = paginator.page(page)
     except PageNotAnInteger:
-       ppages = paginator.page()
+       ppages = paginator.page(1)
     except EmptyPage:
         ppages = paginator.page(paginator.num_pages)
 
@@ -57,7 +57,7 @@ def list_home_today(request):
     try:
         ppages = paginator.page(page)
     except PageNotAnInteger:
-       ppages = paginator.page()
+       ppages = paginator.page(1)
     except EmptyPage:
         ppages = paginator.page(paginator.num_pages)
 
@@ -90,7 +90,7 @@ def list_home(request):
     try:
         ppages = paginator.page(page)
     except PageNotAnInteger:
-       ppages = paginator.page()
+       ppages = paginator.page(1)
     except EmptyPage:
         ppages = paginator.page(paginator.num_pages)
 
