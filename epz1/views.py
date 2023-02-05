@@ -4,10 +4,16 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from epz7.forms import EmailSignupForm
 from datetime import datetime, timedelta
+from itertools import groupby
+from operator import attrgetter
+from django.db.models.functions import TruncDate
 
 
 def list_home_prev(request):
-    pages = Home_Page.objects.order_by("date_time")
+    queryset = Home_Page.objects.annotate(
+        created_at_date=TruncDate('date_time'),
+    ).order_by('date_time')
+    pages = groupby(queryset, attrgetter('created_at_date'))
     query = request.GET.get('q')
     if query:
         pages = Home_Page.objects.filter(
@@ -39,7 +45,10 @@ def list_home_prev(request):
     })
 
 def list_home_today(request):
-    pages = Home_Page.objects.order_by("date_time")
+    queryset = Home_Page.objects.annotate(
+        created_at_date=TruncDate('date_time'),
+    ).order_by('date_time')
+    pages = groupby(queryset, attrgetter('created_at_date'))
     query = request.GET.get('q')
     if query:
         pages = Home_Page.objects.filter(
@@ -72,7 +81,10 @@ def list_home_today(request):
 
 
 def list_home(request):
-    pages = Home_Page.objects.order_by('date_time')
+    queryset = Home_Page.objects.annotate(
+        created_at_date=TruncDate('date_time'),
+    ).order_by('date_time')
+    pages = groupby(queryset, attrgetter('created_at_date'))
     query = request.GET.get('q')
     if query:
         pages = Home_Page.objects.filter(
@@ -104,7 +116,10 @@ def list_home(request):
     })
 
 def list_home_next(request):
-    pages = Home_Page.objects.order_by("date_time")
+    queryset = Home_Page.objects.annotate(
+        created_at_date=TruncDate('date_time'),
+    ).order_by('date_time')
+    pages = groupby(queryset, attrgetter('created_at_date'))
     query = request.GET.get('q')
     if query:
         pages = Home_Page.objects.filter(
