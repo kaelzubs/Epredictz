@@ -15,6 +15,7 @@ class Home_Page(models.Model):
     slug = models.SlugField()
 
     class Meta:
+        db_table = "d23homeh972e6u"
         ordering = ('league',)
 
     def __str__(self):
