@@ -94,30 +94,30 @@
     </table> 
 </div>
 
-#<div class="container">
-#    <div class="row">
-#        <div class="col text-center" id="pag">
-#            <span class="step-links">
-#                {% if ppages.has_previous %}
-#                <a class="btn btn-success" href="?page={{ ppages.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
-#                    <button class="btn btn-success">prev</button>
-#                </a>
-#                {% endif %}
-#                <span class="current">
-#                    Page {{ ppages.number }} of {{ ppages.paginator.num_pages }}.
-#                </span>
-#
-#                {% if ppages.has_next %}
-#                <a class="btn btn-success" href="?page={{ ppages.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
-#                    <button class="btn btn-success">next</button>
-#                </a>
-#                {% endif %}
-#            </span>
-#            <br>
-#            <br>
-#        </div>
-#    </div>
-#</div>
+<div class="container">
+    <div class="row">
+        <div class="col text-center" id="pag">
+            <span class="step-links">
+                {% if object_list.has_previous %}
+                <a class="btn btn-success" href="?page={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+                    <button class="btn btn-success">prev</button>
+                </a>
+                {% endif %}
+                <span class="current">
+                    Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+                </span>
+
+                {% if object_list.has_next %}
+                <a class="btn btn-success" href="?page={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+                    <button class="btn btn-success">next</button>
+                </a>
+                {% endif %}
+            </span>
+            <br>
+            <br>
+        </div>
+    </div>
+</div>
 {% endblock content %}
 
 
