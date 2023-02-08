@@ -53,7 +53,7 @@
     <h1 id="tim">Excellent Prediction Zone: Home country to League tipsters</h1>
     <div class="row">
         <h1>{{ day }}</h1>
-        {% for article in object_list %}
+        {% for article in pages %}
         <p>{{ article.pub_date|date:"F j, Y" }}</p>
         {% if previous_day %}
             <a class="col btn btn-success" href="{{ previous_day }}">Yesterday</a>
