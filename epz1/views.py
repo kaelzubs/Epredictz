@@ -8,7 +8,7 @@ from django.views.generic.dates import DayArchiveView
 
 class ArticleDayArchiveView(DayArchiveView):
     pages = Home_Page.objects.all()
-    date_field = "date_time"
+    date_field = "pub_date"
     allow_future = True
 
     #query = request.GET.get('q')
