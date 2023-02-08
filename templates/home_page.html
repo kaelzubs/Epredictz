@@ -52,37 +52,9 @@
 <div class="container">
     <h1 id="tim">Excellent Prediction Zone: Home country to League tipsters</h1>
     <div class="row">
-        {% for pf in page_field %}
-         <tbody>
-            <tr>
-                <td>{{ pf.league }}</td>
-                <td>{{ pf.date_time }}</td>
-                <td>{{ pf.home_team }}</td>
-                <td>{{ pf.away_team }}</td>
-                <td>{{ pf.tip }}</td>
-                <td>{{ pf.tip_odd }}</td>
-                {% if pf.result == 'won' %}
-                <td><button class="btn btn-success">{{ pf.result }}</button></td>
-                {% elif pf.result == 'lost' %}
-                <td><button class="btn btn-danger">{{ pf.result }}</button></td>
-                {% elif pf.result == 'pending' %}
-                <td><button class="btn btn-warning text-white">{{ pf.result }}...</button></td>
-                {% else %}
-                <td><button class="btn btn-primary">waiting...</button></td>
-                {% endif %}
-            </tr>
-        </tbody>
-        {% endfor %}
-
-        {% if previous_day %}
-            <a class="col btn btn-success" href="{{ previous_day }}">Yesterday</a>
-        {% endif %}
-        {% if previous_day and next_day %}
-            <a class="col btn btn-danger" href="{% url 'list_home' %}">Today</a>
-        {% endif %}
-        {% if next_day %}
-            <a class="col btn btn-primary" href="{{ next_day }}">Tomorrow</a>
-        {% endif %}
+        <a class="col btn btn-success" href="{{ previous_day }}">Yesterday</a>
+        <a class="col btn btn-danger" href="{% url 'list_home' %}">Today</a>
+        <a class="col btn btn-primary" href="{{ next_day }}">Tomorrow</a>
     </div>
   
     <table class="table table-bordered table-striped table-responsive-stack table-dark" id="tableOne">
