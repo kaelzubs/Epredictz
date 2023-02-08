@@ -52,7 +52,26 @@
 <div class="container">
     <h1 id="tim">Excellent Prediction Zone: Home country to League tipsters</h1>
     <div class="row">
-        {% for article in pages %}
+        {% for page in pages %}
+         <tbody>
+            <tr>
+                <td>{{ page.league }}</td>
+                <td>{{ page.date_time }}</td>
+                <td>{{ page.home_team }}</td>
+                <td>{{ page.away_team }}</td>
+                <td>{{ page.tip }}</td>
+                <td>{{ page.tip_odd }}</td>
+                {% if page.result == 'won' %}
+                <td><button class="btn btn-success">{{ page.result }}</button></td>
+                {% elif page.result == 'lost' %}
+                <td><button class="btn btn-danger">{{ page.result }}</button></td>
+                {% elif page.result == 'pending' %}
+                <td><button class="btn btn-warning text-white">{{ page.result }}...</button></td>
+                {% else %}
+                <td><button class="btn btn-primary">waiting...</button></td>
+                {% endif %}
+            </tr>
+        </tbody>
         {% endfor %}
 
         {% if previous_day %}
