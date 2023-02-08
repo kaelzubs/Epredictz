@@ -11,35 +11,37 @@ class ArticleDayArchiveView(DayArchiveView):
     date_field = "pub_date"
     allow_future = True
 
-    #query = request.GET.get('q')
-    #if query:
-    #    pages = Home_Page.objects.filter(
-    #        Q(date_time__icontains=query) |
-    #        Q(league__icontains=query) |
-    #        Q(home_team__icontains=query) |
-    #        Q(away_team__icontains=query) |
-    #        Q(tip__icontains=query) |
-    #        Q(tip_odd__icontains=query) |
-    #        Q(result__icontains=query)
-    #
-    #    ).distinct()
-    #
-    #paginator = Paginator(pages, 5)
-    #page = request.GET.get('page')
-    #try:
-    #    ppages = paginator.page(page)
-    #except PageNotAnInteger:
-    #   ppages = paginator.page(1)
-    #except EmptyPage:
-    #    ppages = paginator.page(paginator.num_pages)
+def list_home(request):
+    pages = Home_Page.objects.all()
+    query = request.GET.get('q')
+    if query:
+        pages = Home_Page.objects.filter(
+            Q(date_time__icontains=query) |
+            Q(league__icontains=query) |
+            Q(home_team__icontains=query) |
+            Q(away_team__icontains=query) |
+            Q(tip__icontains=query) |
+            Q(tip_odd__icontains=query) |
+            Q(result__icontains=query)
+    
+        ).distinct()
+    
+    paginator = Paginator(pages, 5)
+    page = request.GET.get('page')
+    try:
+        ppages = paginator.page(page)
+    except PageNotAnInteger:
+       ppages = paginator.page(1)
+    except EmptyPage:
+        ppages = paginator.page(paginator.num_pages)
 
-    #forms = EmailSignupForm()
+    forms = EmailSignupForm()
 
-    #return render(request, 'home_page.html', {
-    #    'pages': pages,
-    #    'ppages': ppages,
-    #    'forms': forms
-    #})
+    return render(request, 'home_page.html', {
+        'pages': pages,
+        'ppages': ppages,
+        'forms': forms
+    })
 
 def handler404(request, exception, template_name="error_404.html"):
     pages = Home_Page.objects.all()
