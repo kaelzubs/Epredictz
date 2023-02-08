@@ -52,21 +52,21 @@
 <div class="container">
     <h1 id="tim">Excellent Prediction Zone: Home country to League tipsters</h1>
     <div class="row">
-        {% for page in page_field %}
+        {% for pf in page_field %}
          <tbody>
             <tr>
-                <td>{{ page.league }}</td>
-                <td>{{ page.date_time }}</td>
-                <td>{{ page.home_team }}</td>
-                <td>{{ page.away_team }}</td>
-                <td>{{ page.tip }}</td>
-                <td>{{ page.tip_odd }}</td>
-                {% if page.result == 'won' %}
-                <td><button class="btn btn-success">{{ page.result }}</button></td>
-                {% elif page.result == 'lost' %}
-                <td><button class="btn btn-danger">{{ page.result }}</button></td>
-                {% elif page.result == 'pending' %}
-                <td><button class="btn btn-warning text-white">{{ page.result }}...</button></td>
+                <td>{{ pf.league }}</td>
+                <td>{{ pf.date_time }}</td>
+                <td>{{ pf.home_team }}</td>
+                <td>{{ pf.away_team }}</td>
+                <td>{{ pf.tip }}</td>
+                <td>{{ pf.tip_odd }}</td>
+                {% if pf.result == 'won' %}
+                <td><button class="btn btn-success">{{ pf.result }}</button></td>
+                {% elif pf.result == 'lost' %}
+                <td><button class="btn btn-danger">{{ pf.result }}</button></td>
+                {% elif pf.result == 'pending' %}
+                <td><button class="btn btn-warning text-white">{{ pf.result }}...</button></td>
                 {% else %}
                 <td><button class="btn btn-primary">waiting...</button></td>
                 {% endif %}
