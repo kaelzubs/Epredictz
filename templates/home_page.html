@@ -76,8 +76,8 @@
         </thead>
         {% regroup ppages by pub_date as object_list %}
         {% for gpage in object_list %}
-        {{ pub_date.grouper }}
-        {% for page in gpage %}
+        {{ gpage.grouper }}
+        {% for page in gpage.list %}
         <tbody>
             <tr>
                 <td>{{ page.league }}</td>
