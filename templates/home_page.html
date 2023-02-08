@@ -74,7 +74,8 @@
                 <th>Result</th>
             </tr>
         </thead>
-        {% for page in ppages %}
+        {% regroup ppages by pub_date as object_list %}
+        {% for page in object_list %}
         <tbody>
             <tr>
                 <td>{{ page.league }}</td>
