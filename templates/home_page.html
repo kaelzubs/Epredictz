@@ -53,12 +53,12 @@
     <h1 id="tim">Excellent Prediction Zone: Home country to League tipsters</h1>
     <div class="col-12">
         <div class="row">
-            {% if ppages.get_previous_by_created %}
-                <a class="col btn btn-success" href="{{ ppages.get_previous_by_created.get_absolute_url }}">Yesterday</a>
+            {% if pages.get_previous_by_created %}
+                <a class="col btn btn-success" href="{{ pages.get_previous_by_created.get_absolute_url }}">Yesterday</a>
             {% endif %}
             <a class="col btn btn-danger" href="{% url 'list_home' %}">Today</a>
-            {% if ppages.get_next_by_created %}
-                <a class="col btn btn-primary" href="{{ ppages.get_next_by_created.get_absolute_url }}">Tomorrow</a>
+            {% if pages.get_next_by_created %}
+                <a class="col btn btn-primary" href="{{ pages.get_next_by_created.get_absolute_url }}">Tomorrow</a>
             {% endif %}
         </div>
     </div>
