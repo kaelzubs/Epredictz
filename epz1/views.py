@@ -7,7 +7,7 @@ from django.views.generic.dates import DayArchiveView
 
 
 class ArticleDayArchiveView(DayArchiveView):
-    pages = Home_Page.objects.all()
+    page_field = Home_Page.objects.all()
     date_field = "pub_date"
     allow_future = True
 
