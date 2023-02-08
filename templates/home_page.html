@@ -53,9 +53,9 @@
     <h1 id="tim">Excellent Prediction Zone: Home country to League tipsters</h1>
     <div class="col-12">
         <div class="row">
-            <a class="col btn btn-success" href="{% url 'list_home_prev' %}">Yesterday</a>
-            <a class="col btn btn-danger" href="{% url 'list_home_today' %}">Today</a>
-            <a class="col btn btn-primary" href="{% url 'list_home_next' %}">Tomorrow</a>
+            <a class="col btn btn-success" href="{% url '' %}">Yesterday</a>
+            <a class="col btn btn-danger" href="{% url '' %}">Today</a>
+            <a class="col btn btn-primary" href="{% url '' %}">Tomorrow</a>
         </div>
     </div>
     <table class="table table-bordered table-striped table-responsive-stack table-dark" id="tableOne">
@@ -70,7 +70,7 @@
                 <th>Result</th>
             </tr>
         </thead>
-        {% for date, page in ppages %}
+        {% for page in object_list %}
         <tbody>
             <tr>
                 <td>{{ page.league }}</td>
@@ -98,17 +98,17 @@
     <div class="row">
         <div class="col text-center" id="pag">
             <span class="step-links">
-                {% if ppages.has_previous %}
-                <a class="btn btn-success" href="?page={{ ppages.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+                {% if object_list.has_previous %}
+                <a class="btn btn-success" href="?page={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
                     <button class="btn btn-success">prev</button>
                 </a>
                 {% endif %}
                 <span class="current">
-                    Page {{ ppages.number }} of {{ ppages.paginator.num_pages }}.
+                    Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
                 </span>
 
-                {% if ppages.has_next %}
-                <a class="btn btn-success" href="?page={{ ppages.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+                {% if object_list.has_next %}
+                <a class="btn btn-success" href="?page={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
                     <button class="btn btn-success">next</button>
                 </a>
                 {% endif %}
