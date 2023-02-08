@@ -6,13 +6,10 @@ from epz7.forms import EmailSignupForm
 from django.views.generic.dates import DayArchiveView
 
 
-class ArticleDayArchiveView(DayArchiveView):
+class list_home(DayArchiveView):
     template_name = "home_page.html"
-    page_field = Home_Page.objects.all()
     date_field = "pub_date"
     allow_future = True
-
-def list_home(request):
     pages = Home_Page.objects.all()
     query = request.GET.get('q')
     if query:
@@ -38,11 +35,11 @@ def list_home(request):
 
     forms = EmailSignupForm()
 
-    return render(request, 'home_page.html', {
-        'pages': pages,
-        'ppages': ppages,
-        'forms': forms
-    })
+    #return render(request, 'home_page.html', {
+    #    'pages': pages,
+    #    'ppages': ppages,
+    #    'forms': forms
+    #})
 
 def handler404(request, exception, template_name="error_404.html"):
     pages = Home_Page.objects.all()
