@@ -51,13 +51,24 @@
 {% block content %}
 <div class="container">
     <h1 id="tim">Excellent Prediction Zone: Home country to League tipsters</h1>
-    <div class="col-12">
-        <div class="row">
-            <a class="col btn btn-success" href="{% url '' %}">Yesterday</a>
-            <a class="col btn btn-danger" href="{% url '' %}">Today</a>
-            <a class="col btn btn-primary" href="{% url '' %}">Tomorrow</a>
-        </div>
-    </div>
+    
+    <h1>{{ day }}</h1>
+
+    <ul>
+        {% for article in object_list %}
+            <li>{{ article.pub_date|date:"F j, Y" }}: {{ article.title }}</li>
+        {% endfor %}
+    </ul>
+
+    <p>
+        {% if previous_day %}
+            Previous Day: {{ previous_day }}
+        {% endif %}
+        {% if previous_day and next_day %}--{% endif %}
+        {% if next_day %}
+            Next Day: {{ next_day }}
+        {% endif %}
+    </p>
     <table class="table table-bordered table-striped table-responsive-stack table-dark" id="tableOne">
         <thead class="thead-dark">
             <tr>
