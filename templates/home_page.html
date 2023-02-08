@@ -62,8 +62,6 @@
             {% endif %}
         </div>
     </div>
-    {% regroup ppages by date_time as object_list %}
-    {% for gpage in object_list %}
     <table class="table table-bordered table-striped table-responsive-stack table-dark" id="tableOne">
         <thead class="thead-dark">
             <tr>
@@ -76,7 +74,9 @@
                 <th>Result</th>
             </tr>
         </thead>
-        {{ date_time.grouper }}
+        {% regroup ppages by pub_date as object_list %}
+        {% for gpage in object_list %}
+        {{ 'pub_date.grouper }}
         {% for page in gpage %}
         <tbody>
             <tr>
@@ -98,8 +98,8 @@
             </tr>
         </tbody>
        {% endfor %}
+       {% endfor %}
     </table>
-    {% endfor %}
 </div>
 
 <div class="container">
