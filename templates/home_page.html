@@ -53,6 +53,8 @@
     <h1 id="tim">Excellent Prediction Zone: Home country to League tipsters</h1>
     <div class="row">
         {% for article in pages %}
+        {% endfor %}
+
         {% if previous_day %}
             <a class="col btn btn-success" href="{{ previous_day }}">Yesterday</a>
         {% endif %}
@@ -62,7 +64,6 @@
         {% if next_day %}
             <a class="col btn btn-primary" href="{{ next_day }}">Tomorrow</a>
         {% endif %}
-        {% endfor %}
     </div>
   
     <table class="table table-bordered table-striped table-responsive-stack table-dark" id="tableOne">
