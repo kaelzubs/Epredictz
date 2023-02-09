@@ -3,10 +3,13 @@ from . models import Home_Page
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from epz7.forms import EmailSignupForm
+from datetime import timedelta
 
 
 def list_home(request):
-    pages = Home_Page.objects.all()
+    pages = Home_Page.objects.filter(
+        created_at__date=pub_date - timedelta(1)
+    )
     query = request.GET.get('q')
     if query:
         pages = Home_Page.objects.filter(
