@@ -37,7 +37,7 @@ def list_home(request):
         'pages': pages,
         'ppages': ppages,
         'forms': forms,
-        'form': form
+        #'form': form
     })
 
 def handler404(request, exception, template_name="error_404.html"):
