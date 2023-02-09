@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import ArticleDayArchiveView
+from .views import list_home
 
 urlpatterns = [
-    path('<int:year>/<str:month>/<int:day>/', ArticleDayArchiveView.as_view(), name='list_home'),
+    path('', list_home, name='list_home'),
 ]
