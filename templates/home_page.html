@@ -92,7 +92,7 @@
     <div class="row">
         <div class="col text-center" id="pag">
             <span class="step-links">
-                {% if ppages.has_previous && yesterday %}
+                {% if ppages.has_previous and yesterday %}
                 <a class="btn btn-success" href="?page={{ ppages.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
                     <button class="btn btn-success">prev</button>
                 </a>
@@ -101,7 +101,7 @@
                     Page {{ ppages.number }} of {{ ppages.paginator.num_pages }}.
                 </span>
 
-                {% if ppages.has_next && tomorrow %}
+                {% if ppages.has_next and tomorrow %}
                 <a class="btn btn-success" href="?page={{ ppages.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
                     <button class="btn btn-success">next</button>
                 </a>
