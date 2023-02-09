@@ -9,4 +9,4 @@ class LastActiveForm(forms.Form):
     pub_date = forms.DateField(widget=DateInput)
     class Meta:
         model = Home_Page
-        fields = ('pub_date')
+        fields = ('pub_date',)
