@@ -40,8 +40,9 @@ def list_home(request):
     })
 
 def list_home_yesterday(request):
+    cur_date=now().date()
     pages = Home_Page.objects.filter(
-        created_at__date=pub_date - timedelta(days=1)
+        created_at__date=cur_date - timedelta(days=1)
     )
     query = request.GET.get('q')
     if query:
@@ -74,8 +75,9 @@ def list_home_yesterday(request):
     })
 
 def list_home_today(request):
+    cur_date=now().date()
     pages = Home_Page.objects.filter(
-        created_at__date=pub_date
+        created_at__date=cur_date
     )
     query = request.GET.get('q')
     if query:
@@ -108,8 +110,9 @@ def list_home_today(request):
     })
 
 def list_home_tomorrow(request):
+    cur_date=now().date()
     pages = Home_Page.objects.filter(
-        created_at__date=pub_date + timedelta(days=1)
+        created_at__date=cur_date + timedelta(days=1)
     )
     query = request.GET.get('q')
     if query:
