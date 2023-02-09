@@ -1,4 +1,4 @@
-from django.form import forms
+from django import forms
 from .models import Home_Page
 
 
@@ -12,4 +12,4 @@ class LastActiveForm(forms.Form):
     pub_date = forms.DateField(widget=DateInput)
     class Meta:
         model = Home_Page
-        fields = ('email',)
+        fields = ('date_tme', 'league','home_team', 'away_team', 'tip', 'tip_odd', 'result', 'slug', 'pub_date')
