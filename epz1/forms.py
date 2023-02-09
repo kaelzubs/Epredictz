@@ -1,4 +1,5 @@
 from django.form import forms
+from .models import Home_Page
 
 
 class DateInput(forms.DateInput):
@@ -8,4 +9,7 @@ class LastActiveForm(forms.Form):
     """
     Last Active Date Form
     """
-    last_active = forms.DateField(widget=DateInput)
+    pub_date = forms.DateField(widget=DateInput)
+    class Meta:
+        model = Home_Page
+        fields = ('email',)
