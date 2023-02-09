@@ -62,10 +62,7 @@
             {% endif %}
         </div>
     </div>
-    <form class="form-inline my-2 my-lg-0" method="get" action=".">
-        <input class="form-control mr-sm-2" type="text" value="{{ request.GET.qd }}" name="qd" accept-charset="utf-8" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    {{ form.as_p }}
     <table class="table table-bordered table-striped table-responsive-stack table-dark" id="tableOne">
         <thead class="thead-dark">
             <tr>
