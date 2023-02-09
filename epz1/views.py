@@ -3,6 +3,7 @@ from . models import Home_Page
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from epz7.forms import EmailSignupForm
+from .forms import LastActiveForm
 
 
 def list_home(request):
@@ -30,11 +31,13 @@ def list_home(request):
         ppages = paginator.page(paginator.num_pages)
 
     forms = EmailSignupForm()
+    form = LastActiveForm()
 
     return render(request, 'home_page.html', {
         'pages': pages,
         'ppages': ppages,
-        'forms': forms
+        'forms': forms,
+        'form': form
     })
 
 def handler404(request, exception, template_name="error_404.html"):
