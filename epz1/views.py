@@ -8,7 +8,11 @@ from datetime import timedelta
 
 
 def list_home(request):
-    pages = Home_Page.objects.all()
+    cur_date=now().date()
+    # pages = Home_Page.objects.all()
+    pages = Home_Page.objects.filter(
+        created_at__date=cur_date-timedelta(days=1)
+    )
     query = request.GET.get('q')
     if query:
         pages = Home_Page.objects.filter(
@@ -37,16 +41,6 @@ def list_home(request):
         'pages': pages,
         'ppages': ppages,
         'forms': forms
-    })
-
-def list_home_yesterday(request):
-    cur_date=now().date()
-    pages = Home_Page.objects.filter(
-        created_at__date=(cur_date-timedelta(days=1))
-    )
-
-    return render(request, 'home_page.html', {
-        'pages': pages
     })
 
 def handler404(request, exception, template_name="error_404.html"):
