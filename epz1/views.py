@@ -9,10 +9,7 @@ from datetime import timedelta
 
 def list_home(request):
     cur_date=now().date()
-    # pages = Home_Page.objects.all()
-    pages = Home_Page.objects.filter(
-        created_at__date=cur_date-timedelta(days=1)
-    )
+    pages = Home_Page.objects.all()
     query = request.GET.get('q')
     if query:
         pages = Home_Page.objects.filter(
