@@ -8,7 +8,7 @@ from datetime import timedelta, datetime
 
 def list_home(request):
     pages = Home_Page.objects.filter(
-        created_at__date=datetime.now - timedelta(1)
+        created_at__date=datetime.now() - timedelta(1)
     )
     query = request.GET.get('q')
     if query:
