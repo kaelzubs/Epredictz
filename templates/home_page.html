@@ -51,17 +51,6 @@
 {% block content %}
 <div class="container">
     <h1 id="tim">Excellent Prediction Zone: Home country to League tipsters</h1>
-    <div class="col-12">
-        <div class="row">
-            {% if pages.get_previous_by_created %}
-                <a class="col btn btn-success" href="{{ pages.get_previous_by_created.get_absolute_url }}">Yesterday</a>
-            {% endif %}
-            <a class="col btn btn-danger" href="{% url 'list_home' %}">Today</a>
-            {% if pages.get_next_by_created %}
-                <a class="col btn btn-primary" href="{{ pages.get_next_by_created.get_absolute_url }}">Tomorrow</a>
-            {% endif %}
-        </div>
-    </div>
    
     <table class="table table-bordered table-striped table-responsive-stack table-dark" id="tableOne">
         <thead class="thead-dark">
@@ -75,10 +64,7 @@
                 <th>Result</th>
             </tr>
         </thead>
-        {% regroup ppages by pub_date as object_list %}
-        {% for gpage in object_list %}
-        {{ gpage.grouper }}
-        {% for page in gpage.list %}
+        {% for page in ppages %}
         <tbody>
             <tr>
                 <td>{{ page.league }}</td>
@@ -98,7 +84,6 @@
                 {% endif %}
             </tr>
         </tbody>
-       {% endfor %}
        {% endfor %}
     </table>
 </div>
