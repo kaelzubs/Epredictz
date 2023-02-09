@@ -42,7 +42,7 @@ def list_home(request):
 def list_home_yesterday(request):
     cur_date=now().date()
     pages = Home_Page.objects.filter(
-        created_at__range=(cur_date - timedelta(days=1))
+        created_at__date=(cur_date - timedelta(days=1))
     )
     query = request.GET.get('q')
     if query:
