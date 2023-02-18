@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block carousel %}
-<div class="container-fluid" id="cousel">
+<div class="container-fluid pb-2" id="cousel">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -49,14 +49,25 @@
 {% endblock carousel%}
 
 {% block content %}
-<div class="container">
+<div class="container pt-2">
     <h1 id="tim">Excellent Prediction Zone: Best football prediction website in the world</h1>
     <div class="col-12">
         <div class="row">
-            <a class="col btn btn-success" href="{% url 'list_home_yesterday' %}">Yesterday</a>
-            <a class="col btn btn-danger" href="{% url 'list_home_today' %}">Today</a>
-            <a class="col btn btn-primary" href="{% url 'list_home_tomorrow' %}">Tomorrow</a>
+            <a class="col btn-success" href="{% url 'list_home_yesterday' %}">Yesterday</a>
+            <a class="col btn-danger" href="{% url 'list_home_today' %}">Today</a>
+            <a class="col btn-primary" href="{% url 'list_home_tomorrow' %}">Tomorrow</a>
         </div>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6411693288489882" crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+            style="display:block; text-align:center;"
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
+            data-ad-client="ca-pub-6411693288489882"
+            data-ad-slot="2193778565">
+        </ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>
     <table class="table table-bordered table-striped table-responsive-stack table-dark" id="tableOne">
         <thead class="thead-dark">
