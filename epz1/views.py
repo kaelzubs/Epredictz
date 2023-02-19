@@ -7,11 +7,7 @@ from datetime import timedelta, datetime
 from . forms import PickDateForm
 
 
-def list_home(request):
-    pages = Home_Page.objects.filter(
-        pub_date=datetime.now()
-    )
-
+def query_by_month(request)
     if request.method == 'POST':
         form = PickDateForm(request.POST)
         if form.is_valid():
@@ -22,6 +18,14 @@ def list_home(request):
             return HttpResponse('Invalid form')
     else:
         form = PickDateForm()
+    return render(request, 'home_page.html', {
+        'form': form
+    })
+
+def list_home(request):
+    pages = Home_Page.objects.filter(
+        pub_date=datetime.now()
+    )
 
     query = request.GET.get('q')
     if query:
