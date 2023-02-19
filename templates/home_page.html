@@ -57,6 +57,11 @@
             <a class="col-4 p-3 text-center font-weight-bold btn-danger" href="{% url 'list_home_today' %}">Today</a>
             <a class="col-4 p-3 text-center font-weight-bold btn-primary" href="{% url 'list_home_tomorrow' %}">Tomorrow</a>
         </div>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ s_form.as_p }}
+            <input type="submit" value="Create" />
+        </form>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6411693288489882" crossorigin="anonymous"></script>
         <ins class="adsbygoogle"
             style="display:block; text-align:center;"
