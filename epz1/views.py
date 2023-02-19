@@ -10,9 +10,11 @@ def list_home(request):
     pages = Home_Page.objects.filter(
         pub_date=datetime.now()
     )
+
     query = request.GET.get('q')
     if query:
         pages = Home_Page.objects.filter(
+            Q(pub_date__icontain=query) |
             Q(date_time__icontains=query) |
             Q(league__icontains=query) |
             Q(home_team__icontains=query) |
@@ -22,8 +24,8 @@ def list_home(request):
             Q(result__icontains=query)
     
         ).distinct()
-    
-    paginator = Paginator(pages, 5)
+ 
+    paginator = Paginator(pages, 10)
     page = request.GET.get('page')
     try:
         ppages = paginator.page(page)
@@ -57,7 +59,7 @@ def list_home_today(request):
     
         ).distinct()
     
-    paginator = Paginator(pages, 5)
+    paginator = Paginator(pages, 10)
     page = request.GET.get('page')
     try:
         ppages = paginator.page(page)
@@ -91,7 +93,7 @@ def list_home_yesterday(request):
     
         ).distinct()
     
-    paginator = Paginator(pages, 5)
+    paginator = Paginator(pages, 10)
     page = request.GET.get('page')
     try:
         ppages = paginator.page(page)
@@ -125,7 +127,7 @@ def list_home_tomorrow(request):
     
         ).distinct()
     
-    paginator = Paginator(pages, 5)
+    paginator = Paginator(pages, 10)
     page = request.GET.get('page')
     try:
         ppages = paginator.page(page)
