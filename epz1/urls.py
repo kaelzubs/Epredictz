@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import query_by_month list_home, list_home_today, list_home_yesterday, list_home_tomorrow
+from .views import query_by_month, list_home, list_home_today, list_home_yesterday, list_home_tomorrow
 
 
 urlpatterns = [
