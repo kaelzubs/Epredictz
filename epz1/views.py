@@ -23,7 +23,7 @@ def list_home(request):
     
         ).distinct()
     
-    paginator = Paginator(pages, 5)
+    paginator = Paginator(pages, 10)
     page = request.GET.get('page')
     try:
         ppages = paginator.page(page)
@@ -57,7 +57,7 @@ def list_home_today(request):
     
         ).distinct()
     
-    paginator = Paginator(pages, 5)
+    paginator = Paginator(pages, 10)
     page = request.GET.get('page')
     try:
         ppages = paginator.page(page)
@@ -91,7 +91,7 @@ def list_home_yesterday(request):
     
         ).distinct()
     
-    paginator = Paginator(pages, 5)
+    paginator = Paginator(pages, 10)
     page = request.GET.get('page')
     try:
         ppages = paginator.page(page)
@@ -125,7 +125,7 @@ def list_home_tomorrow(request):
     
         ).distinct()
     
-    paginator = Paginator(pages, 5)
+    paginator = Paginator(pages, 10)
     page = request.GET.get('page')
     try:
         ppages = paginator.page(page)
