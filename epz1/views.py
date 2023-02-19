@@ -4,6 +4,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from epz7.forms import EmailSignupForm
 from datetime import timedelta, datetime
+from .forms import SearchForm
 
 
 def list_home(request):
@@ -33,11 +34,13 @@ def list_home(request):
         ppages = paginator.page(paginator.num_pages)
 
     forms = EmailSignupForm()
+    s_form = SearchForm()
 
     return render(request, 'home_page.html', {
         'pages': pages,
         'ppages': ppages,
-        'forms': forms
+        'forms': forms,
+        's_form': s_form
     })
 
 def list_home_today(request):
