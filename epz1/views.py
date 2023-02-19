@@ -4,12 +4,25 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from epz7.forms import EmailSignupForm
 from datetime import timedelta, datetime
+from . forms import PickDateForm
 
 
 def list_home(request):
     pages = Home_Page.objects.filter(
         pub_date=datetime.now()
     )
+
+    if request.method == 'POST':
+        form = PickDateForm(request.POST)
+        if form.is_valid():
+            selected_date = form.cleaned_data['date_time']    # 'selected_date' is a datetime.date object
+            pages = Home_Page.objects.filter(uploaded_time__year=selected_date.year, uploaded_time__month=selected_date.month)
+            return HttpResponse(repr(pages))
+        else:
+            return HttpResponse('Invalid form')
+    else:
+        form = PickDateForm()
+
     query = request.GET.get('q')
     if query:
         pages = Home_Page.objects.filter(
@@ -37,7 +50,8 @@ def list_home(request):
     return render(request, 'home_page.html', {
         'pages': pages,
         'ppages': ppages,
-        'forms': forms
+        'forms': forms,
+        'form': form
     })
 
 def list_home_today(request):
