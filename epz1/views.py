@@ -4,26 +4,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from epz7.forms import EmailSignupForm
 from datetime import timedelta, datetime
-from . forms import PickDateForm
 
-
-def query_by_month(request)
-    if request.method == 'POST':
-        form = PickDateForm(request.POST)
-        if form.is_valid():
-            selected_date = form.cleaned_data['date_time']    # 'selected_date' is a datetime.date object
-            pages = Home_Page.objects.filter(uploaded_time__year=selected_date.year, uploaded_time__month=selected_date.month)
-            return HttpResponse(repr(pages))
-        else:
-            return HttpResponse('Invalid form')
-    else:
-        form = PickDateForm()
-
-    form = PickDateForm()
-
-    return render(request, 'home_page.html', {
-        'form': form
-    })
 
 def list_home(request):
     pages = Home_Page.objects.filter(
