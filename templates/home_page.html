@@ -57,7 +57,7 @@
             <a class="col-4 p-3 text-center font-weight-bold btn-danger" href="{% url 'list_home_today' %}">Today</a>
             <a class="col-4 p-3 text-center font-weight-bold btn-primary" href="{% url 'list_home_tomorrow' %}">Tomorrow</a>
         </div>
-        <form action="." method="post">
+        <form action="/pick_date/" method="post">
             {% csrf_token %}
             {{ form }}
             <input type="submit" value="Submit" />
