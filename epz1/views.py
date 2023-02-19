@@ -57,8 +57,7 @@ def list_home(request):
     return render(request, 'home_page.html', {
         'pages': pages,
         'ppages': ppages,
-        'forms': forms,
-        'form': form
+        'forms': forms
     })
 
 def list_home_today(request):
