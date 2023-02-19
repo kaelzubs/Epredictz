@@ -24,7 +24,7 @@ def list_home(request):
             Q(result__icontains=query)
     
         ).distinct()
-        Home_Page.objects.filter(pub_date=pub_date)
+ 
     paginator = Paginator(pages, 10)
     page = request.GET.get('page')
     try:
