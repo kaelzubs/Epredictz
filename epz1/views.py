@@ -18,6 +18,9 @@ def query_by_month(request)
             return HttpResponse('Invalid form')
     else:
         form = PickDateForm()
+
+    form = PickDateForm()
+
     return render(request, 'home_page.html', {
         'form': form
     })
