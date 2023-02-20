@@ -42,12 +42,10 @@ $(document).ready(function() {
     // document ready  
 });
 
-<script>
-var buttonTarget = document.getElementsByClassName("btn_count")[0];
-var counter = 1;
 
 function incrementer(){
-    //document.getElementById("btn").innerHTML = counter.toString();
+    var counter = 1;
+    buttonTarget = document.getElementById("btn_count")
     buttonTarget.innerHTML  = counter.toString();
     counter++;
     return counter;
