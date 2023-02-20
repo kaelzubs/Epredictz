@@ -11,7 +11,7 @@ def list_home(request):
         pub_date=datetime.now()
     )
 
-    s_event = HomePage.objects.filter(
+    s_event = Home_Page.objects.filter(
         pub_date__year = datetime.now().year()
         pub_date__month = datetime.now().month()
         pub_date__day = datetime.now()
