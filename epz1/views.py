@@ -9,7 +9,7 @@ from calendar import HTMLCalendar
 
 
 def list_calender(request, year, month, day):
-    cal = HTMLCalendar().format(year, month, day)
+    cal = HTMLCalendar().formatmonth(year, month, day)
     return render(request, home_page.html, {
         'year': year,
         'month': month,
