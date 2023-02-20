@@ -11,6 +11,12 @@ def list_home(request):
         pub_date=datetime.now()
     )
 
+    s_event = HomePage.objects.filter(
+        pub_date__year = datetime.now().year()
+        pub_date__month = datetime.now().month()
+        pub_date__day = datetime.now()
+    )
+
     query = request.GET.get('q')
     if query:
         pages = Home_Page.objects.filter(
@@ -39,7 +45,8 @@ def list_home(request):
     return render(request, 'home_page.html', {
         'pages': pages,
         'ppages': ppages,
-        'forms': forms
+        'forms': forms,
+        's_event': s_event
     })
 
 def list_home_today(request):
