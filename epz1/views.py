@@ -47,13 +47,10 @@ def list_home(request):
 
     forms = EmailSignupForm()
 
-    counter = 0
-
     return render(request, 'home_page.html', {
         'pages': pages,
         'ppages': ppages,
-        'forms': forms,
-        'counter': counter
+        'forms': forms
     })
 
 def list_home_today(request):
