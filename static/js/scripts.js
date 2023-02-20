@@ -41,14 +41,3 @@ $(document).ready(function() {
     };
     // document ready  
 });
-
-let counter = 0;
-//click event handler function
-function increment(){
-   counter = counter + 1
-}
-
- 
- 
- 
- 
