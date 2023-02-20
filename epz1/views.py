@@ -4,12 +4,17 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from epz7.forms import EmailSignupForm
 from datetime import timedelta, datetime
+import calendar
+from calendar import HTMLCalendar
 
 
 def list_calender(request, year, month, day):
-    
+    cal = HTMLCalendar().format(year, month, day)
     return render(request, home_page.html, {
-        
+        'year': year,
+        'month': month,
+        'day': day,
+        'cal': cal
     })
 
 def list_home(request):
