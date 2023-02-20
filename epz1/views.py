@@ -6,15 +6,15 @@ from epz7.forms import EmailSignupForm
 from datetime import timedelta, datetime
 
 
+def list_calender(request, year, month, day):
+    
+    return render(request, home_page.html, {
+        
+    })
+
 def list_home(request):
     pages = Home_Page.objects.filter(
         pub_date=datetime.now()
-    )
-
-    s_event = Home_Page.objects.filter(
-        pub_date__year = datetime.now().year()
-        pub_date__month = datetime.now().month()
-        pub_date__day = datetime.now()
     )
 
     query = request.GET.get('q')
@@ -45,8 +45,7 @@ def list_home(request):
     return render(request, 'home_page.html', {
         'pages': pages,
         'ppages': ppages,
-        'forms': forms,
-        's_event': s_event
+        'forms': forms
     })
 
 def list_home_today(request):
