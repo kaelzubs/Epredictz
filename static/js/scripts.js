@@ -43,7 +43,7 @@ $(document).ready(function() {
 });
 
 <script>
-var buttonTarget = document.getElementsByClassName("btn")[0];
+var buttonTarget = document.getElementsByClassName("btn_count")[0];
 var counter = 1;
 
 function incrementer(){
