@@ -78,6 +78,7 @@
                 <th>Away</th>
                 <th>Tips</th>
                 <th>Odds</th>
+                <th>Vote</th>
                 <th>Result</th>
             </tr>
         </thead>
@@ -90,6 +91,12 @@
                 <td>{{ page.away_team }}</td>
                 <td>{{ page.tip }}</td>
                 <td>{{ page.tip_odd }}</td>
+                <td>
+                    <div class='row'>
+                        <button class='btn btn-outline-primary'><i class="bi bi-hand-thumbs-up"></i></button>
+                        <button class='btn btn-outline-danger'><i class="bi bi-hand-thumbs-down"></i></button>
+                    </div>
+                </td>
                 {% if page.result == 'won' %}
                 <td><button class="btn btn-success">{{ page.result }}</button></td>
                 {% elif page.result == 'lost' %}
