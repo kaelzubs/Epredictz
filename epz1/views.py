@@ -46,11 +46,17 @@ def list_home(request):
         ppages = paginator.page(paginator.num_pages)
 
     forms = EmailSignupForm()
+    counter = 0
+    def increment():
+        counter = counter + 1
+        return counter
 
     return render(request, 'home_page.html', {
         'pages': pages,
         'ppages': ppages,
-        'forms': forms
+        'forms': forms,
+        'counter': counter,
+        'increment': increment()
     })
 
 def list_home_today(request):
