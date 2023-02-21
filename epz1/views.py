@@ -176,7 +176,7 @@ def list_home_tomorrow(request):
     return render(request, 'home_page.html', {
         'pages': pages,
         'ppages': ppages,
-        'forms': forms,
+        'forms': forms
     })
 
 def handler404(request, exception, template_name="error_404.html"):
