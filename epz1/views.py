@@ -17,12 +17,19 @@ def list_calender(request, year, month, day):
         'cal': cal
     })
 
+
 def voteLike(request, pk):
     vote_id = request.POST.get('vote-id')
     votes = Home_Page.objects.get(pk=vote_id)
     ip = get_client_ip(request)
     if not IpModel.objects.filter(ip=ip).exists():
         IpModel.objects.create(ip=ip)
+    if votes.vote.filter(id=IpModel.objects.get(ip=ip).id).exists():
+        votes.vote.remove(IpModel.objects.get(ip=ip))
+    else:
+        votes.vote.add(IpModel.objects.get(ip=ip))
+
+    return HttpResponseRedirect(reverse('', arg=[vote_id]))
 
 
 def list_home(request):
