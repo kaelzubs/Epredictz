@@ -17,6 +17,9 @@ def list_calender(request, year, month, day):
         'cal': cal
     })
 
+def voteLike(request, pk):
+    Pass
+
 def list_home(request):
     pages = Home_Page.objects.filter(
         pub_date=datetime.now()
