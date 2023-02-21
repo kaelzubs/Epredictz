@@ -4,6 +4,41 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from epz7.forms import EmailSignupForm
 from datetime import timedelta, datetime
+import calendar
+from calendar import HTMLCalendar
+
+
+def list_calender(request, year, month, day):
+    cal = HTMLCalendar().formatmonth(year, month, day)
+    return render(request, home_page.html, {
+        'year': year,
+        'month': month,
+        'day': day,
+        'cal': cal
+    })
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    
+    return ip
+
+
+def voteLike(request, pk):
+    vote_id = request.POST.get('vote-id')
+    votes = Home_Page.objects.get(pk=vote_id)
+    ip = get_client_ip(request)
+    if not IpModel.objects.filter(ip=ip).exists():
+        IpModel.objects.create(ip=ip)
+    if votes.vote.filter(id=IpModel.objects.get(ip=ip).id).exists():
+        votes.vote.remove(IpModel.objects.get(ip=ip))
+    else:
+        votes.vote.add(IpModel.objects.get(ip=ip))
+
+    return HttpResponseRedirect(reverse('list_home', arg=[vote_id]))
 
 
 def list_home(request):
