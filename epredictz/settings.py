@@ -12,11 +12,13 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
-import dj_database_url
+# import dj_database_url
 
 import django_heroku
 
 import cloudinary
+
+
 
 # Initialise environment variables
 from dotenv import load_dotenv
@@ -32,15 +34,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 if DEBUG is False:
     ALLOWED_HOSTS = [
-        '*'
+        "epredictz.com",
+        "www.epredictz.com",
     ]
 
 if DEBUG is True:
     ALLOWED_HOSTS = []
+
 
 # Application definition
 INSTALLED_APPS = [
@@ -67,18 +71,22 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    "epz1.middleware.WwwRedirectMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.gzip.GZipMiddleware',
 ]
 
-ROOT_URLCONF = 'epredictz.urls'
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
 
+ROOT_URLCONF = 'epredictz.urls'
 
 
 TEMPLATES = [
@@ -115,17 +123,27 @@ WSGI_APPLICATION = 'epredictz.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-         'ENGINE': 'django.db.backends.sqlite3',
-         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'epredictz',
+        'USER': os.getenv('POST_NAME'),
+        'PASSWORD': os.getenv('POST_PASS'),
+        'HOST': os.getenv('HOST'),
+        'PORT': os.getenv('PORT'),
     }
 }
 
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+#DATABASES = {}
+#db_from_env = dj_database_url.config(conn_max_age=600)
+#DATABASES['default'].update(db_from_env)
+#DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 django_heroku.settings(locals())
+
+# options = DATABASES['default'].get('OPTIONS', {})
+# options.pop('sslmode', None)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -205,6 +223,6 @@ DEFAULT_FROM_EMAIL = 'donmart4u@gmail.com'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-DEFAULT_AUTO_FIELD='django.db.models.AutoField'
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 ROBOTS_CACHE_TIMEOUT = 60*60*24
