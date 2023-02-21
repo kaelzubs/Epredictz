@@ -29,7 +29,11 @@ def get_client_ip(request):
     return ip
 
 
-def voteLike(request, pk):
+def list_home(request, pk):
+    pages = Home_Page.objects.filter(
+        pub_date=datetime.now()
+    )
+
     vote_id = request.POST.get('vote-id')
     post = Home_Page.objects.get(pk=vote_id)
     ip = get_client_ip(request)
@@ -40,13 +44,7 @@ def voteLike(request, pk):
     else:
         post.vote.add(IpModel.objects.get(ip=ip))
 
-    return HttpResponseRedirect(reverse('vote_like', args=[vote_id]))
-
-
-def list_home(request):
-    pages = Home_Page.objects.filter(
-        pub_date=datetime.now()
-    )
+    return HttpResponseRedirect(reverse('list_home', args=[vote_id]))
 
     query = request.GET.get('q')
     if query:
@@ -178,7 +176,7 @@ def list_home_tomorrow(request):
     return render(request, 'home_page.html', {
         'pages': pages,
         'ppages': ppages,
-        'forms': forms
+        'forms': forms,
     })
 
 def handler404(request, exception, template_name="error_404.html"):
