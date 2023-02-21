@@ -31,14 +31,14 @@ def get_client_ip(request):
 
 def voteLike(request, pk):
     vote_id = request.POST.get('vote-id')
-    votes = Home_Page.objects.filter(pk=vote_id)
+    post = Home_Page.objects.get(pk=vote_id)
     ip = get_client_ip(request)
     if not IpModel.objects.filter(ip=ip).exists():
         IpModel.objects.create(ip=ip)
-    if votes.vote.filter(id=IpModel.objects.get(ip=ip).id).exists():
-        votes.vote.remove(IpModel.objects.get(ip=ip))
+    if post.vote.filter(id=IpModel.objects.get(ip=ip).id).exists():
+        post.vote.remove(IpModel.objects.get(ip=ip))
     else:
-        votes.vote.add(IpModel.objects.get(ip=ip))
+        post.vote.add(IpModel.objects.get(ip=ip))
 
     return HttpResponseRedirect(reverse('vote_like', args=[vote_id]))
 
