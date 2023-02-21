@@ -43,7 +43,7 @@ def voteLike(request, pk):
     return HttpResponseRedirect(reverse('list_home', args=[vote_id]))
 
 
-def list_home(request, pk):
+def list_home(request):
     pages = Home_Page.objects.filter(
         pub_date=datetime.now()
     )
