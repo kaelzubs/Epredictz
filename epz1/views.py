@@ -31,7 +31,7 @@ def get_client_ip(request):
 
 def voteLike(request, pk):
     vote_id = request.POST.get('vote-id')
-    votes = Home_Page.objects.get(pk=vote_id)
+    votes = Home_Page.objects.filter(pk=vote_id)
     ip = get_client_ip(request)
     if not IpModel.objects.filter(ip=ip).exists():
         IpModel.objects.create(ip=ip)
