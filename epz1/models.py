@@ -19,7 +19,7 @@ class Home_Page(models.Model):
     result = models.CharField(max_length=100)
     slug = models.SlugField()
     pub_date = models.DateField()
-    vote = models.ManyToManyField(IpModel, related_name="post_like", blank=True)
+    vote = models.ManyToManyField(IpModel, related_name="vote_likes", blank=True)
 
     class Meta:
         ordering = ('-date_time',)
