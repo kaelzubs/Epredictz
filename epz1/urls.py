@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import list_calender, list_home, list_detail list_home_today, list_home_yesterday, list_home_tomorrow
+from .views import list_calender, list_home, list_detail, list_home_today, list_home_yesterday, list_home_tomorrow
 from django.shortcuts import redirect
 
 
