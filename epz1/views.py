@@ -29,7 +29,7 @@ def voteLike(request, pk):
     else:
         votes.vote.add(IpModel.objects.get(ip=ip))
 
-    return HttpResponseRedirect(reverse('', arg=[vote_id]))
+    return HttpResponseRedirect(reverse('list_home', arg=[vote_id]))
 
 
 def list_home(request):
