@@ -18,7 +18,12 @@ def list_calender(request, year, month, day):
     })
 
 def voteLike(request, pk):
-    Pass
+    vote_id = request.POST.get('vote-id')
+    votes = Home_Page.objects.get(pk=vote_id)
+    ip = get_client_ip(request)
+    if not IpModel.objects.filter(ip=ip).exists():
+        IpModel.objects.create(ip=ip)
+
 
 def list_home(request):
     pages = Home_Page.objects.filter(
