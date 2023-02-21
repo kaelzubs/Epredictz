@@ -8,5 +8,5 @@ urlpatterns = [
     path('yesterday/', list_home_yesterday, name='list_home_yesterday'),
     path('tomorrow/', list_home_tomorrow, name='list_home_tomorrow'),
     path('<int:year>/<str:month>/<int:day>/', list_calender, name='calender'),
-    path('vote/<int:pk>/', voteLike, name="vote_like")
+    path('vote/<int:pk>', voteLike, name="vote_like")
 ]
