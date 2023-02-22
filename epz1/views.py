@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from . models import Home_Page
+from django.shortcuts import render, redirect
+from . models import Home_Page, IpModel
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from epz7.forms import EmailSignupForm
@@ -26,26 +26,37 @@ def get_client_ip(request):
     
     return ip
 
-
-def voteLike(request, pk):
-    vote_id = request.POST.get('vote-id')
-    votes = Home_Page.objects.get(pk=vote_id)
+def vote_up(request, pk):
+    vote_id = request.POST.get('vote-id-up')
+    post = Home_Page.objects.get(pk=vote_id)
     ip = get_client_ip(request)
     if not IpModel.objects.filter(ip=ip).exists():
         IpModel.objects.create(ip=ip)
-    if votes.vote.filter(id=IpModel.objects.get(ip=ip).id).exists():
-        votes.vote.remove(IpModel.objects.get(ip=ip))
+    if post.vote.filter(id=IpModel.objects.get(ip=ip).id).exists():
+        post.vote.remove(IpModel.objects.get(ip=ip))
     else:
-        votes.vote.add(IpModel.objects.get(ip=ip))
+        post.vote.add(IpModel.objects.get(ip=ip))
 
-    return HttpResponseRedirect(reverse('list_home', arg=[vote_id]))
+    return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
+
+def vote_down(request, pk):
+    vote_id = request.POST.get('vote-id-down')
+    post = Home_Page.objects.get(pk=vote_id)
+    ip = get_client_ip(request)
+    if not IpModel.objects.filter(ip=ip).exists():
+        IpModel.objects.create(ip=ip)
+    if post.vote.filter(id=IpModel.objects.get(ip=ip).id).exists():
+        post.vote.remove(IpModel.objects.get(ip=ip))
+    else:
+        post.vote.add(IpModel.objects.get(ip=ip))
+
+    return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
 
 
 def list_home(request):
     pages = Home_Page.objects.filter(
         pub_date=datetime.now()
     )
-
     query = request.GET.get('q')
     if query:
         pages = Home_Page.objects.filter(
