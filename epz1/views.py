@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from . models import Home_Page, IpModel
@@ -45,7 +45,7 @@ def list_detail(request, pk):
     else:
         post.vote.add(IpModel.objects.get(ip=ip))
 
-    return HttpResponseRedirect(request.path_info)
+    return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
 
     query = request.GET.get('q')
     if query:
