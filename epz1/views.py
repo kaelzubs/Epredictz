@@ -81,19 +81,6 @@ def list_home(request):
     pages = Home_Page.objects.filter(
         pub_date=datetime.now()
     )
-
-    vote_id = request.POST.get('vote-id')
-    post = Home_Page.objects.get(pk=vote_id)
-    ip = get_client_ip(request)
-    if not IpModel.objects.filter(ip=ip).exists():
-        IpModel.objects.create(ip=ip)
-    if post.vote.filter(id=IpModel.objects.get(ip=ip).id).exists():
-        post.vote.remove(IpModel.objects.get(ip=ip))
-    else:
-        post.vote.add(IpModel.objects.get(ip=ip))
-
-    return HttpResponseRedirect(reverse('list_home', args=[vote_id]))
-
     query = request.GET.get('q')
     if query:
         pages = Home_Page.objects.filter(
