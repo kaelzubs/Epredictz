@@ -43,8 +43,6 @@ def list_detail(request, pk):
     else:
         post.vote.add(IpModel.objects.get(ip=ip))
 
-    return HttpResponseRedirect(reverse('list_detail', args=[vote_id]))
-
     query = request.GET.get('q')
     if query:
         pages = Home_Page.objects.filter(
