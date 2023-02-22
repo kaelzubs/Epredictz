@@ -32,5 +32,8 @@ class Home_Page(models.Model):
     def get_absolute_url(self):
         return f"/{self.slug}/"
 
-    def total_vote(self):
-        return (self.vote_like.count(), self.vote_dislike.count())
+    def total_vote_like(self):
+        return self.vote_like.count()
+
+    def total_vote_dislike(self):
+        return self.vote_dislike.count()
