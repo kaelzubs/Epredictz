@@ -93,7 +93,7 @@
                 <td>{{ page.tip_odd }}</td>
                 <td>
                     <center>
-                        <form action={% url "vote_like" pk=page.id %} method="POST">
+                        <form action={% url "list_detail" pk=page.id %} method="POST">
                             {% csrf_token %}
                             <button type="submit" name="vote-id" value={{ page.id }} class='btn btn-outline-primary'>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up" viewBox="0 0 16 16">
