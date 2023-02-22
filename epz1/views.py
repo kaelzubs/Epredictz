@@ -9,6 +9,8 @@ from datetime import timedelta, datetime
 import calendar
 from calendar import HTMLCalendar
 
+from django.http import HttpResponseRedirect
+
 
 def list_calender(request, year, month, day):
     cal = HTMLCalendar().formatmonth(year, month, day)
@@ -42,6 +44,8 @@ def list_detail(request, pk):
         post.vote.remove(IpModel.objects.get(ip=ip))
     else:
         post.vote.add(IpModel.objects.get(ip=ip))
+
+    return HttpResponseRedirect("")
 
     query = request.GET.get('q')
     if query:
