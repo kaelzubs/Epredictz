@@ -4,8 +4,8 @@ from .views import vote_up, vote_down, list_calender, list_home, list_home_today
 
 urlpatterns = [
     path('', list_home, name="list_home"),
-    path('like-prediction/<int:pk>/', vote_up),
-    path('dislike-prediction/<int:pk>/', vote_down),
+    path('likes-prediction/<int:pk>/', vote_up),
+    path('dislikes-prediction/<int:pk>/', vote_down),
     path('today/', list_home_today, name='list_home_today'),
     path('yesterday/', list_home_yesterday, name='list_home_yesterday'),
     path('tomorrow/', list_home_tomorrow, name='list_home_tomorrow'),
