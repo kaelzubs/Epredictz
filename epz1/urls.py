@@ -10,5 +10,5 @@ urlpatterns = [
     path('tomorrow/', list_home_tomorrow, name='list_home_tomorrow'),
     path('<int:year>/<str:month>/<int:day>/', list_calender, name='calender'),
     path('home/', list_home, name="list_home"),
-    re_path(r'^vote/<int:pk>/$', list_detail, name="list_detail")
+    path('vote/<int:pk>', list_detail, name="list_detail")
 ]
