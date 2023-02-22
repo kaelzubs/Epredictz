@@ -93,7 +93,7 @@
                 <td>{{ page.tip_odd }}</td>
                 <td>
                     <div class='row'>
-                        <div class='col-md-6'>
+                        <div class='col-6 p-2'>
                             <form action={% url "like" pk=page.id %} method="POST">
                                 {% csrf_token %}
                                 <button type="submit" name="vote-id-up" value={{ page.id }} class='btn btn-outline-primary'>
@@ -104,7 +104,7 @@
                                 </button>
                             </form>
                         </div>
-                        <div class='col-md-6'>
+                        <div class='col-6 p-2'>
                             <form action={% url "dislike" pk=page.id %} method="POST">
                                 {% csrf_token %}
                                 <button type="submit" name="vote-id-down" value={{ page.id }} class='btn btn-outline-danger'>
