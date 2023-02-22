@@ -45,7 +45,7 @@ def list_detail(request, pk):
     else:
         post.vote.add(IpModel.objects.get(ip=ip))
 
-    return HttpResponseRedirect("")
+    return HttpResponseRedirect(request.path_info)
 
     query = request.GET.get('q')
     if query:
