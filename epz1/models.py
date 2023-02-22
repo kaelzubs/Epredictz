@@ -19,7 +19,9 @@ class Home_Page(models.Model):
     result = models.CharField(max_length=100)
     slug = models.SlugField()
     pub_date = models.DateField()
-    vote = models.ManyToManyField(IpModel, related_name="vote_likes", blank=True)
+    vote_like = models.ManyToManyField(IpModel, related_name="vote_likes", blank=True)
+    vote_dislike = models.ManyToManyField(IpModel, related_name="vote_dislikes", blank=True)
+
 
     class Meta:
         ordering = ('-date_time',)
@@ -31,4 +33,4 @@ class Home_Page(models.Model):
         return f"/{self.slug}/"
 
     def total_vote(self):
-        return self.vote.count()
+        return (self.vote_like.count(), self.vote_dislike.count())
