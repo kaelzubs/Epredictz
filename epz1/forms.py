@@ -6,7 +6,7 @@ from django import forms
 class EventForm(forms.ModelForm):
     class Meta:
         model = Home_Page
-        fields = ["__all__"]
+        fields = "__all__"
         widgets = {
             "pub_date": DatePickerInput(),
         }
