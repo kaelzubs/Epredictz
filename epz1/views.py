@@ -6,12 +6,14 @@ from epz7.forms import EmailSignupForm
 from datetime import timedelta, datetime
 import datetime
 from django.urls import reverse
+from django.urls import reverse_lazy
 from .utils import Calendar
+from django.views.generic.list import ListView
 
 
 class CalendarView(ListView):
     model = Home_Page
-    template_name = 'components/home_page.html'
+    template_name = 'home_page.html'
     success_url = reverse_lazy("calendar")
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
