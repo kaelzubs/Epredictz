@@ -6,7 +6,6 @@ from epz7.forms import EmailSignupForm
 from datetime import timedelta, datetime
 from .forms import DateEventForm
 from django.views import generic
-from bootstrap_datepicker_plus.widgets import DateTimePickerInput
 
 
 def get_client_ip(request):
@@ -74,10 +73,13 @@ def list_home(request):
 
     forms = EmailSignupForm()
 
+    form = DateEventForm()
+
     return render(request, 'home_page.html', {
         'pages': pages,
         'ppages': ppages,
-        'forms': forms
+        'forms': forms,
+        'form': form
     })
 
 def list_home_today(request):
