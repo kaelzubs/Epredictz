@@ -4,13 +4,13 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from epz7.forms import EmailSignupForm
 from datetime import timedelta, datetime
-from .forms import EventForm
+from .forms import DateEventForm
 from django.views import generic
 
 
 class CustomFormView(generic.FormView):
     template_name = "home_page.html"
-    form_class = EventForm
+    form_class = DateEventForm
 
 
 def get_client_ip(request):
