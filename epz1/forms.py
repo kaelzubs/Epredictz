@@ -1,12 +1,15 @@
-from django_flatpickr.widgets import DatePickerInput
-from .models import Home_Page
+from bootstrap_datepicker_plus.widgets import DatePickerInput, TimePickerInput, DateTimePickerInput, MonthPickerInput, YearPickerInput
 from django import forms
 
 
-class DateEventForm(forms.ModelForm):
+class EventForm(forms.ModelForm):
     class Meta:
-        model = Home_Page
-        fields = ["pub_date"]
+        model = Event
+        fields = ["start_date", "start_time", "start_datetime", "start_month", "start_year"]
         widgets = {
-            "pub_date": DatePickerInput(),
+            "start_date": DatePickerInput(),
+            "start_time": TimePickerInput(),
+            "start_datetime": DateTimePickerInput(),
+            "start_month": MonthPickerInput(),
+            "start_year": YearPickerInput(),
         }
