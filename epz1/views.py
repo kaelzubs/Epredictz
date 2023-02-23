@@ -6,11 +6,16 @@ from epz7.forms import EmailSignupForm
 from datetime import timedelta, datetime
 from .forms import DateEventForm
 from django.views import generic
+from bootstrap_datepicker_plus.widgets import DateTimePickerInput
 
 
-class CustomFormView(generic.edit.UpdateView):
-    template_name = "home_page.html"
-    form = DateEventForm
+class CreateView(generic.edit.CreateView):
+    model = Home_Page
+    fields = ["pub_date"]
+    def get_form(self):
+        form = super().get_form()
+        form.fields["pub_date"].widget = DateTimePickerInput()
+        return form
 
 
 def get_client_ip(request):
