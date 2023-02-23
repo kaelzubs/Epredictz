@@ -5,12 +5,12 @@ from django.db.models import Q
 from epz7.forms import EmailSignupForm
 from datetime import timedelta, datetime
 from .forms import DateEventForm
-from django.views.generic import FormView
+from django.views import generic
 
 
-class CustomFormView(FormView):
+class CustomFormView(generic.edit.UpdateView):
     template_name = "home_page.html"
-    form_class = DateEventForm
+    form = DateEventForm
 
 
 def get_client_ip(request):
