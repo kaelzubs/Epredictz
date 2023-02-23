@@ -25,7 +25,7 @@ class Calendar(HTMLCalendar):
         return f'<tr> {week} </tr>'
 
     def formatmonth(self, withyear=True):
-        events = Event.objects.filter(pub_date__year=self.year, pub_date__month=self.month)
+        events = Home_Page.objects.filter(pub_date__year=self.year, pub_date__month=self.month)
         cal = f'<table border="0" cellpadding="0" cellspacing="0"     class="calendar">\n'
         cal += f'{self.formatmonthname(self.year, self.month, withyear=withyear)}\n'
         cal += f'{self.formatweekheader()}\n'
