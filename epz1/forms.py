@@ -6,7 +6,11 @@ from .models import Home_Page
 class DateEventForm(forms.ModelForm):
     class Meta:
         model = Home_Page
-        fields = ["pub_date"]
+        fields = ["start_date", "start_time", "start_datetime", "start_month", "start_year"]
         widgets = {
-            "pub_date": DatePickerInput(),
+            "start_date": DatePickerInput(),
+            "start_time": TimePickerInput(),
+            "start_datetime": DateTimePickerInput(),
+            "start_month": MonthPickerInput(),
+            "start_year": YearPickerInput(),
         }
