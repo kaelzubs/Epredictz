@@ -4,18 +4,14 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from epz7.forms import EmailSignupForm
 from datetime import timedelta, datetime
-import calendar
-from calendar import HTMLCalendar
+from .forms import ToDoForm
+from django.views import generic
 
 
-def list_calender(request, year, month, day):
-    cal = HTMLCalendar().formatmonth(year, month, day)
-    return render(request, home_page.html, {
-        'year': year,
-        'month': month,
-        'day': day,
-        'cal': cal
-    })
+class CustomFormView(generic.FormView):
+    template_name = "home_page.html"
+    form_class = ToDoForm
+
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')

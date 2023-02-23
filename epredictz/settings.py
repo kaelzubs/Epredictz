@@ -11,11 +11,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-
 # import dj_database_url
-
 import django_heroku
-
 import cloudinary
 
 
@@ -68,6 +65,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'cloudinary',
     'whitenoise.runserver_nostatic',
+    'django_flatpickr',
 ]
 
 MIDDLEWARE = [
@@ -219,7 +217,7 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Email recieved from epredictz.com'
-DEFAULT_FROM_EMAIL = 'donmart4u@gmail.com'
+DEFAULT_FROM_EMAIL = 'info@epredictz.com'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
