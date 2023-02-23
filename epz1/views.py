@@ -32,10 +32,10 @@ def vote_up(request, pk):
     ip = get_client_ip(request)
     if not IpModel.objects.filter(ip=ip).exists():
         IpModel.objects.create(ip=ip)
-    if post.vote.filter(id=IpModel.objects.get(ip=ip).id).exists():
-        post.vote.remove(IpModel.objects.get(ip=ip))
+    if post.vote_like.filter(id=IpModel.objects.get(ip=ip).id).exists():
+        post.vote_like.remove(IpModel.objects.get(ip=ip))
     else:
-        post.vote.add(IpModel.objects.get(ip=ip))
+        post.vote_like.add(IpModel.objects.get(ip=ip))
 
     return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
 
@@ -45,10 +45,10 @@ def vote_down(request, pk):
     ip = get_client_ip(request)
     if not IpModel.objects.filter(ip=ip).exists():
         IpModel.objects.create(ip=ip)
-    if post.vote.filter(id=IpModel.objects.get(ip=ip).id).exists():
-        post.vote.remove(IpModel.objects.get(ip=ip))
+    if post.vote_dislike.filter(id=IpModel.objects.get(ip=ip).id).exists():
+        post.vote_dislike.remove(IpModel.objects.get(ip=ip))
     else:
-        post.vote.add(IpModel.objects.get(ip=ip))
+        post.vote_dislike.add(IpModel.objects.get(ip=ip))
 
     return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
 
