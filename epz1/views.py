@@ -9,15 +9,6 @@ from django.views import generic
 from bootstrap_datepicker_plus.widgets import DateTimePickerInput
 
 
-class CreateDateView(generic.edit.CreateView):
-    model = Home_Page
-    fields = ["pub_date"]
-    def get_form(self):
-        form = super().get_form()
-        form.fields["pub_date"].widget = DateTimePickerInput()
-        return form
-
-
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
