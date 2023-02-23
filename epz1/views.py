@@ -9,7 +9,7 @@ from django.views import generic
 from bootstrap_datepicker_plus.widgets import DateTimePickerInput
 
 
-class CreateView(generic.edit.CreateView):
+class CreateDateView(generic.edit.CreateView):
     model = Home_Page
     fields = ["pub_date"]
     def get_form(self):
