@@ -5,7 +5,6 @@ from django.db.models import Q
 from epz7.forms import EmailSignupForm
 from datetime import timedelta, datetime
 from .forms import DateEventForm
-from django.views import generic
 
 
 def get_client_ip(request):
