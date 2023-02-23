@@ -4,7 +4,7 @@ from .views import CustomFormView, vote_up, vote_down, list_home, list_home_toda
 
 urlpatterns = [
     path('', list_home, name="list_home"),
-    path('<int:date>/', CustomFormView.as_view()),
+    path('<int:date>/', CustomFormView.as_view(), name='list_date'),
     path('likes-prediction/<int:pk>/', vote_up, name='like'),
     path('dislikes-prediction/<int:pk>/', vote_down, name='dislike'),
     path('today/', list_home_today, name='list_home_today'),
