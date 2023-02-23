@@ -65,7 +65,6 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'cloudinary',
     'whitenoise.runserver_nostatic',
-    'django_flatpickr',
 ]
 
 MIDDLEWARE = [
