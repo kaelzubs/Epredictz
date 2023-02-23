@@ -5,10 +5,10 @@ from django.db.models import Q
 from epz7.forms import EmailSignupForm
 from datetime import timedelta, datetime
 from .forms import DateEventForm
-from django.views import generic
+from django.views.generic import FormView
 
 
-class CustomFormView(generic.FormView):
+class CustomFormView(FormView):
     template_name = "home_page.html"
     form_class = DateEventForm
 
