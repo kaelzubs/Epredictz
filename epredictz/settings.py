@@ -11,12 +11,10 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-
 # import dj_database_url
-
 import django_heroku
-
 import cloudinary
+import smtplib
 
 
 
@@ -213,7 +211,8 @@ cloudinary.config(
 
 CLOUDINARY_URL=os.getenv('CLOUDINARY_URL')
 
-EMAIL_HOST = 'smtp.sendgrid.net'
+# EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST = smtplib.SMTP_SSL('smtp.gmail.com')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
