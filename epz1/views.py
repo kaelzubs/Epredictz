@@ -5,6 +5,7 @@ from django.db.models import Q
 from epz7.forms import EmailSignupForm
 from datetime import timedelta, datetime
 from .forms import ToDoForm
+from django.views import generic
 
 
 class CustomFormView(generic.FormView):
