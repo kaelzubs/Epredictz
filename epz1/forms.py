@@ -2,7 +2,7 @@ from django import forms
 from .models import Home_Page
 
 
-class DateForm(forms.ModelForm):
+class DateForm(forms.Form):
     model = Home_Page
     fields = ["pub_date"]
     pub_date = forms.DateField(
