@@ -6,12 +6,6 @@ from epz7.forms import EmailSignupForm
 from datetime import timedelta, datetime
 
 
-today = datetime.now()
-
-year = today.year
-month = today.month
-day = today.day
-
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
@@ -50,9 +44,7 @@ def vote_down(request, pk):
 
 def list_home(request):
     pages = Home_Page.objects.filter(
-        pub_date__year=year
-        pub_date__month=month,
-        pub_date__day=day
+        pub_date=datetime.now()
     )
     query = request.GET.get('q')
     if query:
