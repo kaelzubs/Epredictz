@@ -1,10 +1,13 @@
 from django import forms
+from .models import Home_Page
 
 
-class DateForm(forms.Form):
-    date=forms.DateTimeField(
-        input_formats=['%d/%m/%Y %H:%M'],
-        widget=forms.DateTimeInput(attrs={
+class DateForm(forms.ModelForm):
+    model = Home_Page
+    fields = ["pub_date"]
+    pub_date = forms.DateField(
+        input_formats = ['%Y/%m/%d'],
+        widget = forms.DateTimeInput(attrs = {
             'class': 'form-control datetimepicker-input',
             'data-target': '#datetimepicker1'
         })
