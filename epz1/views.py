@@ -4,7 +4,19 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from epz7.forms import EmailSignupForm
 from datetime import timedelta, datetime
+import Calendar
+from Calendar import HtmlCalendar
 
+
+def calender_view(request, year, month, day):
+    
+    return render(request, 'home_page.html', {
+        "pages": pages,
+        "year": year,
+        "month": month,
+        "day": day,
+        "cal": cal
+    })
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
