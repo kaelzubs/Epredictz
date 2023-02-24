@@ -8,20 +8,18 @@ import calendar
 from calendar import HTMLCalendar
 
 
-def calendar_view(request, year, month, day):
+def calendar_view(request, year, month):
     month = month.capitalize()
     month_number = list(calendar.month_name).index(month)
     month_number = int(month_number)
     cal = HTMLCalendar().formatmonth(
         year,
         month_number,
-        day
     )
     return render(request, 'home_page.html', {
         "pages": pages,
         "year": year,
         "month": month,
-        "day": day,
         "cal": cal,
         "month_number": month_number
     })
