@@ -6,7 +6,7 @@ from epz7.forms import EmailSignupForm
 from datetime import timedelta, datetime
 
 
-today = datetime.today()
+today = datetime.now()
 
 year = today.year
 month = today.month
