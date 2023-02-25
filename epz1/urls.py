@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import get_events, vote_up, vote_down, list_home, list_home_today, list_home_yesterday, list_home_tomorrow
+from .views import vote_up, vote_down, list_home, list_home_today, list_home_yesterday, list_home_tomorrow
 
 
 urlpatterns = [
