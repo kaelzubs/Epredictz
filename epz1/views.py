@@ -49,7 +49,7 @@ def list_home(request):
     query = request.GET.get('q')
     if query:
         pages = Home_Page.objects.filter(
-            Q(pub_date__icontain=query) |
+            Q(pub_date__icontains=query) |
             Q(date_time__icontains=query) |
             Q(league__icontains=query) |
             Q(home_team__icontains=query) |
