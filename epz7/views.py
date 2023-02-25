@@ -41,5 +41,4 @@ def email_list_signup(request):
     # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def sub_success(request):
-    form = EmailSignupForm()
-    return render(request, 'sub_success.html', {'form': form})
+    return render(request, 'sub_success.html', {})
