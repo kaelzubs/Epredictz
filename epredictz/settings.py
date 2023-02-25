@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'whitenoise.runserver_nostatic',
     'schedule',
+    'djangobower',
 ]
 
 MIDDLEWARE = [
@@ -190,9 +191,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR,  'media')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATICFILES_FINDERS = (
-	'django.contrib.staticfiles.finders.FileSystemFinder',
-	'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'djangobower.finders.BowerFinder',
 )
+
+BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
+
+BOWER_INSTALLED_APPS = (
+    'jquery#1.9',
+    'underscore',
+)
+
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
