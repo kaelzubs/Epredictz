@@ -31,7 +31,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 if DEBUG is False:
     ALLOWED_HOSTS = [
@@ -65,8 +65,6 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'cloudinary',
     'whitenoise.runserver_nostatic',
-    'schedule',
-    'djangobower',
 ]
 
 MIDDLEWARE = [
@@ -193,14 +191,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'djangobower.finders.BowerFinder',
-)
-
-BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
-
-BOWER_INSTALLED_APPS = (
-    'jquery#1.9',
-    'underscore',
 )
 
 
