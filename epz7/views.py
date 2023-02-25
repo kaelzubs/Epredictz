@@ -27,12 +27,12 @@ def subscribe(email):
     return r.status_code, r.json()
 
 def email_list_signup(request):
-    forms = EmailSignupForm(request.POST or None)
+    form = EmailSignupForm(request.POST or None)
     if request.method == 'POST':
         if form.is_valid():
             email_signup_qs = Sign_up.objects.filter(email=form.instance.email)
             if email_signup_qs.exists():
-                return render(request, 'subscribed.html', {'forms': forms})
+                return render(request, 'subscribed.html', {'form': form})
             else:
                 subscribe(form.instance.email)
                 form.save()
@@ -41,5 +41,5 @@ def email_list_signup(request):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def sub_success(request):
-    forms = EmailSignupForm()
-    return render(request, 'sub_success.html', {'forms': forms})
+    form = EmailSignupForm()
+    return render(request, 'sub_success.html', {'form': form})
