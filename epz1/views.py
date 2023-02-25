@@ -4,13 +4,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from epz7.forms import EmailSignupForm
 from datetime import timedelta, datetime
-from .forms import ToDoForm
-from django.views import generic
-
-
-class CustomFormView(generic.FormView):
-    template_name = "home_page.html"
-    form_class = ToDoForm
+from schedule.models import Event
 
 
 def get_client_ip(request):
@@ -50,13 +44,14 @@ def vote_down(request, pk):
 
 
 def list_home(request):
+    event = Event.objects.all()
     pages = Home_Page.objects.filter(
         pub_date=datetime.now()
     )
     query = request.GET.get('q')
     if query:
         pages = Home_Page.objects.filter(
-            Q(pub_date__icontain=query) |
+            Q(pub_date__icontains=query) |
             Q(date_time__icontains=query) |
             Q(league__icontains=query) |
             Q(home_team__icontains=query) |
@@ -81,7 +76,8 @@ def list_home(request):
     return render(request, 'home_page.html', {
         'pages': pages,
         'ppages': ppages,
-        'forms': forms
+        'forms': forms,
+        'event': event
     })
 
 def list_home_today(request):
