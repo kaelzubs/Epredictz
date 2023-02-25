@@ -4,6 +4,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from epz7.forms import EmailSignupForm
 from datetime import timedelta, datetime
+from schedule.models import Event
 
 
 def get_client_ip(request):
@@ -43,6 +44,7 @@ def vote_down(request, pk):
 
 
 def list_home(request):
+    event = Event.objects.all()
     pages = Home_Page.objects.filter(
         pub_date=datetime.now()
     )
@@ -74,7 +76,8 @@ def list_home(request):
     return render(request, 'home_page.html', {
         'pages': pages,
         'ppages': ppages,
-        'forms': forms
+        'forms': forms,
+        'event': event
     })
 
 def list_home_today(request):
