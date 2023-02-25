@@ -70,9 +70,6 @@ def list_home(request, calendar):
         ppages = paginator.page(paginator.num_pages)
 
     forms = EmailSignupForm()
-    
-    get_events(request, calendar):
-       return calendar.event_set.all()
 
     return render(request, 'home_page.html', {
         'pages': pages,
