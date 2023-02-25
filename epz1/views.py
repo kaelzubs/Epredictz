@@ -6,13 +6,6 @@ from epz7.forms import EmailSignupForm
 from datetime import timedelta, datetime
 
 
-def get_events(request, calendar):
-    cal = calendar.event_set.all()
-    return render(request, 'calendar.html', {
-        'cal': cal
-    })
-
-
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
@@ -77,6 +70,9 @@ def list_home(request, calendar):
         ppages = paginator.page(paginator.num_pages)
 
     forms = EmailSignupForm()
+    
+    get_events(request, calendar):
+       return calendar.event_set.all()
 
     return render(request, 'home_page.html', {
         'pages': pages,
