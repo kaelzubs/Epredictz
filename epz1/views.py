@@ -42,7 +42,7 @@ def vote_down(request, pk):
     return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
 
 
-def list_home(request, calendar):
+def list_home(request):
     pages = Home_Page.objects.filter(
         pub_date=datetime.now()
     )
