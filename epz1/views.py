@@ -7,7 +7,10 @@ from datetime import timedelta, datetime
 
 
 def get_events(request, calendar):
-    return 
+    cal = calendar.event_set.all()
+    return render(request, 'calendar.html', {
+        'cal': cal
+    })
 
 
 def get_client_ip(request):
@@ -47,7 +50,6 @@ def vote_down(request, pk):
 
 
 def list_home(request, calendar):
-    calendar.event_set.all()
     pages = Home_Page.objects.filter(
         pub_date=datetime.now()
     )
