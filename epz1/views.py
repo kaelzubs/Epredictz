@@ -4,6 +4,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from epz7.forms import EmailSignupForm
 from datetime import timedelta, datetime
+from django.http import HttpResponseRedirect
 
 
 def get_client_ip(request):
@@ -26,7 +27,8 @@ def vote_up(request, pk):
     else:
         post.vote_like.add(IpModel.objects.get(ip=ip))
 
-    return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
+    # return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def vote_down(request, pk):
     vote_id = request.POST.get('vote-id-down')
@@ -39,7 +41,8 @@ def vote_down(request, pk):
     else:
         post.vote_dislike.add(IpModel.objects.get(ip=ip))
 
-    return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
+    # return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def list_home(request):
