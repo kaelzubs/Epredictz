@@ -57,6 +57,7 @@ def email_list_signup(request):
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+
 def sub_success(request):
     pages = Home_Page.objects.filter(
         pub_date=datetime.now()
@@ -75,6 +76,6 @@ def sub_success(request):
     
         ).distinct()
 
-    form = EmailSignupForm()
+    forms = EmailSignupForm()
 
-    return render(request, 'sub_success.html', {'form': form, 'pages': pages})
+    return render(request, 'sub_success.html', {'forms': forms, 'pages': pages})
