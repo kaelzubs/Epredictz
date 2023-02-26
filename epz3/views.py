@@ -5,6 +5,23 @@ from epz7.forms import EmailSignupForm
 # Create your views here.
 
 def list_contact(request):
+    pages = Home_Page.objects.filter(
+        pub_date=datetime.now()
+    )
+    query = request.GET.get('q')
+    if query:
+        pages = Home_Page.objects.filter(
+            Q(pub_date__icontains=query) |
+            Q(date_time__icontains=query) |
+            Q(league__icontains=query) |
+            Q(home_team__icontains=query) |
+            Q(away_team__icontains=query) |
+            Q(tip__icontains=query) |
+            Q(tip_odd__icontains=query) |
+            Q(result__icontains=query)
+    
+        ).distinct()
+
     submitted = False
     if request.method == 'POST':
         form = ContactForms(request.POST or None)
@@ -29,13 +46,32 @@ def list_contact(request):
     return render(request, 'contact_page.html', {
         'form': form,
         'submitted': submitted,
-        'forms': forms
+        'forms': forms,
+        'pages': pages
     })
 
 
 def contact_success(request):
+    pages = Home_Page.objects.filter(
+        pub_date=datetime.now()
+    )
+    query = request.GET.get('q')
+    if query:
+        pages = Home_Page.objects.filter(
+            Q(pub_date__icontains=query) |
+            Q(date_time__icontains=query) |
+            Q(league__icontains=query) |
+            Q(home_team__icontains=query) |
+            Q(away_team__icontains=query) |
+            Q(tip__icontains=query) |
+            Q(tip_odd__icontains=query) |
+            Q(result__icontains=query)
+    
+        ).distinct()
+
     forms = EmailSignupForm()
-    return render(request, 'contact_success.html', {'forms': forms})
+
+    return render(request, 'contact_success.html', {'forms': forms, 'pages': pages})
 
 
 
