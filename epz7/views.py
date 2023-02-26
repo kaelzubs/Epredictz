@@ -57,19 +57,19 @@ def email_list_signup(request):
     except EmptyPage:
         ppages = paginator.page(paginator.num_pages)
 
-    form = EmailSignupForm(request.POST or None)
+    forms = EmailSignupForm(request.POST or None)
     if request.method == 'POST':
-        if form.is_valid():
-            email_signup_qs = Sign_up.objects.filter(email=form.instance.email)
+        if forms.is_valid():
+            email_signup_qs = Sign_up.objects.filter(email=forms.instance.email)
             if email_signup_qs.exists():
                 return render(request, 'subscribed.html', {
-                    'form': form,
+                    'forms': forms,
                     'pages': pages,
                     'ppages': ppages
                 })
             else:
                 subscribe(form.instance.email)
-                form.save()
+                forms.save()
                 
             return redirect('sub_success')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
