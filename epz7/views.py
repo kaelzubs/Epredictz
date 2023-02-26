@@ -31,12 +31,42 @@ def subscribe(email):
     return r.status_code, r.json()
 
 def email_list_signup(request):
+    pages = Home_Page.objects.filter(
+        pub_date=datetime.now()
+    )
+    query = request.GET.get('q')
+    if query:
+        pages = Home_Page.objects.filter(
+            Q(pub_date__icontains=query) |
+            Q(date_time__icontains=query) |
+            Q(league__icontains=query) |
+            Q(home_team__icontains=query) |
+            Q(away_team__icontains=query) |
+            Q(tip__icontains=query) |
+            Q(tip_odd__icontains=query) |
+            Q(result__icontains=query)
+    
+        ).distinct()
+
+    paginator = Paginator(pages, 10)
+    page = request.GET.get('page')
+    try:
+        ppages = paginator.page(page)
+    except PageNotAnInteger:
+       ppages = paginator.page(1)
+    except EmptyPage:
+        ppages = paginator.page(paginator.num_pages)
+
     form = EmailSignupForm(request.POST or None)
     if request.method == 'POST':
         if form.is_valid():
             email_signup_qs = Sign_up.objects.filter(email=form.instance.email)
             if email_signup_qs.exists():
-                return render(request, 'subscribed.html', {'form': form})
+                return render(request, 'subscribed.html', {
+                    'forms': form,
+                    'pages': pages,
+                    'ppages': ppages
+                })
             else:
                 subscribe(form.instance.email)
                 form.save()
@@ -45,4 +75,34 @@ def email_list_signup(request):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def sub_success(request):
-    return render(request, 'sub_success.html', {})
+    pages = Home_Page.objects.filter(
+        pub_date=datetime.now()
+    )
+    query = request.GET.get('q')
+    if query:
+        pages = Home_Page.objects.filter(
+            Q(pub_date__icontains=query) |
+            Q(date_time__icontains=query) |
+            Q(league__icontains=query) |
+            Q(home_team__icontains=query) |
+            Q(away_team__icontains=query) |
+            Q(tip__icontains=query) |
+            Q(tip_odd__icontains=query) |
+            Q(result__icontains=query)
+    
+        ).distinct()
+
+    paginator = Paginator(pages, 10)
+    page = request.GET.get('page')
+    try:
+        ppages = paginator.page(page)
+    except PageNotAnInteger:
+       ppages = paginator.page(1)
+    except EmptyPage:
+        ppages = paginator.page(paginator.num_pages)
+
+    return render(request, 'sub_success.html', {
+        'ppages': ppages,
+        'pages': pages,
+        'forms': forms
+    })
