@@ -53,7 +53,8 @@ def email_list_signup(request):
             else:
                 subscribe(form.instance.email)
                 forms.save()
-                redirect('sub_success')   
+            return redirect('sub_success')
+
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def sub_success(request):
