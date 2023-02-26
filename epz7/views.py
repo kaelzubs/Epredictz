@@ -27,12 +27,29 @@ def subscribe(email):
     return r.status_code, r.json()
 
 def email_list_signup(request):
+    pages = Home_Page.objects.filter(
+        pub_date=datetime.now()
+    )
+    query = request.GET.get('q')
+    if query:
+        pages = Home_Page.objects.filter(
+            Q(pub_date__icontains=query) |
+            Q(date_time__icontains=query) |
+            Q(league__icontains=query) |
+            Q(home_team__icontains=query) |
+            Q(away_team__icontains=query) |
+            Q(tip__icontains=query) |
+            Q(tip_odd__icontains=query) |
+            Q(result__icontains=query)
+    
+        ).distinct()
+
     forms = EmailSignupForm(request.POST or None)
     if request.method == 'POST':
         if forms.is_valid():
             email_signup_qs = Sign_up.objects.filter(email=forms.instance.email)
             if email_signup_qs.exists():
-                return render(request, 'subscribed.html', {'forms': forms})
+                return render(request, 'subscribed.html', {'forms': forms, 'pages': pages})
             else:
                 subscribe(form.instance.email)
                 form.save()
