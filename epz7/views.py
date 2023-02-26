@@ -48,15 +48,16 @@ def email_list_signup(request):
     if request.method == 'POST':
         if forms.is_valid():
             email_signup_qs = Sign_up.objects.filter(email=forms.instance.email)
-            if email_signup_qs.exists():
-                return render(request, 'subscribed.html', {'forms': forms, 'pages': pages})
-            else:
+            if not email_signup_qs.exists():
                 subscribe(form.instance.email)
                 form.save()
 
             return redirect('sub_success')
 
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return render(request, 'subscribed.html', {'forms': forms, 'pages': pages})
+
+            # else:   
+    # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def sub_success(request):
     pages = Home_Page.objects.filter(
