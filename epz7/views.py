@@ -5,6 +5,10 @@ from django.conf import settings
 from django.http import HttpResponseRedirect
 from .forms import EmailSignupForm
 from .models import Sign_up
+from epz1.models import Home_Page
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
+from datetime import timedelta, datetime
 # Create your views here.
 
 MAILCHIMP_API_KEY = settings.MAILCHIMP_API_KEY
