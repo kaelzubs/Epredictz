@@ -3,6 +3,8 @@ from . forms import ContactForms
 from django.core.mail import send_mail, get_connection
 from epz7.forms import EmailSignupForm
 from epz1.models import Home_Page
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
 from datetime import timedelta, datetime
 # Create your views here.
 
