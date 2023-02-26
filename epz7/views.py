@@ -44,15 +44,15 @@ def email_list_signup(request):
     
         ).distinct()
 
-    forms = EmailSignupForm(request.POST or None)
+    form = EmailSignupForm(request.POST or None)
     if request.method == 'POST':
-        if forms.is_valid():
-            email_signup_qs = Sign_up.objects.filter(email=forms.instance.email)
+        if form.is_valid():
+            email_signup_qs = Sign_up.objects.filter(email=form.instance.email)
             if email_signup_qs.exists():
-                return render(request, 'subscribed.html', {'forms': forms, 'pages': pages})
+                return render(request, 'subscribed.html', {'form': form, 'pages': pages})
             else:
-                subscribe(forms.instance.email)
-                forms.save()
+                subscribe(form.instance.email)
+                form.save()
             # return redirect('sub_success')
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -76,6 +76,4 @@ def sub_success(request):
     
         ).distinct()
 
-    forms = EmailSignupForm()
-
-    return render(request, 'sub_success.html', {'forms': forms, 'pages': pages})
+    return render(request, 'sub_success.html', {'pages': pages})
