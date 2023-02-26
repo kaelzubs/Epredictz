@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from . forms import ContactForms
 from django.core.mail import send_mail, get_connection
+from epz7.forms import EmailSignupForm
 # Create your views here.
 
 def list_contact(request):
@@ -23,11 +24,18 @@ def list_contact(request):
         if 'submitted' in request.GET:
             submitted = True
 
-    return render(request, 'contact_page.html', {'form': form, 'submitted': submitted})
+    forms = EmailSignupForm()
+
+    return render(request, 'contact_page.html', {
+        'form': form,
+        'submitted': submitted,
+        'forms': forms
+    })
 
 
 def contact_success(request):
-    return render(request, 'contact_success.html', {})
+    forms = EmailSignupForm()
+    return render(request, 'contact_success.html', {'forms': forms})
 
 
 
