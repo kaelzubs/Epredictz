@@ -23,6 +23,15 @@ def list_contact(request):
     
         ).distinct()
 
+    paginator = Paginator(pages, 10)
+    page = request.GET.get('page')
+    try:
+        ppages = paginator.page(page)
+    except PageNotAnInteger:
+       ppages = paginator.page(1)
+    except EmptyPage:
+        ppages = paginator.page(paginator.num_pages)
+
     submitted = False
     if request.method == 'POST':
         form = ContactForms(request.POST or None)
@@ -48,7 +57,8 @@ def list_contact(request):
         'form': form,
         'submitted': submitted,
         'forms': forms,
-        'pages': pages
+        'pages': pages,
+        'ppages': ppages
     })
 
 
@@ -70,9 +80,22 @@ def contact_success(request):
     
         ).distinct()
 
+    paginator = Paginator(pages, 10)
+    page = request.GET.get('page')
+    try:
+        ppages = paginator.page(page)
+    except PageNotAnInteger:
+       ppages = paginator.page(1)
+    except EmptyPage:
+        ppages = paginator.page(paginator.num_pages)
+
     forms = EmailSignupForm()
 
-    return render(request, 'contact_success.html', {'forms': forms, 'pages': pages})
+    return render(request, 'contact_success.html', {
+        'forms': forms,
+        'pages': pages,
+        'ppages': ppages
+    })
 
 
 
