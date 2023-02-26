@@ -63,7 +63,7 @@ def email_list_signup(request):
             email_signup_qs = Sign_up.objects.filter(email=form.instance.email)
             if email_signup_qs.exists():
                 return render(request, 'subscribed.html', {
-                    'forms': form,
+                    'form': form,
                     'pages': pages,
                     'ppages': ppages
                 })
