@@ -19,7 +19,9 @@ def list_about(request):
             Q(result__icontains=query)
     
         ).distinct()
+
     forms = EmailSignupForm()
+
     return render(request, 'about_page.html', {
         'pages': pages,
         'forms': forms
