@@ -101,6 +101,22 @@ def sub_success(request):
     except EmptyPage:
         ppages = paginator.page(paginator.num_pages)
 
+    forms = EmailSignupForm(request.POST or None)
+    if request.method == 'POST':
+        if forms.is_valid():
+            email_signup_qs = Sign_up.objects.filter(email=forms.instance.email)
+            if email_signup_qs.exists():
+                return render(request, 'subscribed.html', {
+                    'forms': forms,
+                    'pages': pages,
+                    'ppages': ppages
+                })
+            else:
+                subscribe(forms.instance.email)
+                forms.save()
+                
+            return redirect('sub_success')
+
     return render(request, 'sub_success.html', {
         'ppages': ppages,
         'pages': pages,
