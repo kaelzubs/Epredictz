@@ -200,11 +200,20 @@ def handler404(request, exception, template_name="error_404.html"):
     
         ).distinct()
 
+    paginator = Paginator(pages, 10)
+    page = request.GET.get('page')
+    try:
+        ppages = paginator.page(page)
+    except PageNotAnInteger:
+       ppages = paginator.page(1)
+    except EmptyPage:
+        ppages = paginator.page(paginator.num_pages)
+
     forms = EmailSignupForm()
 
     response = render(request, "error_404.html", {
-        'forms': pages,
-        'forms': ppages,
+        'pages': pages,
+        'ppages': ppages,
         'forms': forms
     })
     response.status_code = 404
@@ -228,6 +237,15 @@ def handler500(request, template_name="error_500.html"):
             Q(result__icontains=query)
     
         ).distinct()
+
+    paginator = Paginator(pages, 10)
+    page = request.GET.get('page')
+    try:
+        ppages = paginator.page(page)
+    except PageNotAnInteger:
+       ppages = paginator.page(1)
+    except EmptyPage:
+        ppages = paginator.page(paginator.num_pages)
 
     forms = EmailSignupForm()
 
