@@ -53,10 +53,28 @@ def email_list_signup(request):
             else:
                 subscribe(form.instance.email)
                 form.save()
-                redirect('sub_success')
+                return redirect('sub_success')
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def sub_success(request):
+    pages = Home_Page.objects.filter(
+        pub_date=datetime.now()
+    )
+    query = request.GET.get('q')
+    if query:
+        pages = Home_Page.objects.filter(
+            Q(pub_date__icontains=query) |
+            Q(date_time__icontains=query) |
+            Q(league__icontains=query) |
+            Q(home_team__icontains=query) |
+            Q(away_team__icontains=query) |
+            Q(tip__icontains=query) |
+            Q(tip_odd__icontains=query) |
+            Q(result__icontains=query)
+    
+        ).distinct()
+
     forms = EmailSignupForm()
-    return render(request, 'sub_success.html', {'forms': forms})
+
+    return render(request, 'sub_success.html', {'forms': forms, 'pages': pages})
