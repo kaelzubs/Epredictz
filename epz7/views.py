@@ -49,7 +49,7 @@ def email_list_signup(request):
         if forms.is_valid():
             email_signup_qs = Sign_up.objects.filter(email=forms.instance.email)
             if email_signup_qs.exists():
-                return render(request, 'subscribed.html', {'form': form, 'pages': pages})
+                return render(request, 'subscribed.html', {'forms': forms, 'pages': pages})
             else:
                 subscribe(forms.instance.email)
                 forms.save()
