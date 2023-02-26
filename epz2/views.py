@@ -21,9 +21,19 @@ def list_about(request):
     
         ).distinct()
 
+    paginator = Paginator(pages, 10)
+    page = request.GET.get('page')
+    try:
+        ppages = paginator.page(page)
+    except PageNotAnInteger:
+       ppages = paginator.page(1)
+    except EmptyPage:
+        ppages = paginator.page(paginator.num_pages)
+
     forms = EmailSignupForm()
 
     return render(request, 'about_page.html', {
+        'ppages': ppages,
         'pages': pages,
         'forms': forms
     })
