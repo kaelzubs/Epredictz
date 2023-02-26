@@ -51,13 +51,12 @@ def email_list_signup(request):
             if not email_signup_qs.exists():
                 subscribe(form.instance.email)
                 form.save()
+                redirect('sub_success')
 
-            return redirect('sub_success')
-
-    return render(request, 'subscribed.html', {'forms': forms, 'pages': pages})
+            return render(request, 'subscribed.html', {'forms': forms, 'pages': pages})
 
             # else:   
-    # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def sub_success(request):
     pages = Home_Page.objects.filter(
