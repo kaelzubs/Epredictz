@@ -21,9 +21,19 @@ def cookie_policy(request):
     
         ).distinct()
 
+    paginator = Paginator(pages, 10)
+    page = request.GET.get('page')
+    try:
+        ppages = paginator.page(page)
+    except PageNotAnInteger:
+       ppages = paginator.page(1)
+    except EmptyPage:
+        ppages = paginator.page(paginator.num_pages)
+
     forms = EmailSignupForm()
 
     return render(request, 'cookielaw/cookie_page.html', {
         'forms': forms,
-        'pages': pages
+        'pages': pages,
+        'ppages': ppages
     })
