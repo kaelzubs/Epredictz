@@ -68,7 +68,7 @@ def email_list_signup(request):
                     'ppages': ppages
                 })
             else:
-                subscribe(form.instance.email)
+                subscribe(forms.instance.email)
                 forms.save()
                 
             return redirect('sub_success')
