@@ -49,10 +49,10 @@ def list_contact(request):
                 connection=con
             )
             return redirect('contact_success')
-    else:
-        form = ContactForms()
-        if 'submitted' in request.GET:
-            submitted = True
+        else:
+            form = ContactForms()
+            if 'submitted' in request.GET:
+                submitted = True
 
     forms = EmailSignupForm()
 
