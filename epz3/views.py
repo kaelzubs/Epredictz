@@ -48,7 +48,7 @@ def list_contact(request):
                 ['info@epredictz.com'],
                 connection=con
             )
-        return redirect('contact_success')
+            return redirect('contact_success')
     else:
         form = ContactForms()
         if 'submitted' in request.GET:
