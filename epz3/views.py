@@ -45,10 +45,10 @@ def list_contact(request):
                 cd['subject'],
                 cd['message'],
                 cd.get('email','noreply@epredictz.com'),
-                ['donmart4u@gmail.com'],
+                ['info@epredictz.com'],
                 connection=con
             )
-            return redirect('contact_success')
+        return redirect('contact_success')
     else:
         form = ContactForms()
         if 'submitted' in request.GET:
