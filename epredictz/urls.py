@@ -39,11 +39,11 @@ urlpatterns = [
     path('about-', include('epz2.urls')),
     path('contact-', include('epz3.urls')),
     path('terms-', include('epz4.urls')),
-    path('faqs/', include('epz5.urls')),
+    path('frequently-asked-', include('epz5.urls')),
     path('cookie-', include('epz6.urls')),
     path('subscription-', include('epz7.urls')),
-    path('robots.txt/', include('robots.urls')),
-    path('sitemap.xml/', sitemap, {'sitemaps': sitemaps}),
+    path('robots.txt', include('robots.urls')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}),
     path("ads.txt", RedirectView.as_view(url=staticfiles_storage.url("ads.txt"))),
 ]
 

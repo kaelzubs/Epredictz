@@ -4,7 +4,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from epz7.forms import EmailSignupForm
 from datetime import timedelta, datetime
-from schedule.models import Event
+from django.http import HttpResponseRedirect
 
 
 def get_client_ip(request):
@@ -27,7 +27,8 @@ def vote_up(request, pk):
     else:
         post.vote_like.add(IpModel.objects.get(ip=ip))
 
-    return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
+    # return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def vote_down(request, pk):
     vote_id = request.POST.get('vote-id-down')
@@ -40,11 +41,11 @@ def vote_down(request, pk):
     else:
         post.vote_dislike.add(IpModel.objects.get(ip=ip))
 
-    return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
+    # return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def list_home(request):
-    event = Event.objects.all()
     pages = Home_Page.objects.filter(
         pub_date=datetime.now()
     )
@@ -76,8 +77,7 @@ def list_home(request):
     return render(request, 'home_page.html', {
         'pages': pages,
         'ppages': ppages,
-        'forms': forms,
-        'event': event
+        'forms': forms
     })
 
 def list_home_today(request):
@@ -183,15 +183,111 @@ def list_home_tomorrow(request):
     })
 
 def handler404(request, exception, template_name="error_404.html"):
-    pages = Home_Page.objects.all()
-    response = render(request, "error_404.html", {})
+    pages = Home_Page.objects.filter(
+        pub_date=datetime.now()
+    )
+    query = request.GET.get('q')
+    if query:
+        pages = Home_Page.objects.filter(
+            Q(pub_date__icontains=query) |
+            Q(date_time__icontains=query) |
+            Q(league__icontains=query) |
+            Q(home_team__icontains=query) |
+            Q(away_team__icontains=query) |
+            Q(tip__icontains=query) |
+            Q(tip_odd__icontains=query) |
+            Q(result__icontains=query)
+    
+        ).distinct()
+
+    paginator = Paginator(pages, 10)
+    page = request.GET.get('page')
+    try:
+        ppages = paginator.page(page)
+    except PageNotAnInteger:
+       ppages = paginator.page(1)
+    except EmptyPage:
+        ppages = paginator.page(paginator.num_pages)
+
+    forms = EmailSignupForm()
+
+    response = render(request, "error_404.html", {
+        'pages': pages,
+        'ppages': ppages,
+        'forms': forms
+    })
     response.status_code = 404
     return response
 
 
 def handler500(request, template_name="error_500.html"):
-    pages = Home_Page.objects.all()
-    response = render(request, "error_500.html", {})
+    pages = Home_Page.objects.filter(
+        pub_date=datetime.now()
+    )
+    query = request.GET.get('q')
+    if query:
+        pages = Home_Page.objects.filter(
+            Q(pub_date__icontains=query) |
+            Q(date_time__icontains=query) |
+            Q(league__icontains=query) |
+            Q(home_team__icontains=query) |
+            Q(away_team__icontains=query) |
+            Q(tip__icontains=query) |
+            Q(tip_odd__icontains=query) |
+            Q(result__icontains=query)
+    
+        ).distinct()
+
+    paginator = Paginator(pages, 10)
+    page = request.GET.get('page')
+    try:
+        ppages = paginator.page(page)
+    except PageNotAnInteger:
+       ppages = paginator.page(1)
+    except EmptyPage:
+        ppages = paginator.page(paginator.num_pages)
+
+    forms = EmailSignupForm()
+
+    response = render(request, "error_500.html", {
+        'pages': pages,
+        'ppages': ppages,
+        'forms': forms
+    })
     response.status_code = 500
     return response
+
+
+def list_all_prediction(request):
+    pages = Home_Page.objects.all()
+    query = request.GET.get('q')
+    if query:
+        pages = Home_Page.objects.filter(
+            Q(pub_date__icontains=query) |
+            Q(date_time__icontains=query) |
+            Q(league__icontains=query) |
+            Q(home_team__icontains=query) |
+            Q(away_team__icontains=query) |
+            Q(tip__icontains=query) |
+            Q(tip_odd__icontains=query) |
+            Q(result__icontains=query)
+    
+        ).distinct()
+ 
+    paginator = Paginator(pages, 10)
+    page = request.GET.get('page')
+    try:
+        ppages = paginator.page(page)
+    except PageNotAnInteger:
+       ppages = paginator.page(1)
+    except EmptyPage:
+        ppages = paginator.page(paginator.num_pages)
+
+    forms = EmailSignupForm()
+
+    return render(request, 'home_page.html', {
+        'pages': pages,
+        'ppages': ppages,
+        'forms': forms
+    })
 

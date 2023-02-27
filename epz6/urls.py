@@ -3,5 +3,5 @@ from .views import cookie_policy
 
 
 urlpatterns = [
-    path('configuration/', cookie_policy, name='cookie-list'),
+    path('configuration', cookie_policy, name='cookie-list'),
 ]

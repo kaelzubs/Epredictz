@@ -65,8 +65,6 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'cloudinary',
     'whitenoise.runserver_nostatic',
-    'schedule',
-    'djangobower',
 ]
 
 MIDDLEWARE = [
@@ -193,14 +191,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'djangobower.finders.BowerFinder',
-)
-
-BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
-
-BOWER_INSTALLED_APPS = (
-    'jquery#1.9',
-    'underscore',
 )
 
 
