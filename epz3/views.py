@@ -36,8 +36,8 @@ def list_contact(request):
         ppages = paginator.page(paginator.num_pages)
 
     submitted = False
+    form = ContactForms(request.POST or None)
     if request.method == 'POST':
-        form = ContactForms(request.POST or None)
         if form.is_valid():
             cd = form.cleaned_data
             con = get_connection('django.core.mail.backends.smtp.EmailBackend')
