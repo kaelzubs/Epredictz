@@ -211,19 +211,14 @@ cloudinary.config(
 
 CLOUDINARY_URL=os.getenv('CLOUDINARY_URL')
 
-EMAIL_HOST = 'smtp.titan.email'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = 465
+EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-# ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Email recieved from epredictz.com'
-# DEFAULT_FROM_EMAIL = 'info@epredictz.com'
+ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Email recieved from epredictz.com'
+DEFAULT_FROM_EMAIL = 'epredictz.com'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-ADMIN_EMAIL = "info@epredictz.com"
-SUPPORT_EMAIL = "info@epredictz.com"
-DEFAULT_FROM_EMAIL = ADMIN_EMAIL
-SERVER_EMAIL = ADMIN_EMAIL
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
