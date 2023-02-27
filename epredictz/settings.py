@@ -217,13 +217,8 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 465
 EMAIL_USE_TLS = True
 ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Email recieved from epredictz.com'
-# DEFAULT_FROM_EMAIL = 'info@epredictz.com'
+DEFAULT_FROM_EMAIL = 'info@epredictz.com'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-ADMIN_EMAIL = "info@epredictz.com"
-SUPPORT_EMAIL = "info@epredictz.com"
-DEFAULT_FROM_EMAIL = ADMIN_EMAIL
-SERVER_EMAIL = ADMIN_EMAIL
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
