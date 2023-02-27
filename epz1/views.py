@@ -257,3 +257,37 @@ def handler500(request, template_name="error_500.html"):
     response.status_code = 500
     return response
 
+
+def list_all_prediction(request):
+    pages = Home_Page.objects.all()
+    query = request.GET.get('q')
+    if query:
+        pages = Home_Page.objects.filter(
+            Q(pub_date__icontains=query) |
+            Q(date_time__icontains=query) |
+            Q(league__icontains=query) |
+            Q(home_team__icontains=query) |
+            Q(away_team__icontains=query) |
+            Q(tip__icontains=query) |
+            Q(tip_odd__icontains=query) |
+            Q(result__icontains=query)
+    
+        ).distinct()
+ 
+    paginator = Paginator(pages, 10)
+    page = request.GET.get('page')
+    try:
+        ppages = paginator.page(page)
+    except PageNotAnInteger:
+       ppages = paginator.page(1)
+    except EmptyPage:
+        ppages = paginator.page(paginator.num_pages)
+
+    forms = EmailSignupForm()
+
+    return render(request, 'home_page.html', {
+        'pages': pages,
+        'ppages': ppages,
+        'forms': forms
+    })
+
