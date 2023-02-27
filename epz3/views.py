@@ -44,15 +44,16 @@ def list_contact(request):
             send_mail(
                 cd['subject'],
                 cd['message'],
-                cd.get('email', 'noreply@epredictz.com'),
+                cd.get('email',
+                'noreply@epredictz.com'),
                 ['donmart4u@gmail.com'],
                 connection=con
             )
             return redirect('contact_success')
-    else:
-        form = ContactForms()
-        if 'submitted' in request.GET:
-            submitted = True
+        else:
+            form = ContactForms()
+            if 'submitted' in request.GET:
+                submitted = True
 
     forms = EmailSignupForm()
 
