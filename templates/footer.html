@@ -33,7 +33,7 @@
             <div class='col text-center mx-auto'>
                 <form action="{% url 'email_list' %}" method="post" class="validate">
                     {% csrf_token %}
-                    {{ forms }}
+                    <div class='mr-2'>{{ forms }}</div>
                     <button class="newsletter-subscribe btn btn-outline-warning font-weight-bold my-2 mx-auto" name="subscribe" type="submit">Subscribe</button>
                 </form>
             </div>
