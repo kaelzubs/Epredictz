@@ -12,7 +12,6 @@
             <h2 class="footer_epz">EPREDICTZ</h2>
         </div>
 
-
         <div class="col-sm-4">
             <h3>Connect & Share</h3>
             <!-- Go to www.addthis.com/dashboard to customize your tools -->
@@ -20,7 +19,6 @@
             <p><i>Copyright&copy; 2019 epredictz.com. All rights reserved.</i></p>
             <br>
         </div>
-
 
         <div id="bs-newsletter-mailchimp-2" class="col-sm-4 h-ni w-t footer-widget footer-column-2 widget widget_bs-newsletter-mailchimp">
             <span class="h-text footnote">Newsletter</span>
@@ -32,9 +30,11 @@
                     <h5 class="crups footnote">Subscribe on our newsletter to stay updated.</h5>
                 </div>
             </div>
-            <form action="{% url 'email_list' %}" method="post" class="validate mx-auto">
+            <form action="{% url 'email_list' %}" method="post" class="validate">
                 {% csrf_token %}
-                {{ forms }}
+                <div class='col text-center mx-auto'>
+                    {{ forms }}
+                </div>
                 <button class="newsletter-subscribe btn btn-outline-warning font-weight-bold my-2 mx-auto" name="subscribe" type="submit">Subscribe</button>
             </form>
         </div>
