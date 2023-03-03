@@ -31,14 +31,12 @@
                 <div class="subscribe-message">
                     <h5 class="crups footnote">Subscribe on our newsletter to stay updated.</h5>
                 </div>
-                
-                <form action="{% url 'email_list' %}" method="post" class="validate text-center">
-                    {% csrf_token %}
-                    {{ forms }}
-                    <button class="newsletter-subscribe btn btn-outline-warning font-weight-bold my-2 mx-auto" name="subscribe" type="submit">Subscribe</button>
-                </form>
-               
             </div>
+            <form action="{% url 'email_list' %}" method="post" class="validate text-center">
+                {% csrf_token %}
+                {{ forms }}
+                <button class="newsletter-subscribe btn btn-outline-warning font-weight-bold my-2 mx-auto" name="subscribe" type="submit">Subscribe</button>
+            </form>
         </div>
     </div>
 </footer>
