@@ -32,7 +32,7 @@
                     <h5 class="crups footnote">Subscribe on our newsletter to stay updated.</h5>
                 </div>
 
-                <form action="{% url 'email_list' %}" method="post" class="validate form-inline mx-2 mr-2">
+                <form action="{% url 'email_list' %}" method="post" class="validate form-inline mx-3 mr-3">
                     {% csrf_token %}
                     {{ forms }}
                     <button class="newsletter-subscribe btn btn-outline-warning font-weight-bold my-2 ml-2 mx-auto d-block" name="subscribe" type="submit">Subscribe</button>
