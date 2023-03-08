@@ -148,7 +148,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col text-center" id="pag">
+        <div class="col text-center pt-2" id="pag">
             <span class="step-links">
                 {% if ppages.has_previous %}
                 <a class="btn btn-success" href="?page={{ ppages.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
