@@ -60,6 +60,8 @@ INSTALLED_APPS = [
     'epz5',
     'epz6',
     'epz7',
+    'purchase',
+    'invest',
     'django.contrib.sites',
     'robots',
     'django.contrib.sitemaps',

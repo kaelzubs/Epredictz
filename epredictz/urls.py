@@ -36,6 +36,8 @@ sitemaps = {
 urlpatterns = [
     path('admin-MrRobot/', admin.site.urls),
     path('', include('epz1.urls')),
+    path('estore-', include('purchase.urls')),
+    path('invest-in-', include('invest.urls')),
     path('about-', include('epz2.urls')),
     path('contact-', include('epz3.urls')),
     path('terms-', include('epz4.urls')),
